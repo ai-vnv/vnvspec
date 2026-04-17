@@ -1,6 +1,5 @@
-"""vnvspec — V&V-grade specifications for engineered systems."""
+"""Core data models for vnvspec."""
 
-from vnvspec._version import __version__
 from vnvspec.core.contract import Invariant, IOContract
 from vnvspec.core.errors import (
     AssessmentError,
@@ -28,5 +27,4 @@ __all__ = [
     "Spec",
     "SpecError",
     "VnvspecError",
-    "__version__",
 ]

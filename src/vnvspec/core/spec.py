@@ -1,0 +1,149 @@
+"""Spec model — a complete V&V specification.
+
+A :class:`Spec` aggregates requirements, contracts, ODDs, hazards, and
+evidence into a single, coherent specification document.
+
+Example:
+    >>> from vnvspec.core.requirement import Requirement
+    >>> req = Requirement(
+    ...     id="REQ-001",
+    ...     statement="The system shall produce valid outputs.",
+    ...     rationale="Safety requirement.",
+    ...     verification_method="test",
+    ...     acceptance_criteria=["All outputs are valid."],
+    ... )
+    >>> spec = Spec(name="my-system", requirements=[req])
+    >>> spec.name
+    'my-system'
+"""
+
+from __future__ import annotations
+
+from typing import Any
+
+from pydantic import BaseModel, Field, model_validator
+
+from vnvspec.core.contract import IOContract
+from vnvspec.core.errors import SpecError
+from vnvspec.core.evidence import Evidence
+from vnvspec.core.hazard import Hazard
+from vnvspec.core.odd import ODD
+from vnvspec.core.requirement import Requirement
+
+
+class Spec(BaseModel):
+    """A complete V&V specification.
+
+    Example:
+        >>> spec = Spec(name="empty-spec")
+        >>> len(spec.requirements)
+        0
+    """
+
+    model_config = {"frozen": True}
+
+    name: str = Field(description="Specification name.")
+    version: str = Field(default="0.1.0", description="Specification version.")
+    description: str = Field(default="", description="Human-readable description.")
+    requirements: list[Requirement] = Field(
+        default_factory=list, description="List of requirements."
+    )
+    contracts: list[IOContract] = Field(default_factory=list, description="List of IO contracts.")
+    odds: list[ODD] = Field(default_factory=list, description="List of operational design domains.")
+    hazards: list[Hazard] = Field(default_factory=list, description="List of identified hazards.")
+    evidence: list[Evidence] = Field(default_factory=list, description="Collected evidence.")
+    metadata: dict[str, Any] = Field(
+        default_factory=dict, description="Arbitrary additional metadata."
+    )
+
+    @model_validator(mode="after")
+    def _validate_unique_ids(self) -> Spec:
+        """Ensure all requirement and hazard IDs are unique."""
+        req_ids = [r.id for r in self.requirements]
+        if len(req_ids) != len(set(req_ids)):
+            seen: set[str] = set()
+            dupes: list[str] = []
+            for rid in req_ids:
+                if rid in seen:
+                    dupes.append(rid)
+                seen.add(rid)
+            raise SpecError(f"Duplicate requirement IDs: {dupes}")
+
+        haz_ids = [h.id for h in self.hazards]
+        if len(haz_ids) != len(set(haz_ids)):
+            seen = set()
+            dupes = []
+            for hid in haz_ids:
+                if hid in seen:
+                    dupes.append(hid)
+                seen.add(hid)
+            raise SpecError(f"Duplicate hazard IDs: {dupes}")
+        return self
+
+    def get_requirement(self, requirement_id: str) -> Requirement:
+        """Look up a requirement by ID.
+
+        Raises :class:`SpecError` if not found.
+
+        Example:
+            >>> from vnvspec.core.requirement import Requirement
+            >>> req = Requirement(id="REQ-001", statement="Test.", verification_method="test")
+            >>> spec = Spec(name="s", requirements=[req])
+            >>> spec.get_requirement("REQ-001").id
+            'REQ-001'
+        """
+        for req in self.requirements:
+            if req.id == requirement_id:
+                return req
+        raise SpecError(
+            f"Requirement '{requirement_id}' not found. "
+            f"Available: {[r.id for r in self.requirements]}"
+        )
+
+    def get_hazard(self, hazard_id: str) -> Hazard:
+        """Look up a hazard by ID.
+
+        Raises :class:`SpecError` if not found.
+
+        Example:
+            >>> from vnvspec.core.hazard import Hazard
+            >>> h = Hazard(
+            ...     id="HAZ-001", description="Test.",
+            ...     severity="S1", exposure="E1", controllability="C1", asil="QM",
+            ... )
+            >>> spec = Spec(name="s", hazards=[h])
+            >>> spec.get_hazard("HAZ-001").id
+            'HAZ-001'
+        """
+        for haz in self.hazards:
+            if haz.id == hazard_id:
+                return haz
+        raise SpecError(
+            f"Hazard '{hazard_id}' not found. Available: {[h.id for h in self.hazards]}"
+        )
+
+    def evidence_for(self, requirement_id: str) -> list[Evidence]:
+        """Return all evidence linked to a requirement.
+
+        Example:
+            >>> spec = Spec(name="s")
+            >>> spec.evidence_for("REQ-001")
+            []
+        """
+        return [e for e in self.evidence if e.requirement_id == requirement_id]
+
+    def coverage_summary(self) -> dict[str, int]:
+        """Return a summary of evidence coverage.
+
+        Returns a dict with counts of requirements that are covered (have
+        at least one evidence item) and uncovered.
+
+        Example:
+            >>> spec = Spec(name="s")
+            >>> spec.coverage_summary()
+            {'total': 0, 'covered': 0, 'uncovered': 0}
+        """
+        covered_ids = {e.requirement_id for e in self.evidence}
+        total = len(self.requirements)
+        covered = sum(1 for r in self.requirements if r.id in covered_ids)
+        return {"total": total, "covered": covered, "uncovered": total - covered}
