@@ -8,7 +8,7 @@ authors:
     given-names: "Mansur"
     orcid: "https://orcid.org/0000-0002-0000-0000"
     affiliation: "AI V&V Lab, KFUPM"
-repository-code: "https://github.com/ai-vnv-lab/vnvspec"
+repository-code: "https://github.com/ai-vnv/vnvspec"
 license: Apache-2.0
-version: 0.0.1
+version: 0.1.0
 date-released: 2026-04-17

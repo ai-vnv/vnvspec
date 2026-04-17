@@ -2,7 +2,7 @@
 
 V&V-grade specifications for engineered systems — AI, optimization, simulation, and physics.
 
-[![CI](https://github.com/ai-vnv-lab/vnvspec/actions/workflows/ci.yml/badge.svg)](https://github.com/ai-vnv-lab/vnvspec/actions/workflows/ci.yml)
+[![CI](https://github.com/ai-vnv/vnvspec/actions/workflows/ci.yml/badge.svg)](https://github.com/ai-vnv/vnvspec/actions/workflows/ci.yml)
 [![PyPI](https://img.shields.io/pypi/v/vnvspec)](https://pypi.org/project/vnvspec/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-≥3.11-blue.svg)](https://python.org)

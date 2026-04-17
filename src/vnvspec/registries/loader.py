@@ -31,7 +31,7 @@ class RegistryError(VnvspecError):
         vnvspec.registries.loader.RegistryError: not found
     """
 
-    help_url: str = "https://vnvspec.dev/standards/"
+    help_url: str = "https://ai-vnv.kfupm.io/vnvspec/standards/"
 
 
 class RegistryEntry(BaseModel):

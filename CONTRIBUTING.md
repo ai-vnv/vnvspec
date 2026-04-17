@@ -5,7 +5,7 @@ Thank you for considering contributing to vnvspec!
 ## Development setup
 
 ```bash
-git clone https://github.com/ai-vnv-lab/vnvspec.git
+git clone https://github.com/ai-vnv/vnvspec.git
 cd vnvspec
 just install
 just check

@@ -1,6 +1,6 @@
 [project]
 name = "vnvspec"
-version = "0.0.1"
+version = "0.1.0"
 description = "V&V-grade specifications for engineered systems — AI, optimization, simulation, and physics."
 readme = "README.md"
 license = "Apache-2.0"
@@ -55,9 +55,9 @@ all = [
 vnvspec = "vnvspec.cli.main:app"
 
 [project.urls]
-Homepage = "https://github.com/ai-vnv-lab/vnvspec"
-Documentation = "https://vnvspec.dev"
-Repository = "https://github.com/ai-vnv-lab/vnvspec"
+Homepage = "https://github.com/ai-vnv/vnvspec"
+Documentation = "https://ai-vnv.kfupm.io/vnvspec"
+Repository = "https://github.com/ai-vnv/vnvspec"
 
 [build-system]
 requires = ["hatchling"]

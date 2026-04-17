@@ -1,8 +1,8 @@
 site_name: vnvspec
-site_url: https://vnvspec.dev
+site_url: https://ai-vnv.kfupm.io/vnvspec
 site_description: V&V-grade specifications for engineered systems
-repo_url: https://github.com/ai-vnv-lab/vnvspec
-repo_name: ai-vnv-lab/vnvspec
+repo_url: https://github.com/ai-vnv/vnvspec
+repo_name: ai-vnv/vnvspec
 
 theme:
   name: material

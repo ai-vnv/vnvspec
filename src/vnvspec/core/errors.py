@@ -17,7 +17,7 @@ class VnvspecError(Exception):
         vnvspec.core.errors.VnvspecError: something went wrong
     """
 
-    help_url: str = "https://vnvspec.dev/concepts/"
+    help_url: str = "https://ai-vnv.kfupm.io/vnvspec/concepts/"
 
     def __init__(self, message: str, *, help_url: str | None = None) -> None:
         super().__init__(message)
@@ -35,7 +35,7 @@ class SpecError(VnvspecError):
         vnvspec.core.errors.SpecError: duplicate requirement id
     """
 
-    help_url: str = "https://vnvspec.dev/concepts/spec/"
+    help_url: str = "https://ai-vnv.kfupm.io/vnvspec/concepts/spec/"
 
 
 class RequirementError(VnvspecError):
@@ -48,7 +48,7 @@ class RequirementError(VnvspecError):
         vnvspec.core.errors.RequirementError: empty statement
     """
 
-    help_url: str = "https://vnvspec.dev/concepts/requirement/"
+    help_url: str = "https://ai-vnv.kfupm.io/vnvspec/concepts/requirement/"
 
 
 class ContractError(VnvspecError):
@@ -61,7 +61,7 @@ class ContractError(VnvspecError):
         vnvspec.core.errors.ContractError: invariant violated
     """
 
-    help_url: str = "https://vnvspec.dev/concepts/io-contract/"
+    help_url: str = "https://ai-vnv.kfupm.io/vnvspec/concepts/io-contract/"
 
 
 class AssessmentError(VnvspecError):
@@ -74,4 +74,4 @@ class AssessmentError(VnvspecError):
         vnvspec.core.errors.AssessmentError: model adapter not compatible
     """
 
-    help_url: str = "https://vnvspec.dev/concepts/assessment/"
+    help_url: str = "https://ai-vnv.kfupm.io/vnvspec/concepts/assessment/"
