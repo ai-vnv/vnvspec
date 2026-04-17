@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "vnvspec"
+abstract: "V&V-grade specifications for engineered systems — AI, optimization, simulation, and physics."
+authors:
+  - family-names: "Arief"
+    given-names: "Mansur"
+    orcid: "https://orcid.org/0000-0002-0000-0000"
+    affiliation: "AI V&V Lab, KFUPM"
+repository-code: "https://github.com/ai-vnv-lab/vnvspec"
+license: Apache-2.0
+version: 0.0.1
+date-released: 2026-04-17
