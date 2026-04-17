@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [Unreleased]
+
+### Fixed
+
+- CLI `vnvspec validate` now accepts YAML and TOML spec files (previously only JSON worked due to hardcoded `json.loads()`).
+
+### Added
+
+- `Spec.from_file(path)` classmethod that auto-detects format by file extension (`.yaml`/`.yml`, `.json`, `.toml`).
+
 ## [0.3.0] — 2026-04-17
 
 ### Changed

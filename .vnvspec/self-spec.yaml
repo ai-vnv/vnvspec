@@ -215,6 +215,32 @@ requirements:
     metadata:
       since: "0.2.0"
 
+  - id: REQ-SELF-CLI-002
+    statement: The vnvspec CLI validate command shall accept YAML, JSON, and TOML spec files, auto-detecting format by file extension.
+    rationale: Users author specs in YAML or TOML; the CLI must not restrict to JSON-only parsing.
+    verification_method: test
+    acceptance_criteria:
+      - vnvspec validate accepts .yaml/.yml files.
+      - vnvspec validate accepts .json files.
+      - vnvspec validate accepts .toml files.
+      - vnvspec validate returns SPEC_VALIDATION_ERROR (exit 3) for unsupported extensions.
+    priority: high
+    metadata:
+      since: "0.3.1"
+
+  - id: REQ-SELF-IO-002
+    statement: Spec.from_file(path) shall auto-detect format by file extension and delegate to the appropriate from_yaml/from_json/from_toml method.
+    rationale: A single entry point simplifies callers and prevents format-detection bugs.
+    verification_method: test
+    acceptance_criteria:
+      - Spec.from_file("x.yaml") delegates to from_yaml.
+      - Spec.from_file("x.json") delegates to from_json.
+      - Spec.from_file("x.toml") delegates to from_toml.
+      - Spec.from_file("x.txt") raises SpecError.
+    priority: high
+    metadata:
+      since: "0.3.1"
+
   # --- v0.2 EvidenceCollector ---
   - id: REQ-SELF-COLLECTOR-001
     statement: The EvidenceCollector shall validate requirement IDs against the spec and raise RequirementError for unknown IDs.

@@ -209,6 +209,41 @@ class TestSpecSerialization:
         assert spec2.name == spec.name
         assert len(spec2.requirements) == 1
 
+    @pytest.mark.vnvspec("REQ-SELF-IO-002")
+    def test_from_file_yaml(self, sample_req: Requirement, tmp_path: Path) -> None:
+        spec = Spec(name="test-ff", requirements=[sample_req])
+        p = tmp_path / "spec.yaml"
+        spec.to_yaml(p)
+        assert Spec.from_file(p).name == "test-ff"
+
+    @pytest.mark.vnvspec("REQ-SELF-IO-002")
+    def test_from_file_yml(self, sample_req: Requirement, tmp_path: Path) -> None:
+        spec = Spec(name="test-ff", requirements=[sample_req])
+        p = tmp_path / "spec.yml"
+        spec.to_yaml(p)
+        assert Spec.from_file(p).name == "test-ff"
+
+    @pytest.mark.vnvspec("REQ-SELF-IO-002")
+    def test_from_file_json(self, sample_req: Requirement, tmp_path: Path) -> None:
+        spec = Spec(name="test-ff", requirements=[sample_req])
+        p = tmp_path / "spec.json"
+        spec.to_json(p)
+        assert Spec.from_file(p).name == "test-ff"
+
+    @pytest.mark.vnvspec("REQ-SELF-IO-002")
+    def test_from_file_toml(self, sample_req: Requirement, tmp_path: Path) -> None:
+        spec = Spec(name="test-ff", requirements=[sample_req])
+        p = tmp_path / "spec.toml"
+        spec.to_toml(p)
+        assert Spec.from_file(p).name == "test-ff"
+
+    @pytest.mark.vnvspec("REQ-SELF-IO-002")
+    def test_from_file_unsupported_extension(self, tmp_path: Path) -> None:
+        p = tmp_path / "spec.txt"
+        p.write_text("name: x\n")
+        with pytest.raises(SpecError, match="Unsupported file extension"):
+            Spec.from_file(p)
+
     def test_yaml_invalid_raises(self, tmp_path: Path) -> None:
         bad_yaml = tmp_path / "bad.yaml"
         bad_yaml.write_text("- just a list\n- not a mapping\n")
