@@ -32,12 +32,12 @@ _TABLE_CSS = """
 """
 
 
-def _badge(text: str) -> str:
+def _badge(text: str) -> None:
     cls = f"badge-{text}" if text in ("pass", "fail", "inconclusive", "error", "warning") else "badge"
     return f'<span class="badge {cls}">{text}</span>'
 
 
-def display_requirements_table(requirements: list[Any]) -> str:
+def display_requirements_table(requirements: list[Any]) -> None:
     """Render a list of Requirement objects as a styled HTML table.
 
     Returns the HTML string and displays it in Jupyter.
@@ -60,17 +60,17 @@ def display_requirements_table(requirements: list[Any]) -> str:
         + "</table>"
     )
     display(HTML(html))
-    return html
+    return None  # display() already rendered
 
 
-def display_violations_table(violations: list[Any]) -> str:
+def display_violations_table(violations: list[Any]) -> None:
     """Render GtWR RuleViolation objects as a styled HTML table."""
     from IPython.display import HTML, display  # noqa: PLC0415
 
     if not violations:
         html = _TABLE_CSS + '<div class="card"><b>No violations found.</b> All quality checks passed.</div>'
         display(HTML(html))
-        return html
+        return None  # display() already rendered
 
     rows = []
     for v in violations:
@@ -88,10 +88,10 @@ def display_violations_table(violations: list[Any]) -> str:
         + "</table>"
     )
     display(HTML(html))
-    return html
+    return None  # display() already rendered
 
 
-def display_evidence_table(evidence_list: list[Any]) -> str:
+def display_evidence_table(evidence_list: list[Any]) -> None:
     """Render Evidence objects as a styled HTML table."""
     from IPython.display import HTML, display  # noqa: PLC0415
 
@@ -112,10 +112,10 @@ def display_evidence_table(evidence_list: list[Any]) -> str:
         + "</table>"
     )
     display(HTML(html))
-    return html
+    return None  # display() already rendered
 
 
-def display_report_summary(report: Any) -> str:
+def display_report_summary(report: Any) -> None:
     """Display a styled summary card for a Report."""
     from IPython.display import HTML, display  # noqa: PLC0415
 
@@ -131,10 +131,10 @@ def display_report_summary(report: Any) -> str:
         + "</div>"
     )
     display(HTML(html))
-    return html
+    return None  # display() already rendered
 
 
-def display_requirement_card(req: Any) -> str:
+def display_requirement_card(req: Any) -> None:
     """Display a styled card for a single Requirement."""
     from IPython.display import HTML, display  # noqa: PLC0415
 
@@ -149,7 +149,7 @@ def display_requirement_card(req: Any) -> str:
         + "</div>"
     )
     display(HTML(html))
-    return html
+    return None  # display() already rendered
 
 
 # ---------------------------------------------------------------------------
@@ -270,7 +270,7 @@ def plot_trace_graph(links: list[Any]) -> None:
     plt.show()
 
 
-def display_registry_sample(name: str, n: int = 10) -> str:
+def display_registry_sample(name: str, n: int = 10) -> None:
     """Display the first n entries of a standards registry."""
     from IPython.display import HTML, display  # noqa: PLC0415
     from vnvspec.registries import load  # noqa: PLC0415
@@ -294,7 +294,7 @@ def display_registry_sample(name: str, n: int = 10) -> str:
         + f'<p style="color:#888; font-size:12px;">{registry.disclaimer}</p>'
     )
     display(HTML(html))
-    return html
+    return None  # display() already rendered
 
 
 def display_mermaid(mermaid_code: str) -> None:

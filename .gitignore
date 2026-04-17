@@ -39,5 +39,8 @@ Thumbs.db
 .env
 .env.local
 
+# Jupyter
+.ipynb_checkpoints/
+
 # Claude Code
 .claude/
