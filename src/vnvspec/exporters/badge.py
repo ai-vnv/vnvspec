@@ -87,7 +87,7 @@ def export_badge(
         text = f"{passed}/{total} PASS"
 
     color = _COLORS[verdict]
-    label = "V&V"
+    label = "V&amp;V"
     label_width = 32
     value_width = max(len(text) * 7 + 10, 50)
     width = label_width + value_width
