@@ -3,9 +3,9 @@
 | Phase | Description | Status | Last Check |
 |-------|-------------|--------|------------|
 | 1 | Repo bootstrap + tooling | COMPLETE | 2026-04-17 — just check passes, uv build produces wheel |
-| 2 | Core data model | PENDING | — |
-| 3 | INCOSE GtWR rule checker | PENDING | — |
-| 4 | Traceability graph + Wave A | PENDING | — |
+| 2 | Core data model | COMPLETE | 2026-04-17 — 51 core tests pass, ≥90% coverage on core/ |
+| 3 | INCOSE GtWR rule checker | COMPLETE | 2026-04-17 — 27 GtWR tests (8 pass + 8 fail + integration), 100% coverage |
+| 4 | Traceability graph + Wave A | COMPLETE | 2026-04-17 — 12 trace tests, GraphML round-trip, Wave A report generated |
 | 5 | Standards registry loader | PENDING | — |
 | 6 | Validators | PENDING | — |
 | 7 | Protocols | PENDING | — |

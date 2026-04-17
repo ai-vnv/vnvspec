@@ -13,6 +13,7 @@ from vnvspec.core.hazard import Hazard
 from vnvspec.core.odd import ODD
 from vnvspec.core.requirement import Requirement
 from vnvspec.core.spec import Spec
+from vnvspec.core.trace import TraceLink, build_trace_graph, coverage_report
 
 __all__ = [
     "ODD",
@@ -26,5 +27,8 @@ __all__ = [
     "RequirementError",
     "Spec",
     "SpecError",
+    "TraceLink",
     "VnvspecError",
+    "build_trace_graph",
+    "coverage_report",
 ]

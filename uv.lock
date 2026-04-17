@@ -978,6 +978,18 @@ wheels = [
 ]
 
 [[package]]
+name = "networkx-stubs"
+version = "0.0.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "networkx" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/a9/d6/66a8bcc3724e0909e865672f5f2d3d89a46e900e43bf0296d51b90b604a0/networkx-stubs-0.0.1.tar.gz", hash = "sha256:1751cbc87898328f89d79476ec6363174c05f9e48592f0953cc1077188717a21", size = 37466, upload-time = "2023-02-24T16:11:31.541Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d1/d4/ba87f68af1ab26392dc64ef7ba7ee261bb2ab1df9a9cca1695b4454b8a16/networkx_stubs-0.0.1-py3-none-any.whl", hash = "sha256:ce58dff9b9dcbfdf895d0fce20fa8a73f2e82e581004596b7552086b5bb91366", size = 105780, upload-time = "2023-02-24T16:11:29.893Z" },
+]
+
+[[package]]
 name = "nodeenv"
 version = "1.10.0"
 source = { registry = "https://pypi.org/simple" }
@@ -2043,6 +2055,7 @@ all = [
     { name = "mkdocs-section-index" },
     { name = "mkdocstrings", extra = ["python"] },
     { name = "mypy" },
+    { name = "networkx-stubs" },
     { name = "pre-commit" },
     { name = "pytest" },
     { name = "pytest-cov" },
@@ -2054,6 +2067,7 @@ dev = [
     { name = "codespell" },
     { name = "hypothesis" },
     { name = "mypy" },
+    { name = "networkx-stubs" },
     { name = "pre-commit" },
     { name = "pytest" },
     { name = "pytest-cov" },
@@ -2082,6 +2096,7 @@ requires-dist = [
     { name = "mkdocstrings", extras = ["python"], marker = "extra == 'docs'", specifier = ">=0.25" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.10" },
     { name = "networkx", specifier = ">=3.2" },
+    { name = "networkx-stubs", marker = "extra == 'dev'", specifier = ">=0.0.1" },
     { name = "pre-commit", marker = "extra == 'dev'", specifier = ">=3.7" },
     { name = "pydantic", specifier = ">=2.7" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
