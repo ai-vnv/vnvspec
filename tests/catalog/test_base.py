@@ -6,6 +6,8 @@ from vnvspec.catalog._base import (
     CatalogInfo,
     all_requirements,
     check_compatibility,
+    check_staleness,
+    collect_source_urls,
     discover_catalogs,
 )
 
@@ -73,3 +75,50 @@ class TestCheckCompatibility:
         report = check_compatibility(info)
         assert report.level == "unknown"
         assert "not installed" in report.message
+
+
+class TestCheckStaleness:
+    def test_pytorch_catalog_has_review_date(self) -> None:
+        info = CatalogInfo(
+            module_path="vnvspec.catalog.ml.pytorch_training.reproducibility",
+            compatible_with="torch>=2.3,<3.0",
+            doc="test",
+            requirement_count=6,
+        )
+        report = check_staleness(info)
+        assert report.last_reviewed is not None
+        assert report.level in ("fresh", "stale", "expired")
+
+    def test_no_review_date(self) -> None:
+        # vnvspec.catalog itself has no "Last reviewed" in its docstring
+        info = CatalogInfo(
+            module_path="vnvspec.catalog",
+            compatible_with="",
+            doc="test",
+            requirement_count=0,
+        )
+        report = check_staleness(info)
+        assert report.level == "unknown"
+
+
+class TestCollectSourceUrls:
+    def test_demo_has_urls(self) -> None:
+        info = CatalogInfo(
+            module_path="vnvspec.catalog.demo",
+            compatible_with="",
+            doc="test",
+            requirement_count=1,
+        )
+        urls = collect_source_urls(info)
+        assert len(urls) >= 1
+        assert all(u.startswith("https://") for u in urls)
+
+    def test_pytorch_has_multiple_urls(self) -> None:
+        info = CatalogInfo(
+            module_path="vnvspec.catalog.ml.pytorch_training.reproducibility",
+            compatible_with="torch>=2.3,<3.0",
+            doc="test",
+            requirement_count=6,
+        )
+        urls = collect_source_urls(info)
+        assert len(urls) >= 2

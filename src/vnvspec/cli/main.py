@@ -392,11 +392,25 @@ def catalog_show(
 
 
 @catalog_app.command("audit")
-def catalog_audit() -> None:
-    """Audit catalog modules for compatibility with installed packages."""
+def catalog_audit(
+    check_versions: Annotated[
+        bool, typer.Option("--check-versions", help="Check version compatibility.")
+    ] = True,
+    check_staleness: Annotated[
+        bool, typer.Option("--check-staleness", help="Check last-reviewed dates.")
+    ] = False,
+    check_sources: Annotated[
+        bool, typer.Option("--check-sources", help="Collect source URLs (no HTTP check).")
+    ] = False,
+) -> None:
+    """Audit catalog modules for compatibility, staleness, and source URLs."""
     from vnvspec.catalog._base import (  # noqa: PLC0415
         check_compatibility,
+        collect_source_urls,
         discover_catalogs,
+    )
+    from vnvspec.catalog._base import (  # noqa: PLC0415
+        check_staleness as _check_staleness,
     )
 
     catalogs = discover_catalogs()
@@ -404,32 +418,69 @@ def catalog_audit() -> None:
         console.print("[yellow]No catalog modules found.[/yellow]")
         return
 
-    table = Table(title="Catalog Audit")
-    table.add_column("Module", style="bold")
-    table.add_column("Version Pin")
-    table.add_column("Installed")
-    table.add_column("Status")
+    has_issues = False
 
-    has_incompatible = False
-    for cat in catalogs:
-        report = check_compatibility(cat)
-        status_style = {
-            "compatible": "green",
-            "unknown": "yellow",
-            "incompatible": "red",
-        }[report.level]
-        if report.level == "incompatible":
-            has_incompatible = True
-        table.add_row(
-            cat.module_path,
-            cat.compatible_with or "—",
-            report.installed_version or "—",
-            f"[{status_style}]{report.level}[/{status_style}]",
-        )
+    if check_versions:
+        table = Table(title="Version Compatibility")
+        table.add_column("Module", style="bold")
+        table.add_column("Version Pin")
+        table.add_column("Installed")
+        table.add_column("Status")
 
-    console.print(table)
+        for cat in catalogs:
+            report = check_compatibility(cat)
+            status_style = {
+                "compatible": "green",
+                "unknown": "yellow",
+                "incompatible": "red",
+            }[report.level]
+            if report.level == "incompatible":
+                has_issues = True
+            table.add_row(
+                cat.module_path,
+                cat.compatible_with or "—",
+                report.installed_version or "—",
+                f"[{status_style}]{report.level}[/{status_style}]",
+            )
+        console.print(table)
 
-    if has_incompatible:
+    if check_staleness:
+        table = Table(title="Staleness Check")
+        table.add_column("Module", style="bold")
+        table.add_column("Last Reviewed")
+        table.add_column("Days Ago")
+        table.add_column("Status")
+
+        for cat in catalogs:
+            sr = _check_staleness(cat)
+            status_style = {
+                "fresh": "green",
+                "stale": "yellow",
+                "expired": "red",
+                "unknown": "dim",
+            }[sr.level]
+            if sr.level == "expired":
+                has_issues = True
+            table.add_row(
+                cat.module_path,
+                sr.last_reviewed or "—",
+                str(sr.days_since_review) if sr.days_since_review is not None else "—",
+                f"[{status_style}]{sr.level}[/{status_style}]",
+            )
+        console.print(table)
+
+    if check_sources:
+        table = Table(title="Source URLs")
+        table.add_column("Module", style="bold")
+        table.add_column("URLs", justify="right")
+
+        for cat in catalogs:
+            urls = collect_source_urls(cat)
+            table.add_row(cat.module_path, str(len(urls)))
+
+        console.print(table)
+
+    if has_issues:
         raise typer.Exit(code=ExitCode.ASSESSMENT_FAILURES)
 
 
