@@ -24,36 +24,26 @@ jobs:
       - name: Build docs
         run: uv run mkdocs build -d site
 
-      - name: Run self-assessment and build dashboard
+      - name: Run self-assessment
+        run: uv run python scripts/self_assess.py
+
+      - name: Build dashboard and badge from self-assessment
         run: |
-          uv run pytest -p no:vnvspec -p pytest_vnvspec.plugin \
-            --vnvspec-spec=.vnvspec/self-spec.yaml \
-            --vnvspec-report=.vnvspec/pytest-self-report.json \
-            --ignore=packages -q || true
           uv run python -c "
           from vnvspec import Spec
           from vnvspec.core.assessment import Report
           from vnvspec.exporters.dashboard import export_dashboard
+          from vnvspec.exporters.shields_endpoint import export_shields_endpoint
           import json
           spec = Spec.from_yaml('.vnvspec/self-spec.yaml')
-          report = Report.model_validate(json.loads(open('.vnvspec/pytest-self-report.json').read()))
+          report = Report.model_validate(json.loads(open('.vnvspec/self-assessment-report.json').read()))
           export_dashboard(
               spec, report,
               output_dir='site/dashboard',
               dashboard_url='https://ai-vnv.kfupm.io/vnvspec/dashboard/',
           )
-          print(f'Dashboard: {len(spec.requirements)} requirements')
-          "
-
-      - name: Generate Shields endpoint badge
-        run: |
-          uv run python -c "
-          from vnvspec.core.assessment import Report
-          from vnvspec.exporters.shields_endpoint import export_shields_endpoint
-          import json
-          report = Report.model_validate(json.loads(open('.vnvspec/pytest-self-report.json').read()))
           export_shields_endpoint(report, path='site/vnv-badge.json')
-          print(f'Badge: {report.verdict()} ({report.pass_count()}/{len(report.evidence)})')
+          print(f'Dashboard: {report.pass_count()}/{len(report.evidence)} PASS — verdict: {report.verdict()}')
           "
 
       - name: Deploy to lab site
