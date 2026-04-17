@@ -4,10 +4,13 @@ from __future__ import annotations
 
 import warnings
 
+import pytest
+
 from vnvspec._deprecation import deprecated
 
 
 class TestDeprecated:
+    @pytest.mark.vnvspec("REQ-SELF-DEP-001")
     def test_emits_deprecation_warning(self) -> None:
         @deprecated("0.3.0", "new_func()")
         def old_func() -> str:

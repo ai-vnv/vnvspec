@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import json
 
+import pytest
+
 from vnvspec.core.assessment import AssessmentContext, Report
 from vnvspec.core.evidence import Evidence
 
@@ -60,6 +62,7 @@ class TestReport:
         assert report2.spec_name == "test"
         assert len(report2.evidence) == 1
 
+    @pytest.mark.vnvspec("REQ-SELF-ERGO-002")
     def test_summary_accepts_str(self) -> None:
         report = Report(
             spec_name="test",

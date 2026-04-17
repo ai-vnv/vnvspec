@@ -119,6 +119,7 @@ class TestSpecExtend:
         spec2 = spec.extend(r1, [r2, r3])
         assert len(spec2.requirements) == 4
 
+    @pytest.mark.vnvspec("REQ-SELF-FROZEN-002")
     def test_extend_preserves_original(self, sample_req: Requirement) -> None:
         spec = Spec(name="test", requirements=[sample_req])
         new_req = Requirement(id="REQ-NEW", statement="New.", verification_method="test")
@@ -169,6 +170,7 @@ class TestSpecSerialization:
         assert "test-yaml" in text
         assert "REQ-001" in text
 
+    @pytest.mark.vnvspec("REQ-SELF-IO-001")
     def test_yaml_round_trip_equality(self, sample_req: Requirement) -> None:
         spec = Spec(name="rt", requirements=[sample_req])
         text = spec.to_yaml()
@@ -189,6 +191,7 @@ class TestSpecSerialization:
         text = spec.to_toml()
         assert "test-toml" in text
 
+    @pytest.mark.vnvspec("REQ-SELF-IO-001")
     def test_toml_round_trip_equality(self, sample_req: Requirement) -> None:
         spec = Spec(name="rt", requirements=[sample_req])
         text = spec.to_toml()

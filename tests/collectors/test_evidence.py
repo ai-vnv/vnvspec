@@ -78,6 +78,7 @@ class TestEvidenceCollectorContextManager:
             ev = c.record("REQ-002", "inconclusive", message="needs more data")
         assert ev.verdict == "inconclusive"
 
+    @pytest.mark.vnvspec("REQ-SELF-COLLECTOR-001")
     def test_unknown_requirement_raises(self, sample_spec: Spec) -> None:
         with EvidenceCollector(sample_spec) as c:
             with pytest.raises(RequirementError, match="REQ-999"):

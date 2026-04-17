@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import pytest
+
 from vnvspec.core.assessment import Report
 from vnvspec.core.evidence import Evidence
 from vnvspec.diff import compare_reports
@@ -26,6 +28,7 @@ class TestCompareReports:
         assert diff.added_requirements == []
         assert diff.removed_requirements == []
 
+    @pytest.mark.vnvspec("REQ-SELF-DIFF-001")
     def test_regression_detected(self) -> None:
         prev = _make_report(("R1", "pass"), ("R2", "pass"))
         curr = _make_report(("R1", "pass"), ("R2", "fail"))

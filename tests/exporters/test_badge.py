@@ -4,12 +4,15 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from vnvspec.core.assessment import Report
 from vnvspec.core.evidence import Evidence
 from vnvspec.exporters.badge import export_badge
 
 
 class TestBadgeExporter:
+    @pytest.mark.vnvspec("REQ-SELF-BADGE-001")
     def test_pass_badge(self, tmp_path: Path) -> None:
         report = Report(
             spec_name="test",
@@ -27,6 +30,7 @@ class TestBadgeExporter:
         assert "PASS" in content
         assert "#4c1" in content  # green
 
+    @pytest.mark.vnvspec("REQ-SELF-BADGE-001")
     def test_fail_badge(self, tmp_path: Path) -> None:
         report = Report(
             spec_name="test",

@@ -86,6 +86,7 @@ class TestAutoTrace:
         req_002_links = [l for l in links if l.source_id == "REQ-002"]
         assert len(req_002_links) >= 2
 
+    @pytest.mark.vnvspec("REQ-SELF-TRACE-001")
     def test_no_false_positives(self, sample_spec: Spec, fixture_tree: Path) -> None:
         links = auto_trace(sample_spec, paths=[fixture_tree])
         # REQ-001X should not match (word boundary prevents it)

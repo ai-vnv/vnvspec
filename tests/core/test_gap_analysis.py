@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
+import pytest
+
 from vnvspec.core.requirement import Requirement
 from vnvspec.core.spec import Spec
 from vnvspec.core.trace import standard_gap_analysis
 
 
 class TestStandardGapAnalysis:
+    @pytest.mark.vnvspec("REQ-SELF-GAP-001")
     def test_empty_spec_all_gaps(self) -> None:
         spec = Spec(name="empty")
         report = standard_gap_analysis(spec, "iso_pas_8800")
@@ -15,6 +18,7 @@ class TestStandardGapAnalysis:
         assert report.covered == 0
         assert report.total_clauses == report.gaps
 
+    @pytest.mark.vnvspec("REQ-SELF-GAP-001")
     def test_covered_clause(self) -> None:
         req = Requirement(
             id="REQ-001",

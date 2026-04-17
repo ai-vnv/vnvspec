@@ -1,7 +1,7 @@
 {
   "spec_name": "vnvspec-self",
   "spec_version": "0.2.0",
-  "created_at": "2026-04-17T13:58:38.207747Z",
+  "created_at": "2026-04-17T14:03:06.196497Z",
   "evidence": [
     {
       "id": "EV-AUTO-0001",
@@ -9,7 +9,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T13:58:28.550910Z",
+      "observed_at": "2026-04-17T14:02:56.805569Z",
       "details": {
         "message": "frozen=True, mutation_blocked=True"
       }
@@ -20,7 +20,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T13:58:28.550960Z",
+      "observed_at": "2026-04-17T14:02:56.805611Z",
       "details": {
         "message": "original=1, extended=2"
       }
@@ -31,7 +31,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T13:58:28.667679Z",
+      "observed_at": "2026-04-17T14:02:56.919711Z",
       "details": {
         "message": "OK: all 16 v0.1 symbols still importable\nOK: basic behavioral checks passed"
       }
@@ -42,7 +42,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T13:58:29.476320Z",
+      "observed_at": "2026-04-17T14:02:57.609262Z",
       "details": {
         "message": "Success: no issues found in 48 source files"
       }
@@ -53,7 +53,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T13:58:29.530826Z",
+      "observed_at": "2026-04-17T14:02:57.690362Z",
       "details": {
         "message": "format=0, check=0"
       }
@@ -64,7 +64,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T13:58:37.828676Z",
+      "observed_at": "2026-04-17T14:03:05.805646Z",
       "details": {
         "message": "302 tests passed, coverage threshold met"
       }
@@ -75,7 +75,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T13:58:38.177150Z",
+      "observed_at": "2026-04-17T14:03:06.154608Z",
       "details": {
         "message": "mkdocs build --strict passed"
       }
@@ -86,7 +86,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T13:58:38.177207Z",
+      "observed_at": "2026-04-17T14:03:06.154670Z",
       "details": {
         "message": "str_wrap={'message': 'ok'}, dict_pass={'k': 'v'}"
       }
@@ -97,7 +97,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T13:58:38.177237Z",
+      "observed_at": "2026-04-17T14:03:06.154712Z",
       "details": {
         "message": "summary={'message': 'ok'}"
       }
@@ -108,7 +108,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T13:58:38.201887Z",
+      "observed_at": "2026-04-17T14:03:06.186647Z",
       "details": {
         "message": "exit_codes=[0, 1, 2, 3, 4, 5]"
       }
@@ -119,7 +119,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T13:58:38.201934Z",
+      "observed_at": "2026-04-17T14:03:06.186697Z",
       "details": {
         "message": "RequirementError raised=True"
       }
@@ -130,7 +130,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T13:58:38.203115Z",
+      "observed_at": "2026-04-17T14:03:06.187676Z",
       "details": {
         "message": "yaml_rt=True, toml_rt=True"
       }
@@ -141,7 +141,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T13:58:38.204539Z",
+      "observed_at": "2026-04-17T14:03:06.189693Z",
       "details": {
         "message": "empty_all_gaps=True, mapped_has_covered=True"
       }
@@ -152,7 +152,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T13:58:38.205426Z",
+      "observed_at": "2026-04-17T14:03:06.191093Z",
       "details": {
         "message": "formal_R6=warning, webapp_R6=info"
       }
@@ -163,7 +163,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T13:58:38.206411Z",
+      "observed_at": "2026-04-17T14:03:06.192013Z",
       "details": {
         "message": "hits=1"
       }
@@ -174,7 +174,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T13:58:38.206688Z",
+      "observed_at": "2026-04-17T14:03:06.195314Z",
       "details": {
         "message": "green_pass=True, text=True"
       }
@@ -185,7 +185,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T13:58:38.207537Z",
+      "observed_at": "2026-04-17T14:03:06.196207Z",
       "details": {
         "message": "regressions=['R1']"
       }
@@ -196,7 +196,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T13:58:38.207739Z",
+      "observed_at": "2026-04-17T14:03:06.196487Z",
       "details": {
         "message": "warning_count=1, correct_type=True"
       }
@@ -207,7 +207,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T13:58:38.207743Z",
+      "observed_at": "2026-04-17T14:03:06.196491Z",
       "details": {
         "message": "Self-spec loaded successfully (we're running)"
       }

@@ -89,6 +89,7 @@ class TestEvidence:
             )
             assert e.kind == kind
 
+    @pytest.mark.vnvspec("REQ-SELF-ERGO-001")
     def test_details_accepts_str(self) -> None:
         e = Evidence(
             id="EV-STR",
@@ -99,6 +100,7 @@ class TestEvidence:
         )
         assert e.details == {"message": "simple message"}
 
+    @pytest.mark.vnvspec("REQ-SELF-ERGO-001")
     def test_details_accepts_dict(self) -> None:
         e = Evidence(
             id="EV-DICT",
@@ -109,6 +111,7 @@ class TestEvidence:
         )
         assert e.details == {"key": "value", "count": 42}
 
+    @pytest.mark.vnvspec("REQ-SELF-ERGO-001")
     def test_details_str_round_trip(self) -> None:
         e = Evidence(
             id="EV-RT",

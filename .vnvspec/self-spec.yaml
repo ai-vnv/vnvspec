@@ -65,7 +65,7 @@ requirements:
   - id: REQ-SELF-COV-001
     statement: The test suite shall achieve at least 85 percent code coverage.
     rationale: Coverage threshold ensures new code is exercised by tests.
-    verification_method: test
+    verification_method: analysis
     acceptance_criteria:
       - pytest --cov-fail-under=85 exits with code 0.
     priority: high

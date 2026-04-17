@@ -1,0 +1,313 @@
+{
+  "spec_name": "vnvspec-self",
+  "spec_version": "0.2.0",
+  "created_at": "2026-04-17T14:08:40.221804Z",
+  "evidence": [
+    {
+      "id": "EV-PYTEST-0001",
+      "requirement_id": "REQ-SELF-COLLECTOR-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.662734Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/collectors/test_evidence.py::TestEvidenceCollectorContextManager::test_unknown_requirement_raises",
+        "test_name": "test_unknown_requirement_raises"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0002",
+      "requirement_id": "REQ-SELF-ERGO-002",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.670850Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/core/test_assessment.py::TestReport::test_summary_accepts_str",
+        "test_name": "test_summary_accepts_str"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0003",
+      "requirement_id": "REQ-SELF-ERGO-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.675137Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/core/test_evidence.py::TestEvidence::test_details_accepts_str",
+        "test_name": "test_details_accepts_str"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0004",
+      "requirement_id": "REQ-SELF-ERGO-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.675300Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/core/test_evidence.py::TestEvidence::test_details_accepts_dict",
+        "test_name": "test_details_accepts_dict"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0005",
+      "requirement_id": "REQ-SELF-ERGO-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.675472Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/core/test_evidence.py::TestEvidence::test_details_str_round_trip",
+        "test_name": "test_details_str_round_trip"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0006",
+      "requirement_id": "REQ-SELF-GAP-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.676077Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/core/test_gap_analysis.py::TestStandardGapAnalysis::test_empty_spec_all_gaps",
+        "test_name": "test_empty_spec_all_gaps"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0007",
+      "requirement_id": "REQ-SELF-GAP-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.676405Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/core/test_gap_analysis.py::TestStandardGapAnalysis::test_covered_clause",
+        "test_name": "test_covered_clause"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0008",
+      "requirement_id": "REQ-SELF-PROFILE-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.682648Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/core/test_gtwr.py::TestRuleProfiles::test_web_app_demotes_r6",
+        "test_name": "test_web_app_demotes_r6"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0009",
+      "requirement_id": "REQ-SELF-FROZEN-002",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.692690Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/core/test_spec.py::TestSpecExtend::test_extend_preserves_original",
+        "test_name": "test_extend_preserves_original"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0010",
+      "requirement_id": "REQ-SELF-IO-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.696940Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/core/test_spec.py::TestSpecSerialization::test_yaml_round_trip_equality",
+        "test_name": "test_yaml_round_trip_equality"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0011",
+      "requirement_id": "REQ-SELF-IO-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.701559Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/core/test_spec.py::TestSpecSerialization::test_toml_round_trip_equality",
+        "test_name": "test_toml_round_trip_equality"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0012",
+      "requirement_id": "REQ-SELF-BADGE-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.712351Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/exporters/test_badge.py::TestBadgeExporter::test_pass_badge",
+        "test_name": "test_pass_badge"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0013",
+      "requirement_id": "REQ-SELF-BADGE-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.712991Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/exporters/test_badge.py::TestBadgeExporter::test_fail_badge",
+        "test_name": "test_fail_badge"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0014",
+      "requirement_id": "REQ-SELF-DEP-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.798770Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/test_deprecation.py::TestDeprecated::test_emits_deprecation_warning",
+        "test_name": "test_emits_deprecation_warning"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0015",
+      "requirement_id": "REQ-SELF-DIFF-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.799477Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/test_diff.py::TestCompareReports::test_regression_detected",
+        "test_name": "test_regression_detected"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0016",
+      "requirement_id": "REQ-SELF-FROZEN-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.800678Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/test_self_spec.py::TestFrozenModels::test_all_core_models_frozen",
+        "test_name": "test_all_core_models_frozen"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0017",
+      "requirement_id": "REQ-SELF-FROZEN-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.800869Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/test_self_spec.py::TestFrozenModels::test_mutation_raises",
+        "test_name": "test_mutation_raises"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0018",
+      "requirement_id": "REQ-SELF-COMPAT-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.941332Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/test_self_spec.py::TestBackwardCompat::test_v01_symbols_importable",
+        "test_name": "test_v01_symbols_importable"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0019",
+      "requirement_id": "REQ-SELF-CLI-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.942029Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/test_self_spec.py::TestExitCodes::test_exit_code_enum_values",
+        "test_name": "test_exit_code_enum_values"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0020",
+      "requirement_id": "REQ-SELF-META-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.946494Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/test_self_spec.py::TestSelfSpecLoadable::test_self_spec_loads",
+        "test_name": "test_self_spec_loads"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0021",
+      "requirement_id": "REQ-SELF-META-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.950491Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/test_self_spec.py::TestSelfSpecLoadable::test_self_spec_ids_unique",
+        "test_name": "test_self_spec_ids_unique"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0022",
+      "requirement_id": "REQ-SELF-META-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:35.954490Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/test_self_spec.py::TestSelfSpecLoadable::test_self_spec_ids_follow_pattern",
+        "test_name": "test_self_spec_ids_follow_pattern"
+      }
+    },
+    {
+      "id": "EV-PYTEST-0023",
+      "requirement_id": "REQ-SELF-TRACE-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T14:08:40.142900Z",
+      "details": {
+        "source": "pytest-vnvspec",
+        "nodeid": "tests/trace/test_auto.py::TestAutoTrace::test_no_false_positives",
+        "test_name": "test_no_false_positives"
+      }
+    }
+  ],
+  "summary": {
+    "total": 23,
+    "pass": 23,
+    "fail": 0,
+    "inconclusive": 0
+  },
+  "metadata": {}
+}

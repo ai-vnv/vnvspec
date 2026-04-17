@@ -5,6 +5,8 @@ Each rule has at least one pass case and one fail case.
 
 from __future__ import annotations
 
+import pytest
+
 from vnvspec.core._internal.gtwr_rules import RuleProfile, RuleViolation, check_all
 from vnvspec.core.requirement import Requirement
 
@@ -251,6 +253,7 @@ class TestRuleProfiles:
         v_formal = check_all(req, profile=RuleProfile.FORMAL)
         assert len(v_default) == len(v_formal)
 
+    @pytest.mark.vnvspec("REQ-SELF-PROFILE-001")
     def test_web_app_demotes_r6(self) -> None:
         """web-app profile demotes R6 (unit-bearing) to info."""
         req = _good_req(statement="The system shall handle 500 requests.")
