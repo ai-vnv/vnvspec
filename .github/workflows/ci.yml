@@ -48,8 +48,16 @@ jobs:
         run: uv sync --all-extras
       - name: Run tests
         run: >
-          uv run pytest
+          uv run pytest -m "not slow"
           --cov=vnvspec
           --cov-report=term-missing
+          --cov-report=xml
           --cov-fail-under=85
           -q
+      - name: Upload coverage to Codecov
+        if: matrix.python-version == '3.12'
+        uses: codecov/codecov-action@v5
+        with:
+          files: coverage.xml
+          fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}

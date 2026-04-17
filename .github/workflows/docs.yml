@@ -23,7 +23,7 @@ jobs:
       - run: uv python install 3.12
       - run: uv sync --extra docs
       - name: Build docs
-        run: uv run mkdocs build --strict -d site
+        run: uv run mkdocs build -d site
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site/

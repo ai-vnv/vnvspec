@@ -11,4 +11,4 @@ def test_version_is_string() -> None:
 
 def test_version_value() -> None:
     """Package version matches expected value."""
-    assert vnvspec.__version__ == "0.0.1"
+    assert vnvspec.__version__ == "0.1.0"
