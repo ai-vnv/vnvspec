@@ -31,6 +31,8 @@ classifiers = [
 torch = [
     "torch>=2.3",
     "transformers>=4.40",
+    "protobuf>=4.0",
+    "sentencepiece>=0.1.99",
 ]
 docs = [
     "mkdocs-material>=9.5",

@@ -44,8 +44,27 @@ class TransformerAdapter:
         self.max_length = max_length
         self._device = device or ("cuda" if torch.cuda.is_available() else "cpu")
 
-        self.tokenizer = AutoTokenizer.from_pretrained(model_name_or_path)
-        self.model = AutoModelForSequenceClassification.from_pretrained(model_name_or_path)
+        try:
+            self.tokenizer = AutoTokenizer.from_pretrained(model_name_or_path)
+        except (ValueError, ImportError):
+            # Fast tokenizer backend may be unavailable (missing tokenizers
+            # Rust build or sentencepiece). Import the slow tokenizer class
+            # matching the model config and fall back to it.
+            try:
+                from transformers import BertTokenizer  # noqa: PLC0415
+
+                self.tokenizer = BertTokenizer.from_pretrained(model_name_or_path)
+            except Exception:
+                # Last resort for non-BERT models
+                self.tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, use_fast=False)
+        try:
+            self.model = AutoModelForSequenceClassification.from_pretrained(model_name_or_path)
+        except (ValueError, OSError):
+            # Model config may lack model_type (older HF Hub cards).
+            # Fall back to explicit BertForSequenceClassification.
+            from transformers import BertForSequenceClassification  # noqa: PLC0415
+
+            self.model = BertForSequenceClassification.from_pretrained(model_name_or_path)
         self.model.eval()
         self.model.to(self._device)
 
