@@ -173,6 +173,32 @@ def validate(
 
 
 @app.command()
+def assess(
+    self_flag: Annotated[
+        bool,
+        typer.Option("--self", help="Run self-assessment against .vnvspec/self-spec.yaml."),
+    ] = False,
+) -> None:
+    """Run assessment. Use --self for vnvspec self-assessment."""
+    import subprocess  # noqa: PLC0415
+    import sys  # noqa: PLC0415
+
+    if not self_flag:
+        console.print("[yellow]Currently only --self mode is supported.[/yellow]")
+        raise typer.Exit(code=ExitCode.USAGE_ERROR)
+
+    script = Path(__file__).resolve().parent.parent.parent.parent / "scripts" / "self_assess.py"
+    if not script.exists():
+        console.print(f"[red]Self-assessment script not found:[/red] {script}")
+        raise typer.Exit(code=ExitCode.INTERNAL_ERROR)
+
+    result = subprocess.run(
+        [sys.executable, str(script)], cwd=str(script.parent.parent), check=False
+    )
+    raise typer.Exit(code=result.returncode)
+
+
+@app.command()
 def export(
     report_path: Annotated[Path, typer.Argument(help="Path to report JSON.")],
     fmt: Annotated[str, typer.Option("--format", "-f", help="Output format.")] = "html",

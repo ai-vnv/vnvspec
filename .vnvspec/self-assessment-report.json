@@ -1,0 +1,220 @@
+{
+  "spec_name": "vnvspec-self",
+  "spec_version": "0.2.0",
+  "created_at": "2026-04-17T13:58:38.207747Z",
+  "evidence": [
+    {
+      "id": "EV-AUTO-0001",
+      "requirement_id": "REQ-SELF-FROZEN-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T13:58:28.550910Z",
+      "details": {
+        "message": "frozen=True, mutation_blocked=True"
+      }
+    },
+    {
+      "id": "EV-AUTO-0002",
+      "requirement_id": "REQ-SELF-FROZEN-002",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T13:58:28.550960Z",
+      "details": {
+        "message": "original=1, extended=2"
+      }
+    },
+    {
+      "id": "EV-AUTO-0003",
+      "requirement_id": "REQ-SELF-COMPAT-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T13:58:28.667679Z",
+      "details": {
+        "message": "OK: all 16 v0.1 symbols still importable\nOK: basic behavioral checks passed"
+      }
+    },
+    {
+      "id": "EV-AUTO-0004",
+      "requirement_id": "REQ-SELF-TYPES-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T13:58:29.476320Z",
+      "details": {
+        "message": "Success: no issues found in 48 source files"
+      }
+    },
+    {
+      "id": "EV-AUTO-0005",
+      "requirement_id": "REQ-SELF-LINT-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T13:58:29.530826Z",
+      "details": {
+        "message": "format=0, check=0"
+      }
+    },
+    {
+      "id": "EV-AUTO-0006",
+      "requirement_id": "REQ-SELF-COV-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T13:58:37.828676Z",
+      "details": {
+        "message": "302 tests passed, coverage threshold met"
+      }
+    },
+    {
+      "id": "EV-AUTO-0007",
+      "requirement_id": "REQ-SELF-DOCS-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T13:58:38.177150Z",
+      "details": {
+        "message": "mkdocs build --strict passed"
+      }
+    },
+    {
+      "id": "EV-AUTO-0008",
+      "requirement_id": "REQ-SELF-ERGO-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T13:58:38.177207Z",
+      "details": {
+        "message": "str_wrap={'message': 'ok'}, dict_pass={'k': 'v'}"
+      }
+    },
+    {
+      "id": "EV-AUTO-0009",
+      "requirement_id": "REQ-SELF-ERGO-002",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T13:58:38.177237Z",
+      "details": {
+        "message": "summary={'message': 'ok'}"
+      }
+    },
+    {
+      "id": "EV-AUTO-0010",
+      "requirement_id": "REQ-SELF-CLI-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T13:58:38.201887Z",
+      "details": {
+        "message": "exit_codes=[0, 1, 2, 3, 4, 5]"
+      }
+    },
+    {
+      "id": "EV-AUTO-0011",
+      "requirement_id": "REQ-SELF-COLLECTOR-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T13:58:38.201934Z",
+      "details": {
+        "message": "RequirementError raised=True"
+      }
+    },
+    {
+      "id": "EV-AUTO-0012",
+      "requirement_id": "REQ-SELF-IO-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T13:58:38.203115Z",
+      "details": {
+        "message": "yaml_rt=True, toml_rt=True"
+      }
+    },
+    {
+      "id": "EV-AUTO-0013",
+      "requirement_id": "REQ-SELF-GAP-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T13:58:38.204539Z",
+      "details": {
+        "message": "empty_all_gaps=True, mapped_has_covered=True"
+      }
+    },
+    {
+      "id": "EV-AUTO-0014",
+      "requirement_id": "REQ-SELF-PROFILE-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T13:58:38.205426Z",
+      "details": {
+        "message": "formal_R6=warning, webapp_R6=info"
+      }
+    },
+    {
+      "id": "EV-AUTO-0015",
+      "requirement_id": "REQ-SELF-TRACE-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T13:58:38.206411Z",
+      "details": {
+        "message": "hits=1"
+      }
+    },
+    {
+      "id": "EV-AUTO-0016",
+      "requirement_id": "REQ-SELF-BADGE-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T13:58:38.206688Z",
+      "details": {
+        "message": "green_pass=True, text=True"
+      }
+    },
+    {
+      "id": "EV-AUTO-0017",
+      "requirement_id": "REQ-SELF-DIFF-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T13:58:38.207537Z",
+      "details": {
+        "message": "regressions=['R1']"
+      }
+    },
+    {
+      "id": "EV-AUTO-0018",
+      "requirement_id": "REQ-SELF-DEP-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T13:58:38.207739Z",
+      "details": {
+        "message": "warning_count=1, correct_type=True"
+      }
+    },
+    {
+      "id": "EV-AUTO-0019",
+      "requirement_id": "REQ-SELF-META-001",
+      "kind": "test",
+      "verdict": "pass",
+      "artifact_uri": "",
+      "observed_at": "2026-04-17T13:58:38.207743Z",
+      "details": {
+        "message": "Self-spec loaded successfully (we're running)"
+      }
+    }
+  ],
+  "summary": {
+    "message": "vnvspec v0.2.0 self-assessment"
+  },
+  "metadata": {}
+}
