@@ -59,3 +59,26 @@ class TestReport:
         report2 = Report.model_validate(data)
         assert report2.spec_name == "test"
         assert len(report2.evidence) == 1
+
+    def test_summary_accepts_str(self) -> None:
+        report = Report(
+            spec_name="test",
+            summary="all good",  # type: ignore[arg-type]
+        )
+        assert report.summary == {"message": "all good"}
+
+    def test_summary_accepts_dict(self) -> None:
+        report = Report(
+            spec_name="test",
+            summary={"passed": 5, "failed": 0},
+        )
+        assert report.summary == {"passed": 5, "failed": 0}
+
+    def test_summary_str_round_trip(self) -> None:
+        report = Report(
+            spec_name="test",
+            summary="round trip",  # type: ignore[arg-type]
+        )
+        data = json.loads(report.model_dump_json())
+        report2 = Report.model_validate(data)
+        assert report2.summary == {"message": "round trip"}

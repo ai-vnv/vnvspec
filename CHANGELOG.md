@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [0.2.0] — Unreleased
+
+### Added
+
+- `Evidence.details` now accepts `str | dict` — bare strings are auto-wrapped to `{"message": "..."}`.
+- `Report.summary` now accepts `str | dict` — same auto-wrap behavior.
+- Structured CLI exit codes: 0 (OK), 1 (failures), 2 (inconclusive), 3 (spec validation error), 4 (usage error), 5 (internal error).
+- `ExitCode` enum exported from `vnvspec.cli.main`.
+- Deprecation infrastructure (`vnvspec._deprecation.deprecated` decorator) for future symbol lifecycle management.
+
 ## [0.1.0] — 2026-04-17
 
 ### Added

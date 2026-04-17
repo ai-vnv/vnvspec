@@ -6,10 +6,19 @@ Usage:
     vnvspec registries list   List available standards registries
     vnvspec registries show   Show entries from a registry
     vnvspec export            Export a report to HTML/MD/GSN/JSON/Annex IV
+
+Exit codes:
+    0 — OK (all pass)
+    1 — Assessment failures (at least one fail verdict)
+    2 — Inconclusive (at least one inconclusive, zero failures)
+    3 — Spec validation error
+    4 — Usage error (bad arguments / config)
+    5 — Internal error (uncaught exception)
 """
 
 from __future__ import annotations
 
+import enum
 import json
 from pathlib import Path
 from typing import Annotated
@@ -19,6 +28,18 @@ from rich.console import Console
 from rich.table import Table
 
 from vnvspec._version import __version__
+
+
+class ExitCode(enum.IntEnum):
+    """Structured exit codes for the vnvspec CLI."""
+
+    OK = 0
+    ASSESSMENT_FAILURES = 1
+    INCONCLUSIVE = 2
+    SPEC_VALIDATION_ERROR = 3
+    USAGE_ERROR = 4
+    INTERNAL_ERROR = 5
+
 
 app = typer.Typer(
     name="vnvspec",
@@ -79,10 +100,19 @@ def validate(
 
     if not spec_path.exists():
         console.print(f"[red]Error:[/red] {spec_path} not found.")
-        raise typer.Exit(code=1)
+        raise typer.Exit(code=ExitCode.USAGE_ERROR)
 
-    data = json.loads(spec_path.read_text(encoding="utf-8"))
-    requirements = [Requirement.model_validate(r) for r in data.get("requirements", [])]
+    try:
+        data = json.loads(spec_path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError) as exc:
+        console.print(f"[red]Spec validation error:[/red] {exc}")
+        raise typer.Exit(code=ExitCode.SPEC_VALIDATION_ERROR) from exc
+
+    try:
+        requirements = [Requirement.model_validate(r) for r in data.get("requirements", [])]
+    except Exception as exc:
+        console.print(f"[red]Spec validation error:[/red] {exc}")
+        raise typer.Exit(code=ExitCode.SPEC_VALIDATION_ERROR) from exc
 
     total_violations = 0
     for req in requirements:
@@ -98,7 +128,7 @@ def validate(
 
     console.print(f"\n{len(requirements)} requirements, {total_violations} violations.")
     if total_violations > 0:
-        raise typer.Exit(code=1)
+        raise typer.Exit(code=ExitCode.ASSESSMENT_FAILURES)
 
 
 @app.command()
@@ -122,7 +152,7 @@ def export(
 
     if not report_path.exists():
         console.print(f"[red]Error:[/red] {report_path} not found.")
-        raise typer.Exit(code=1)
+        raise typer.Exit(code=ExitCode.USAGE_ERROR)
 
     data = json.loads(report_path.read_text(encoding="utf-8"))
     report = Report.model_validate(data)
@@ -142,7 +172,7 @@ def export(
         console.print(
             f"[red]Unknown format:[/red] {fmt}. Available: {', '.join(sorted(formatters))}"
         )
-        raise typer.Exit(code=1)
+        raise typer.Exit(code=ExitCode.USAGE_ERROR)
 
     if fmt in ("gsn", "mermaid", "annex-iv"):
         result: str = fn(report)  # type: ignore[operator]
@@ -183,7 +213,7 @@ def registries_show(
         registry = load(name)
     except Exception as exc:
         console.print(f"[red]Error:[/red] {exc}")
-        raise typer.Exit(code=1) from exc
+        raise typer.Exit(code=ExitCode.USAGE_ERROR) from exc
 
     table = Table(title=f"{registry.name} ({len(registry.entries)} entries)")
     table.add_column("Clause", style="bold")
