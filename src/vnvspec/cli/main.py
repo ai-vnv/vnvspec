@@ -129,7 +129,6 @@ def validate(
 ) -> None:
     """Run GtWR quality checks on a spec file."""
     from vnvspec.core._internal.gtwr_rules import RuleProfile  # noqa: PLC0415
-    from vnvspec.core.requirement import Requirement  # noqa: PLC0415
 
     try:
         rule_profile = RuleProfile(profile)
@@ -145,13 +144,10 @@ def validate(
         raise typer.Exit(code=ExitCode.USAGE_ERROR)
 
     try:
-        data = json.loads(spec_path.read_text(encoding="utf-8"))
-    except (json.JSONDecodeError, OSError) as exc:
-        console.print(f"[red]Spec validation error:[/red] {exc}")
-        raise typer.Exit(code=ExitCode.SPEC_VALIDATION_ERROR) from exc
+        from vnvspec.core.spec import Spec  # noqa: PLC0415
 
-    try:
-        requirements = [Requirement.model_validate(r) for r in data.get("requirements", [])]
+        spec = Spec.from_file(spec_path)
+        requirements = list(spec.requirements)
     except Exception as exc:
         console.print(f"[red]Spec validation error:[/red] {exc}")
         raise typer.Exit(code=ExitCode.SPEC_VALIDATION_ERROR) from exc

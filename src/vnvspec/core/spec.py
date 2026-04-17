@@ -190,6 +190,31 @@ class Spec(BaseModel):
     # --- Serialization: YAML / TOML / JSON ---
 
     @classmethod
+    def from_file(cls, path: Path | str) -> Self:
+        """Load a Spec from a YAML, JSON, or TOML file (auto-detected by extension).
+
+        Example:
+            >>> import tempfile, os
+            >>> from vnvspec.core.spec import Spec
+            >>> s = Spec(name="t")
+            >>> p = os.path.join(tempfile.mkdtemp(), "s.yaml")
+            >>> _ = s.to_yaml(p)
+            >>> Spec.from_file(p).name
+            't'
+        """
+        path = Path(path)
+        suffix = path.suffix.lower()
+        if suffix in (".yaml", ".yml"):
+            return cls.from_yaml(path)
+        if suffix == ".toml":
+            return cls.from_toml(path)
+        if suffix == ".json":
+            return cls.from_json(path)
+        raise SpecError(
+            f"Unsupported file extension '{suffix}' for {path}. Use .yaml, .yml, .json, or .toml."
+        )
+
+    @classmethod
     def from_yaml(cls, path: Path | str) -> Self:
         """Load a Spec from a YAML file.
 
