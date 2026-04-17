@@ -129,7 +129,6 @@ def validate(
 ) -> None:
     """Run GtWR quality checks on a spec file."""
     from vnvspec.core._internal.gtwr_rules import RuleProfile  # noqa: PLC0415
-    from vnvspec.core.requirement import Requirement  # noqa: PLC0415
 
     try:
         rule_profile = RuleProfile(profile)
