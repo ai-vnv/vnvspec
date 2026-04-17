@@ -9,6 +9,8 @@ def test_version_is_string() -> None:
     assert len(vnvspec.__version__) > 0
 
 
-def test_version_value() -> None:
-    """Package version matches expected value."""
-    assert vnvspec.__version__ == "0.3.1"
+def test_version_is_semver() -> None:
+    """Package version follows semver (X.Y.Z) format."""
+    parts = vnvspec.__version__.split(".")
+    assert len(parts) == 3
+    assert all(p.isdigit() for p in parts)

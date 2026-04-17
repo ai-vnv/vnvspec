@@ -424,6 +424,19 @@ requirements:
     metadata:
       since: "0.3.0"
 
+  # --- Packaging ---
+  - id: REQ-SELF-PKG-001
+    statement: All third-party packages imported at runtime in src/vnvspec/ shall be declared in pyproject.toml [project.dependencies].
+    rationale: Missing dependencies cause ImportError for users who pip-install without dev extras, even though tests pass in dev environments.
+    verification_method: test
+    acceptance_criteria:
+      - A test scans all .py files under src/vnvspec/ for import statements.
+      - Every third-party import resolves to a package declared in [project.dependencies] or [project.optional-dependencies].
+      - The test fails if an undeclared import is found.
+    priority: blocking
+    metadata:
+      since: "0.3.1"
+
   # --- Self-hosting ---
   - id: REQ-SELF-META-001
     statement: The vnvspec self-spec shall be loadable by Spec.from_yaml() and shall pass structural validation.
