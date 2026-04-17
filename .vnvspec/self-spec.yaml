@@ -3,17 +3,23 @@
 # This spec defines the requirements that vnvspec (the tool) must satisfy.
 # Run: vnvspec assess --self
 # Or:  python scripts/self_assess.py
+#
+# Each requirement carries metadata.since to track which version introduced it.
 
 name: vnvspec-self
 version: "0.2.0"
 description: >
   Self-hosting specification for the vnvspec package. Every requirement here
   is verified by the vnvspec test suite, lint/typecheck infrastructure, or
-  by inspection of the codebase. If a v0.2 change breaks self-assessment,
-  that's a regression — the change is rolled back, not the self-spec.
+  by inspection of the codebase. If a change breaks self-assessment,
+  that is a regression — the change is rolled back, not the self-spec.
 
 requirements:
-  # --- Core model invariants ---
+  # ==========================================================================
+  # v0.1.0 requirements — original API surface
+  # ==========================================================================
+
+  # --- Core models ---
   - id: REQ-SELF-FROZEN-001
     statement: The core models (Spec, Requirement, Evidence, Hazard, ODD, IOContract, TraceLink) shall be frozen Pydantic models.
     rationale: Frozen models prevent accidental mutation and guarantee hashability for traceability graphs.
@@ -22,15 +28,92 @@ requirements:
       - 'Every core model has model_config = {"frozen": True}.'
       - Attempting to set an attribute on a constructed model raises a ValidationError.
     priority: blocking
+    metadata:
+      since: "0.1.0"
 
-  - id: REQ-SELF-FROZEN-002
-    statement: The Spec.extend() method shall return a new Spec instance without mutating the original.
-    rationale: Frozen-model invariance must extend to the extend() API itself.
+  - id: REQ-SELF-PYDANTIC-001
+    statement: All core models shall use Pydantic v2 BaseModel with full type annotations.
+    rationale: Type-safe data models are the foundation of the vnvspec API.
     verification_method: test
     acceptance_criteria:
-      - spec.extend(new_req) returns a new Spec.
-      - The original spec.requirements list is unchanged.
+      - Every model class inherits from pydantic.BaseModel.
+      - model_validate() and model_dump_json() round-trip without data loss.
     priority: blocking
+    metadata:
+      since: "0.1.0"
+
+  - id: REQ-SELF-SPEC-001
+    statement: The Spec model shall validate uniqueness of requirement IDs and hazard IDs at construction time.
+    rationale: Duplicate IDs would break traceability and coverage reporting.
+    verification_method: test
+    acceptance_criteria:
+      - Constructing a Spec with duplicate requirement IDs raises SpecError.
+      - Constructing a Spec with duplicate hazard IDs raises SpecError.
+    priority: blocking
+    metadata:
+      since: "0.1.0"
+
+  - id: REQ-SELF-TRACE-GRAPH-001
+    statement: The build_trace_graph() function shall reject cyclic traceability links.
+    rationale: Traceability must form a DAG for correctness of coverage analysis.
+    verification_method: test
+    acceptance_criteria:
+      - Cyclic links raise SpecError.
+      - Acyclic links produce a valid networkx DiGraph.
+    priority: high
+    metadata:
+      since: "0.1.0"
+
+  - id: REQ-SELF-GTWR-001
+    statement: The GtWR quality checker shall implement at least 8 INCOSE-derived rules (R1 through R8).
+    rationale: Requirement quality checking is a core differentiator of vnvspec.
+    verification_method: test
+    acceptance_criteria:
+      - A textbook-good requirement produces zero violations.
+      - A textbook-bad requirement produces at least 3 violations.
+    priority: high
+    metadata:
+      since: "0.1.0"
+
+  - id: REQ-SELF-REGISTRIES-001
+    statement: vnvspec shall ship at least 5 built-in standards registries loadable by name.
+    rationale: Standards registries enable compliance mapping without manual clause entry.
+    verification_method: test
+    acceptance_criteria:
+      - list_available() returns at least 5 registry names.
+      - load("iso_pas_8800") returns a Registry with entries.
+    priority: high
+    metadata:
+      since: "0.1.0"
+
+  - id: REQ-SELF-EXPORT-001
+    statement: vnvspec shall export reports in at least 5 formats (HTML, JSON, Markdown, GSN/Mermaid, Annex IV).
+    rationale: Multiple export formats serve different audiences (auditors, developers, stakeholders).
+    verification_method: test
+    acceptance_criteria:
+      - export_html() produces valid HTML with evidence table.
+      - export_json() produces valid JSON round-trippable to Report.
+      - export_markdown() produces Markdown with verdict table.
+      - export_gsn_mermaid() produces Mermaid flowchart syntax.
+      - export_annex_iv() produces EU AI Act Annex IV headings.
+    priority: high
+    metadata:
+      since: "0.1.0"
+
+  - id: REQ-SELF-ERRORS-001
+    statement: All vnvspec exceptions shall inherit from VnvspecError and carry a help_url attribute.
+    rationale: Structured error hierarchy enables programmatic error handling and user-friendly diagnostics.
+    verification_method: test
+    acceptance_criteria:
+      - SpecError, RequirementError, ContractError, AssessmentError all inherit from VnvspecError.
+      - Each has a help_url class attribute pointing to documentation.
+    priority: medium
+    metadata:
+      since: "0.1.0"
+
+  # ==========================================================================
+  # v0.2.0 requirements — new features
+  # ==========================================================================
 
   # --- Backward compatibility ---
   - id: REQ-SELF-COMPAT-001
@@ -41,8 +124,21 @@ requirements:
       - scripts/check_v0_1_compat.py exits with code 0.
       - All 16 v0.1 symbols are importable from the vnvspec top-level namespace.
     priority: blocking
+    metadata:
+      since: "0.2.0"
 
-  # --- Type safety ---
+  - id: REQ-SELF-FROZEN-002
+    statement: The Spec.extend() method shall return a new Spec instance without mutating the original.
+    rationale: Frozen-model invariance must extend to the extend() API itself.
+    verification_method: test
+    acceptance_criteria:
+      - spec.extend(new_req) returns a new Spec.
+      - The original spec.requirements list is unchanged.
+    priority: blocking
+    metadata:
+      since: "0.2.0"
+
+  # --- Type safety and code quality ---
   - id: REQ-SELF-TYPES-001
     statement: The vnvspec source code shall pass mypy --strict with zero errors.
     rationale: Strict type checking catches a class of bugs that tests miss.
@@ -50,8 +146,9 @@ requirements:
     acceptance_criteria:
       - 'mypy --strict src/vnvspec reports "Success: no issues found".'
     priority: blocking
+    metadata:
+      since: "0.1.0"
 
-  # --- Code quality ---
   - id: REQ-SELF-LINT-001
     statement: The vnvspec source code shall pass ruff format and ruff check with zero errors.
     rationale: Consistent formatting and lint rules reduce review friction.
@@ -60,8 +157,9 @@ requirements:
       - ruff format --check . reports all files formatted.
       - ruff check . reports all checks passed.
     priority: blocking
+    metadata:
+      since: "0.1.0"
 
-  # --- Test coverage ---
   - id: REQ-SELF-COV-001
     statement: The test suite shall achieve at least 85 percent code coverage.
     rationale: Coverage threshold ensures new code is exercised by tests.
@@ -69,8 +167,9 @@ requirements:
     acceptance_criteria:
       - pytest --cov-fail-under=85 exits with code 0.
     priority: high
+    metadata:
+      since: "0.1.0"
 
-  # --- Documentation ---
   - id: REQ-SELF-DOCS-001
     statement: The documentation site shall build with mkdocs --strict and zero warnings.
     rationale: Broken links and missing pages degrade the user experience.
@@ -78,8 +177,10 @@ requirements:
     acceptance_criteria:
       - mkdocs build --strict exits with code 0.
     priority: high
+    metadata:
+      since: "0.1.0"
 
-  # --- Evidence.details ergonomics ---
+  # --- v0.2 ergonomics ---
   - id: REQ-SELF-ERGO-001
     statement: 'The Evidence.details field shall accept both str and dict values, auto-wrapping str to {"message": str}.'
     rationale: This was the number-one friction point reported in the labwork integration.
@@ -89,8 +190,9 @@ requirements:
       - 'Evidence(details={"key": "val"}).details == {"key": "val"}.'
       - JSON round-trip preserves the dict shape.
     priority: high
+    metadata:
+      since: "0.2.0"
 
-  # --- Report.summary ergonomics ---
   - id: REQ-SELF-ERGO-002
     statement: The Report.summary field shall accept both str and dict values, with the same auto-wrap as Evidence.details.
     rationale: Consistency with Evidence.details.
@@ -98,8 +200,10 @@ requirements:
     acceptance_criteria:
       - 'Report(summary="ok").summary == {"message": "ok"}.'
     priority: medium
+    metadata:
+      since: "0.2.0"
 
-  # --- CLI exit codes ---
+  # --- v0.2 CLI ---
   - id: REQ-SELF-CLI-001
     statement: The vnvspec CLI shall use structured exit codes (0 through 5) as defined by ExitCode enum.
     rationale: Structured exit codes allow CI pipelines to distinguish failure modes.
@@ -108,8 +212,10 @@ requirements:
       - ExitCode enum defines OK=0, ASSESSMENT_FAILURES=1, INCONCLUSIVE=2, SPEC_VALIDATION_ERROR=3, USAGE_ERROR=4, INTERNAL_ERROR=5.
       - All CLI subcommands use ExitCode values, not raw integers.
     priority: medium
+    metadata:
+      since: "0.2.0"
 
-  # --- EvidenceCollector ---
+  # --- v0.2 EvidenceCollector ---
   - id: REQ-SELF-COLLECTOR-001
     statement: The EvidenceCollector shall validate requirement IDs against the spec and raise RequirementError for unknown IDs.
     rationale: Strong contract prevents evidence from being silently orphaned.
@@ -118,8 +224,10 @@ requirements:
       - collector.check("UNKNOWN", True) raises RequirementError.
       - collector.record("UNKNOWN", "pass") raises RequirementError.
     priority: high
+    metadata:
+      since: "0.2.0"
 
-  # --- Spec I/O round-trip ---
+  # --- v0.2 Spec I/O ---
   - id: REQ-SELF-IO-001
     statement: The Spec YAML and TOML serialization shall be lossless — from_yaml(to_yaml()) and from_toml(to_toml()) shall produce identical Spec objects.
     rationale: Users must be able to hand-edit serialized specs without data loss.
@@ -128,8 +236,10 @@ requirements:
       - Spec.from_yaml(spec.to_yaml()).model_dump() == spec.model_dump().
       - Spec.from_toml(spec.to_toml()).model_dump() == spec.model_dump().
     priority: high
+    metadata:
+      since: "0.2.0"
 
-  # --- Gap analysis ---
+  # --- v0.2 Gap analysis ---
   - id: REQ-SELF-GAP-001
     statement: The standard_gap_analysis() function shall correctly identify covered and uncovered clauses.
     rationale: Gap analysis is the foundation of compliance reporting.
@@ -138,8 +248,10 @@ requirements:
       - A spec mapping REQ to clause 6.2.1 reports that clause as "covered".
       - An empty spec reports all normative clauses as "gap".
     priority: high
+    metadata:
+      since: "0.2.0"
 
-  # --- GtWR profiles ---
+  # --- v0.2 GtWR profiles ---
   - id: REQ-SELF-PROFILE-001
     statement: The web-app rule profile shall demote R6 (unit-bearing) and R7 (shall-language) to info severity.
     rationale: Web applications rarely use physical units or formal shall-language.
@@ -147,8 +259,10 @@ requirements:
     acceptance_criteria:
       - A requirement with "500 requests" gets R6 severity=warning under formal, severity=info under web-app.
     priority: medium
+    metadata:
+      since: "0.2.0"
 
-  # --- auto_trace ---
+  # --- v0.2 auto_trace ---
   - id: REQ-SELF-TRACE-001
     statement: The auto_trace() function shall use word-boundary matching to prevent partial ID matches.
     rationale: REQ-001X must not match REQ-001.
@@ -157,8 +271,10 @@ requirements:
       - A file containing "REQ-001X" produces zero TraceLinks for REQ-001.
       - A file containing "REQ-001" produces exactly one TraceLink per occurrence.
     priority: high
+    metadata:
+      since: "0.2.0"
 
-  # --- Badge exporter ---
+  # --- v0.2 Badge ---
   - id: REQ-SELF-BADGE-001
     statement: The badge SVG exporter shall produce valid SVG with correct color coding (green=pass, red=fail, yellow=inconclusive).
     rationale: Badges are the primary visual indicator of V&V status in READMEs.
@@ -167,8 +283,10 @@ requirements:
       - All-pass report produces SVG with "#4c1" (green) and "PASS" text.
       - Any-fail report produces SVG with "#e05d44" (red) and "FAIL" text.
     priority: medium
+    metadata:
+      since: "0.2.0"
 
-  # --- Report diff ---
+  # --- v0.2 Report diff ---
   - id: REQ-SELF-DIFF-001
     statement: The compare_reports() function shall correctly identify regressions (pass to fail transitions).
     rationale: Regression detection is critical for CI gates.
@@ -177,8 +295,10 @@ requirements:
       - A requirement that was pass in previous and fail in current appears in regressions list.
       - A requirement that was fail in previous and fail in current does NOT appear in regressions.
     priority: high
+    metadata:
+      since: "0.2.0"
 
-  # --- Deprecation infra ---
+  # --- v0.2 Deprecation ---
   - id: REQ-SELF-DEP-001
     statement: The deprecated() decorator shall emit a DeprecationWarning with the target version and alternative.
     rationale: Clean deprecation lifecycle prevents surprise breakage.
@@ -187,6 +307,8 @@ requirements:
       - A decorated function emits DeprecationWarning when called.
       - The warning message contains the version and alternative text.
     priority: medium
+    metadata:
+      since: "0.2.0"
 
   # --- Self-hosting ---
   - id: REQ-SELF-META-001
@@ -197,3 +319,5 @@ requirements:
       - Spec.from_yaml(".vnvspec/self-spec.yaml") succeeds.
       - All requirement IDs are unique and follow the PREFIX-NNN pattern.
     priority: blocking
+    metadata:
+      since: "0.2.0"
