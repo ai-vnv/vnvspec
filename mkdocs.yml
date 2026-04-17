@@ -70,6 +70,7 @@ nav:
       - Requirement: concepts/requirement.md
       - IO Contract: concepts/io-contract.md
       - Evidence & Assessment: concepts/eve-spec.md
+      - Catalog (Preview): concepts/catalog.md
   - Adapters:
       - PyTorch: adapters/torch.md
   - Standards:

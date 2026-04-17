@@ -95,6 +95,55 @@ class TestSpecEvidence:
         assert summary == {"total": 2, "covered": 1, "uncovered": 1}
 
 
+class TestSpecExtend:
+    def test_extend_with_list(self, sample_req: Requirement) -> None:
+        spec = Spec(name="test", requirements=[sample_req])
+        new_req = Requirement(id="REQ-NEW", statement="New.", verification_method="test")
+        spec2 = spec.extend([new_req])
+        assert len(spec2.requirements) == 2
+        assert spec2.requirements[1].id == "REQ-NEW"
+
+    def test_extend_with_varargs(self, sample_req: Requirement) -> None:
+        spec = Spec(name="test", requirements=[sample_req])
+        r1 = Requirement(id="REQ-A", statement="A.", verification_method="test")
+        r2 = Requirement(id="REQ-B", statement="B.", verification_method="test")
+        spec2 = spec.extend(r1, r2)
+        assert len(spec2.requirements) == 3
+
+    def test_extend_mixed(self, sample_req: Requirement) -> None:
+        spec = Spec(name="test", requirements=[sample_req])
+        r1 = Requirement(id="REQ-A", statement="A.", verification_method="test")
+        r2 = Requirement(id="REQ-B", statement="B.", verification_method="test")
+        r3 = Requirement(id="REQ-C", statement="C.", verification_method="test")
+        spec2 = spec.extend(r1, [r2, r3])
+        assert len(spec2.requirements) == 4
+
+    def test_extend_preserves_original(self, sample_req: Requirement) -> None:
+        spec = Spec(name="test", requirements=[sample_req])
+        new_req = Requirement(id="REQ-NEW", statement="New.", verification_method="test")
+        spec.extend([new_req])
+        assert len(spec.requirements) == 1  # original unchanged
+
+    def test_extend_duplicate_ids_raises(self, sample_req: Requirement) -> None:
+        spec = Spec(name="test", requirements=[sample_req])
+        dupe = Requirement(id="REQ-001", statement="Dupe.", verification_method="test")
+        with pytest.raises(SpecError, match="Duplicate requirement IDs"):
+            spec.extend([dupe])
+
+    def test_extend_with_catalog(self) -> None:
+        from vnvspec.catalog.demo import hello_world
+
+        spec = Spec(name="demo")
+        spec2 = spec.extend(hello_world())
+        assert len(spec2.requirements) == 1
+        assert spec2.requirements[0].id == "CAT-DEMO-001"
+
+    def test_extend_empty(self, sample_req: Requirement) -> None:
+        spec = Spec(name="test", requirements=[sample_req])
+        spec2 = spec.extend([])
+        assert len(spec2.requirements) == 1
+
+
 class TestSpecSerialization:
     def test_json_round_trip(self, sample_req: Requirement) -> None:
         spec = Spec(name="test", requirements=[sample_req])

@@ -17,6 +17,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - Deprecation infrastructure (`vnvspec._deprecation.deprecated` decorator) for future symbol lifecycle management.
 - `EvidenceCollector` context manager for ergonomic evidence collection with `check()`, `record()`, and `from_pytest_junit()` methods.
 - `EvidenceCollector` and `Report` now exported from `vnvspec` top-level.
+- `vnvspec.catalog` namespace (preview) and `vnvspec.catalog.demo` demo module.
+- `Spec.extend(*requirements)` for composing catalog modules into a spec.
 
 ## [0.1.0] — 2026-04-17
 

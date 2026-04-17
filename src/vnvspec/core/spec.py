@@ -19,7 +19,8 @@ Example:
 
 from __future__ import annotations
 
-from typing import Any
+from collections.abc import Iterable
+from typing import Any, Self
 
 from pydantic import BaseModel, Field, model_validator
 
@@ -131,6 +132,33 @@ class Spec(BaseModel):
             []
         """
         return [e for e in self.evidence if e.requirement_id == requirement_id]
+
+    def extend(self, *additional: Requirement | Iterable[Requirement]) -> Self:
+        """Return a new Spec with additional requirements appended.
+
+        Frozen-model-safe: returns a new instance, never mutates self.
+        Accepts both individual Requirements and iterables (so a catalog
+        function's ``list[Requirement]`` return value can be spread or
+        passed directly).
+
+        Example:
+            >>> from vnvspec.catalog.demo import hello_world
+            >>> spec = Spec(name="demo")
+            >>> spec2 = spec.extend(hello_world())
+            >>> len(spec2.requirements)
+            1
+            >>> len(spec.requirements)  # original unchanged
+            0
+        """
+        collected: list[Requirement] = []
+        for item in additional:
+            if isinstance(item, Requirement):
+                collected.append(item)
+            else:
+                collected.extend(item)
+        data = self.model_dump()
+        data["requirements"] = [*self.requirements, *collected]
+        return type(self).model_validate(data)
 
     def coverage_summary(self) -> dict[str, int]:
         """Return a summary of evidence coverage.
