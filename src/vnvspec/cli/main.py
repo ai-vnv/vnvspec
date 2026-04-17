@@ -119,9 +119,23 @@ def init(
 def validate(
     spec_path: Annotated[Path, typer.Argument(help="Path to spec YAML/JSON.")],
     verbose: Annotated[bool, typer.Option("--verbose", "-v")] = False,
+    profile: Annotated[
+        str,
+        typer.Option("--profile", "-p", help="Rule profile: formal, web-app, embedded."),
+    ] = "formal",
 ) -> None:
     """Run GtWR quality checks on a spec file."""
+    from vnvspec.core._internal.gtwr_rules import RuleProfile  # noqa: PLC0415
     from vnvspec.core.requirement import Requirement  # noqa: PLC0415
+
+    try:
+        rule_profile = RuleProfile(profile)
+    except ValueError as exc:
+        console.print(
+            f"[red]Unknown profile:[/red] {profile}. "
+            f"Available: {', '.join(p.value for p in RuleProfile)}"
+        )
+        raise typer.Exit(code=ExitCode.USAGE_ERROR) from exc
 
     if not spec_path.exists():
         console.print(f"[red]Error:[/red] {spec_path} not found.")
@@ -141,12 +155,14 @@ def validate(
 
     total_violations = 0
     for req in requirements:
-        violations = req.check_quality()
+        violations = req.check_quality(profile=rule_profile)
         total_violations += len(violations)
         if violations:
             console.print(f"\n[bold]{req.id}[/bold]: {req.statement}")
             for v in violations:
-                color = "red" if v.severity == "error" else "yellow"
+                color = {"error": "red", "warning": "yellow", "info": "dim"}.get(
+                    v.severity, "yellow"
+                )
                 console.print(f"  [{color}]{v.rule} {v.name}[/{color}]: {v.message}")
         elif verbose:
             console.print(f"[green]✓[/green] {req.id}: no issues")

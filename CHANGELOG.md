@@ -25,6 +25,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - Compliance matrix exporter (`export_compliance_matrix()`) in XLSX, CSV, and HTML formats.
 - `standard_gap_analysis()` for analyzing spec coverage against standards registries.
 - `GapReport` and `ClauseCoverage` models for structured gap analysis results.
+- Configurable GtWR rule profiles: `formal` (default), `web-app`, `embedded`.
+- `RuleViolation.severity` now includes `"info"` level alongside `"error"` and `"warning"`.
+- `Requirement.check_quality(profile=...)` parameter for per-project profile selection.
+- CLI `vnvspec validate --profile web-app` flag.
 
 ## [0.1.0] — 2026-04-17
 
