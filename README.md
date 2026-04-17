@@ -5,6 +5,7 @@ V&V-grade specifications for engineered systems — AI, optimization, simulation
 [![CI](https://github.com/ai-vnv/vnvspec/actions/workflows/ci.yml/badge.svg)](https://github.com/ai-vnv/vnvspec/actions/workflows/ci.yml)
 [![Docs](https://github.com/ai-vnv/vnvspec/actions/workflows/docs.yml/badge.svg)](https://ai-vnv.github.io/vnvspec/)
 [![codecov](https://codecov.io/gh/ai-vnv/vnvspec/graph/badge.svg)](https://codecov.io/gh/ai-vnv/vnvspec)
+[![V&Ved](https://raw.githubusercontent.com/ai-vnv/vnvspec/release/0.2.0/.vnvspec/dashboard/badge.svg)](https://ai-vnv.github.io/vnvspec/dashboard/)
 [![PyPI](https://img.shields.io/pypi/v/vnvspec)](https://pypi.org/project/vnvspec/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-≥3.11-blue.svg)](https://python.org)

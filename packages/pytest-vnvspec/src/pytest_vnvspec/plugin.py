@@ -182,13 +182,9 @@ class VnvspecPlugin:
         if fail_on == "any" and report.fail_count() > 0:
             session.exitstatus = pytest.ExitCode.TESTS_FAILED
         elif fail_on == "blocking":
-            blocking_ids = {
-                r.id for r in self.spec.requirements if r.priority == "blocking"
-            }
+            blocking_ids = {r.id for r in self.spec.requirements if r.priority == "blocking"}
             blocking_fails = [
-                e
-                for e in self.evidence
-                if e.verdict == "fail" and e.requirement_id in blocking_ids
+                e for e in self.evidence if e.verdict == "fail" and e.requirement_id in blocking_ids
             ]
             if blocking_fails:
                 session.exitstatus = pytest.ExitCode.TESTS_FAILED

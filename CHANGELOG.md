@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
-## [0.2.0] — Unreleased
+## [0.2.0] — 2026-04-17
 
 ### Added
 
@@ -40,6 +40,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - Report diff (`compare_reports()`) for evidence regression detection between reports.
 - `ReportDiff` model with `new_failures`, `regressions`, `added_requirements`, etc.
 - GitHub Actions composite action at `actions/vnvspec/action.yml`.
+- V&V dashboard exporter (`export_dashboard()`) — static HTML site with per-requirement detail pages, standards compliance table, version history timeline, clickable badge.
+- Badge SVG now supports `dashboard_url` parameter for clickable links.
+- Self-specification at `.vnvspec/self-spec.yaml` with 26 requirements (8 from v0.1, 18 from v0.2), all with `metadata.since` version tracking.
+- Self-assessment via `vnvspec assess --self` and `pytest --vnvspec-spec=.vnvspec/self-spec.yaml`.
+- `scripts/check_v0_1_compat.py` for backward-compatibility enforcement in CI.
 
 ## [0.1.0] — 2026-04-17
 

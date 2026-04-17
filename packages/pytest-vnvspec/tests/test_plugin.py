@@ -79,7 +79,9 @@ class TestMarkerResolution:
             def test_unknown():
                 assert True
         """)
-        result = pytester.runpytest(f"--vnvspec-spec={spec_file}", "-W", "error::pytest.PytestUnknownMarkWarning")
+        result = pytester.runpytest(
+            f"--vnvspec-spec={spec_file}", "-W", "error::pytest.PytestUnknownMarkWarning"
+        )
         # The test should still pass but with a warning
         # When -W error is set, it will cause failure
         assert result.ret != 0 or "REQ-UNKNOWN" in result.stdout.str()
@@ -161,10 +163,7 @@ class TestEvidenceCapture:
         )
         data = json.loads(report_path.read_text())
         # REQ-002 and REQ-004 are verification_method="test" but have no linked test
-        inconclusive = [
-            e for e in data["evidence"]
-            if e["verdict"] == "inconclusive"
-        ]
+        inconclusive = [e for e in data["evidence"] if e["verdict"] == "inconclusive"]
         assert len(inconclusive) >= 2
 
     def test_multiple_markers(self, pytester: pytest.Pytester, spec_file: Path) -> None:
@@ -182,8 +181,16 @@ class TestEvidenceCapture:
             f"--vnvspec-report={report_path}",
         )
         data = json.loads(report_path.read_text())
-        req_001_ev = [e for e in data["evidence"] if e["requirement_id"] == "REQ-001" and e["verdict"] == "pass"]
-        req_002_ev = [e for e in data["evidence"] if e["requirement_id"] == "REQ-002" and e["verdict"] == "pass"]
+        req_001_ev = [
+            e
+            for e in data["evidence"]
+            if e["requirement_id"] == "REQ-001" and e["verdict"] == "pass"
+        ]
+        req_002_ev = [
+            e
+            for e in data["evidence"]
+            if e["requirement_id"] == "REQ-002" and e["verdict"] == "pass"
+        ]
         assert len(req_001_ev) >= 1
         assert len(req_002_ev) >= 1
 
