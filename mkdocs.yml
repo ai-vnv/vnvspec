@@ -1,0 +1,82 @@
+site_name: vnvspec
+site_url: https://vnvspec.dev
+site_description: V&V-grade specifications for engineered systems
+repo_url: https://github.com/ai-vnv-lab/vnvspec
+repo_name: ai-vnv-lab/vnvspec
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: deep purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+
+plugins:
+  - search
+
+# Uncomment the following when mkdocstrings is installed:
+# - mkdocstrings:
+#     handlers:
+#       python:
+#         paths: [src]
+#         options:
+#           show_source: true
+#           show_root_heading: true
+#           members_order: source
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Concepts:
+      - Spec: concepts/spec.md
+      - Requirement: concepts/requirement.md
+      - IO Contract: concepts/io-contract.md
+      - Evidence & Assessment: concepts/eve-spec.md
+  - Adapters:
+      - PyTorch: adapters/torch.md
+  - Standards:
+      - ISO/PAS 8800: standards/iso-pas-8800.md
+      - ISO 21448 (SOTIF): standards/iso-21448.md
+      - UL 4600: standards/ul-4600.md
+      - EU AI Act: standards/eu-ai-act.md
+      - NIST AI RMF: standards/nist-ai-rmf.md
+  - Development:
+      - Architecture: development/architecture.md
