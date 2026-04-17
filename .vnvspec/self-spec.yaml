@@ -361,6 +361,19 @@ requirements:
     metadata:
       since: "0.3.0"
 
+  - id: REQ-SELF-SHIELDS-001
+    statement: The Shields.io endpoint exporter shall produce valid JSON with schemaVersion, label, message, and color fields matching the Shields endpoint specification.
+    rationale: Dynamic badges via Shields.io are the primary visual indicator of V&V status for GitHub repositories.
+    verification_method: test
+    acceptance_criteria:
+      - All-pass report produces color "green".
+      - Any-fail report produces color "red".
+      - Inconclusive report produces color "yellow".
+      - No-evidence report produces color "lightgrey".
+    priority: high
+    metadata:
+      since: "0.3.0"
+
   - id: REQ-SELF-CATALOG-001
     statement: The vnvspec catalog CLI shall provide list, show, audit, and import subcommands.
     rationale: Discoverability and auditability are essential for a catalog system.

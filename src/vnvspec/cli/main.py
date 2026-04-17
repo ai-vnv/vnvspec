@@ -257,6 +257,32 @@ def export(
         console.print(result)
 
 
+@app.command("export-shields-endpoint")
+def export_shields_endpoint_cmd(
+    report_path: Annotated[Path, typer.Argument(help="Path to report JSON.")],
+    output: Annotated[
+        Path,
+        typer.Option("--output", "-o", help="Output JSON file path."),
+    ] = Path("vnv-badge.json"),
+    label: Annotated[
+        str,
+        typer.Option("--label", "-l", help="Badge label text."),
+    ] = "V&V",
+) -> None:
+    """Export a Shields.io endpoint JSON file for dynamic badges."""
+    from vnvspec.core.assessment import Report  # noqa: PLC0415
+    from vnvspec.exporters.shields_endpoint import export_shields_endpoint  # noqa: PLC0415
+
+    if not report_path.exists():
+        console.print(f"[red]Error:[/red] {report_path} not found.")
+        raise typer.Exit(code=ExitCode.USAGE_ERROR)
+
+    data = json.loads(report_path.read_text(encoding="utf-8"))
+    report = Report.model_validate(data)
+    result = export_shields_endpoint(report, path=output, label=label)
+    console.print(f"[green]Exported[/green] {result}")
+
+
 @registries_app.command("list")
 def registries_list() -> None:
     """List available standards registries."""

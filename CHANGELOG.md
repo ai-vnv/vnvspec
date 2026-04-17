@@ -33,6 +33,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - Standards mappings across all catalogs: NASA SE Handbook (SP-2016-6105), INCOSE SE Handbook, IEEE 754-2019, ISO/IEC 25010:2023, DO-178C, SAE ARP4754A, SAE J3131, ISO/SAE 21434. 10 standards frameworks total, 75% of requirements mapped.
 - 4 new IEEE 754 floating-point requirements: gradient overflow/underflow detection (PyTorch), numerically stable loss functions (PyTorch), mixed-precision dtype consistency (HuggingFace), compensated summation (Pyomo).
 - `docs/catalog/standards-mapping.md` — comprehensive reference for all standards mappings.
+- `export_shields_endpoint()` exporter — generates Shields.io endpoint JSON for dynamic README badges (green/yellow/red/grey).
+- `vnvspec export-shields-endpoint` CLI command.
+- Upgraded GitHub Actions composite action (`actions/vnvspec/action.yml`) with `publish-badge`, `verdict-policy`, and `comment-pr` inputs. Badge JSON auto-published to gh-pages; PR comments posted with verdict summary.
 
 ## [0.2.0] — 2026-04-17
 
