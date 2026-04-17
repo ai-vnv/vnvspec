@@ -29,7 +29,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - `vnvspec.catalog.ml.huggingface_inference` — 24 requirements across 4 sub-modules: `tokenization` (6), `generation` (6), `attention_masks` (6), `structured_outputs` (6). Sources: HuggingFace Transformers docs, Vaswani et al.
 - `vnvspec.catalog.web.fastapi` — 22 requirements across 3 sub-modules: `security` (10, OWASP API Top 10 2023 mapped), `observability` (6), `api_design` (6). Sources: OWASP API Security 2023, FastAPI docs, RFC 9457.
 - `vnvspec.catalog.web.sqlalchemy` — 18 requirements across 3 sub-modules: `transactions` (6), `session` (6), `schema` (6). Sources: SQLAlchemy 2.0 docs, Alembic docs, Cosmic Python.
-- `vnvspec.catalog.optimization.pyomo` — 18 requirements across 3 sub-modules: `solver_status` (6), `constraint_validation` (6), `model_invariants` (6). Sources: Pyomo docs, Hart et al., Williams.
+- `vnvspec.catalog.optimization.pyomo` — 19 requirements across 3 sub-modules: `solver_status` (6), `constraint_validation` (7), `model_invariants` (6). Sources: Pyomo docs, Hart et al., Williams.
+- Standards mappings across all catalogs: NASA SE Handbook (SP-2016-6105), INCOSE SE Handbook, IEEE 754-2019, ISO/IEC 25010:2023, DO-178C, SAE ARP4754A, SAE J3131, ISO/SAE 21434. 10 standards frameworks total, 75% of requirements mapped.
+- 4 new IEEE 754 floating-point requirements: gradient overflow/underflow detection (PyTorch), numerically stable loss functions (PyTorch), mixed-precision dtype consistency (HuggingFace), compensated summation (Pyomo).
+- `docs/catalog/standards-mapping.md` — comprehensive reference for all standards mappings.
 
 ## [0.2.0] — 2026-04-17
 

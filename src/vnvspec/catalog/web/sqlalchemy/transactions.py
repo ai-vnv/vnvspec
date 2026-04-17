@@ -39,6 +39,7 @@ def transactions() -> list[Requirement]:
             ],
             source=["https://docs.sqlalchemy.org/en/20/"],
             priority="blocking",
+            standards={"iso_25010": ["4.6.2"], "nasa_se_handbook": ["5.3"]},
         ),
         Requirement(
             id="CAT-SQA-TXN-002",
@@ -58,6 +59,7 @@ def transactions() -> list[Requirement]:
             ],
             source=["https://docs.sqlalchemy.org/en/20/"],
             priority="blocking",
+            standards={"iso_25010": ["4.5.4"]},
         ),
         Requirement(
             id="CAT-SQA-TXN-003",
@@ -99,6 +101,7 @@ def transactions() -> list[Requirement]:
                 "https://www.cosmicpython.com/",
             ],
             priority="high",
+            standards={"iso_25010": ["4.2.1"]},
         ),
         Requirement(
             id="CAT-SQA-TXN-005",
@@ -137,5 +140,6 @@ def transactions() -> list[Requirement]:
             ],
             source=["https://docs.sqlalchemy.org/en/20/"],
             priority="medium",
+            standards={"iso_25010": ["4.5.3"]},
         ),
     ]

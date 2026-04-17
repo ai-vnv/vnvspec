@@ -41,6 +41,7 @@ def constraint_validation() -> list[Requirement]:
             ],
             source=["https://pyomo.readthedocs.io/en/stable/"],
             priority="blocking",
+            standards={"ieee_754": ["7.1"], "nasa_se_handbook": ["5.3"], "do_178c": ["6.1"]},
         ),
         Requirement(
             id="CAT-PYO-CVAL-002",
@@ -59,6 +60,7 @@ def constraint_validation() -> list[Requirement]:
             ],
             source=["https://pyomo.readthedocs.io/en/stable/"],
             priority="high",
+            standards={"incose_se_handbook": ["5.7"]},
         ),
         Requirement(
             id="CAT-PYO-CVAL-003",
@@ -79,6 +81,7 @@ def constraint_validation() -> list[Requirement]:
             ],
             source=["https://pyomo.readthedocs.io/en/stable/"],
             priority="medium",
+            standards={"ieee_754": ["4.3"]},
         ),
         Requirement(
             id="CAT-PYO-CVAL-004",
@@ -97,6 +100,7 @@ def constraint_validation() -> list[Requirement]:
             ],
             source=["https://pyomo.readthedocs.io/en/stable/"],
             priority="high",
+            standards={"ieee_754": ["7.1"], "iso_25010": ["4.1.2"]},
         ),
         Requirement(
             id="CAT-PYO-CVAL-005",
@@ -117,6 +121,7 @@ def constraint_validation() -> list[Requirement]:
             ],
             source=["https://pyomo.readthedocs.io/en/stable/"],
             priority="medium",
+            standards={"ieee_754": ["5.3"], "nasa_se_handbook": ["5.3"]},
         ),
         Requirement(
             id="CAT-PYO-CVAL-006",
@@ -137,5 +142,33 @@ def constraint_validation() -> list[Requirement]:
             ],
             source=["https://pyomo.readthedocs.io/en/stable/"],
             priority="high",
+            standards={"ieee_754": ["5.8"]},
+        ),
+        Requirement(
+            id="CAT-PYO-CVAL-007",
+            statement=(
+                "The post-solve validation shall use compensated summation (Kahan "
+                "summation or equivalent) when evaluating constraint expressions "
+                "that involve large numbers of terms to minimize floating-point "
+                "accumulation error."
+            ),
+            rationale=(
+                "IEEE 754 clause 9.4 defines reduction operations and notes that "
+                "naive summation of many floating-point values accumulates rounding "
+                "error proportional to the number of terms. In large optimization "
+                "models, this error can exceed the validation tolerance."
+            ),
+            verification_method="test",
+            acceptance_criteria=[
+                "Constraint evaluation uses compensated summation for expressions "
+                "with more than 100 terms.",
+                "The summation error is bounded and documented.",
+            ],
+            source=["https://pyomo.readthedocs.io/en/stable/"],
+            priority="medium",
+            standards={
+                "ieee_754": ["9.4"],
+                "iso_25010": ["4.1.2"],
+            },
         ),
     ]

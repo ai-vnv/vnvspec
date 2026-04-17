@@ -41,6 +41,7 @@ def tokenization() -> list[Requirement]:
             ],
             source=["https://huggingface.co/docs/transformers/tokenizer_summary"],
             priority="blocking",
+            standards={"iso_25010": ["4.1.2"], "do_178c": ["6.1"]},
         ),
         Requirement(
             id="CAT-HGF-TOKEN-002",
@@ -59,6 +60,7 @@ def tokenization() -> list[Requirement]:
             ],
             source=["https://huggingface.co/docs/transformers/tokenizer_summary"],
             priority="blocking",
+            standards={"do_178c": ["6.1"]},
         ),
         Requirement(
             id="CAT-HGF-TOKEN-003",
@@ -121,6 +123,7 @@ def tokenization() -> list[Requirement]:
             ],
             source=["https://huggingface.co/docs/transformers/index"],
             priority="high",
+            standards={"nasa_se_handbook": ["6.5"], "incose_se_handbook": ["5.5"]},
         ),
         Requirement(
             id="CAT-HGF-TOKEN-006",
@@ -140,5 +143,6 @@ def tokenization() -> list[Requirement]:
             ],
             source=["https://huggingface.co/docs/transformers/tokenizer_summary"],
             priority="medium",
+            standards={"iso_25010": ["4.5.3"]},
         ),
     ]

@@ -41,6 +41,7 @@ def solver_status() -> list[Requirement]:
             ],
             source=["https://pyomo.readthedocs.io/en/stable/working_models.html"],
             priority="blocking",
+            standards={"nasa_se_handbook": ["5.3"], "do_178c": ["6.1"], "iso_25010": ["4.1.2"]},
         ),
         Requirement(
             id="CAT-PYO-SOLV-002",
@@ -63,6 +64,7 @@ def solver_status() -> list[Requirement]:
             ],
             source=["https://pyomo.readthedocs.io/en/stable/working_models.html"],
             priority="blocking",
+            standards={"iso_25010": ["4.5.3"], "sae_arp4754a": ["7"]},
         ),
         Requirement(
             id="CAT-PYO-SOLV-003",
@@ -80,6 +82,7 @@ def solver_status() -> list[Requirement]:
             ],
             source=["https://pyomo.readthedocs.io/en/stable/"],
             priority="high",
+            standards={"incose_se_handbook": ["5.7"], "iso_25010": ["4.7.3"]},
         ),
         Requirement(
             id="CAT-PYO-SOLV-004",
@@ -98,6 +101,7 @@ def solver_status() -> list[Requirement]:
             ],
             source=["https://pyomo.readthedocs.io/en/stable/"],
             priority="high",
+            standards={"iso_25010": ["4.2.1"]},
         ),
         Requirement(
             id="CAT-PYO-SOLV-005",
@@ -117,6 +121,7 @@ def solver_status() -> list[Requirement]:
             ],
             source=["https://pyomo.readthedocs.io/en/stable/"],
             priority="high",
+            standards={"nasa_se_handbook": ["6.5"]},
         ),
         Requirement(
             id="CAT-PYO-SOLV-006",
@@ -135,5 +140,6 @@ def solver_status() -> list[Requirement]:
             ],
             source=["https://pyomo.readthedocs.io/en/stable/"],
             priority="medium",
+            standards={"nasa_se_handbook": ["6.5"], "incose_se_handbook": ["5.5"]},
         ),
     ]

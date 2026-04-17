@@ -40,6 +40,7 @@ def generation() -> list[Requirement]:
             ],
             source=["https://huggingface.co/docs/transformers/generation_strategies"],
             priority="blocking",
+            standards={"nasa_se_handbook": ["6.5"]},
         ),
         Requirement(
             id="CAT-HGF-GEN-002",
@@ -97,6 +98,7 @@ def generation() -> list[Requirement]:
             ],
             source=["https://huggingface.co/docs/transformers/generation_strategies"],
             priority="high",
+            standards={"iso_25010": ["4.1.2"]},
         ),
         Requirement(
             id="CAT-HGF-GEN-005",

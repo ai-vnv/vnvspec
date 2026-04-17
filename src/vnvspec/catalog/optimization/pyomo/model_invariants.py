@@ -40,6 +40,7 @@ def model_invariants() -> list[Requirement]:
             ],
             source=["https://pyomo.readthedocs.io/en/stable/"],
             priority="high",
+            standards={"iso_25010": ["4.1.2"]},
         ),
         Requirement(
             id="CAT-PYO-INV-002",
@@ -58,6 +59,7 @@ def model_invariants() -> list[Requirement]:
             ],
             source=["https://pyomo.readthedocs.io/en/stable/"],
             priority="blocking",
+            standards={"do_178c": ["6.1"], "nasa_se_handbook": ["5.3"]},
         ),
         Requirement(
             id="CAT-PYO-INV-003",
@@ -78,6 +80,7 @@ def model_invariants() -> list[Requirement]:
             ],
             source=["https://pyomo.readthedocs.io/en/stable/"],
             priority="blocking",
+            standards={"do_178c": ["6.1"]},
         ),
         Requirement(
             id="CAT-PYO-INV-004",
@@ -101,6 +104,7 @@ def model_invariants() -> list[Requirement]:
                 "https://pyomo.readthedocs.io/en/stable/",
             ],
             priority="high",
+            standards={"ieee_754": ["5.3"], "iso_25010": ["4.1.2"]},
         ),
         Requirement(
             id="CAT-PYO-INV-005",
@@ -123,6 +127,11 @@ def model_invariants() -> list[Requirement]:
                 "https://pyomo.readthedocs.io/en/stable/",
             ],
             priority="blocking",
+            standards={
+                "do_178c": ["6.1", "6.3"],
+                "nasa_se_handbook": ["5.4"],
+                "sae_j3131": ["10.1"],
+            },
         ),
         Requirement(
             id="CAT-PYO-INV-006",
@@ -142,5 +151,6 @@ def model_invariants() -> list[Requirement]:
             ],
             source=["https://pyomo.readthedocs.io/en/stable/"],
             priority="medium",
+            standards={"incose_se_handbook": ["5.7"]},
         ),
     ]

@@ -39,7 +39,11 @@ def gradient_health() -> list[Requirement]:
             ],
             source=["https://karpathy.github.io/2019/04/25/recipe/"],
             priority="blocking",
-            standards={"nist_ai_rmf": ["MS-2.3"]},
+            standards={
+                "nist_ai_rmf": ["MS-2.3"],
+                "ieee_754": ["7.4", "7.5"],
+                "incose_se_handbook": ["5.7"],
+            },
         ),
         Requirement(
             id="CAT-PYT-GRAD-002",
@@ -58,7 +62,11 @@ def gradient_health() -> list[Requirement]:
             ],
             source=["https://karpathy.github.io/2019/04/25/recipe/"],
             priority="blocking",
-            standards={"nist_ai_rmf": ["MS-2.3"]},
+            standards={
+                "nist_ai_rmf": ["MS-2.3"],
+                "ieee_754": ["5.7", "6.1", "6.2"],
+                "iso_25010": ["4.5.1"],
+            },
         ),
         Requirement(
             id="CAT-PYT-GRAD-003",
@@ -119,7 +127,11 @@ def gradient_health() -> list[Requirement]:
             ],
             source=["https://karpathy.github.io/2019/04/25/recipe/"],
             priority="high",
-            standards={"nist_ai_rmf": ["MS-2.3"]},
+            standards={
+                "nist_ai_rmf": ["MS-2.3"],
+                "nasa_se_handbook": ["5.3"],
+                "do_178c": ["6.1"],
+            },
         ),
         Requirement(
             id="CAT-PYT-GRAD-006",
@@ -142,5 +154,33 @@ def gradient_health() -> list[Requirement]:
             ],
             priority="medium",
             standards={"nist_ai_rmf": ["MS-2.3"]},
+        ),
+        Requirement(
+            id="CAT-PYT-GRAD-007",
+            statement=(
+                "The training loop shall detect floating-point overflow (gradient norm "
+                "exceeding torch.finfo(dtype).max) and underflow (gradient norm below "
+                "torch.finfo(dtype).tiny) conditions and shall log them as distinct events."
+            ),
+            rationale=(
+                "IEEE 754 defines overflow and underflow as distinct exception conditions "
+                "(clauses 7.4 and 7.5). Distinguishing them in logs enables targeted "
+                "debugging: overflow suggests learning rate is too high; underflow "
+                "suggests vanishing gradients or excessive weight decay."
+            ),
+            verification_method="test",
+            acceptance_criteria=[
+                "Overflow events (gradient > finfo.max) are logged with 'overflow' tag.",
+                "Underflow events (gradient < finfo.tiny and > 0) are logged with 'underflow' tag.",
+            ],
+            source=[
+                "https://docs.pytorch.org/docs/stable/generated/torch.finfo.html",
+            ],
+            priority="high",
+            standards={
+                "ieee_754": ["7.4", "7.5"],
+                "nist_ai_rmf": ["MS-2.3"],
+                "iso_25010": ["4.5.1"],
+            },
         ),
     ]

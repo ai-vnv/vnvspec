@@ -2227,6 +2227,7 @@ source = { editable = "." }
 dependencies = [
     { name = "networkx" },
     { name = "openpyxl" },
+    { name = "packaging" },
     { name = "pydantic" },
     { name = "pyyaml" },
     { name = "tomli-w" },
@@ -2293,6 +2294,7 @@ requires-dist = [
     { name = "networkx", specifier = ">=3.2" },
     { name = "networkx-stubs", marker = "extra == 'dev'", specifier = ">=0.0.1" },
     { name = "openpyxl", specifier = ">=3.1" },
+    { name = "packaging", specifier = ">=23" },
     { name = "pandas-stubs", marker = "extra == 'dev'" },
     { name = "pandera", extras = ["pandas"], marker = "extra == 'dev'", specifier = ">=0.19" },
     { name = "pre-commit", marker = "extra == 'dev'", specifier = ">=3.7" },

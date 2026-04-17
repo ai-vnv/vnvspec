@@ -42,6 +42,7 @@ def attention_masks() -> list[Requirement]:
                 "https://arxiv.org/abs/1706.03762",
             ],
             priority="blocking",
+            standards={"do_178c": ["6.1"], "iso_25010": ["4.1.2"]},
         ),
         Requirement(
             id="CAT-HGF-ATTN-002",
@@ -61,6 +62,7 @@ def attention_masks() -> list[Requirement]:
             ],
             source=["https://huggingface.co/docs/transformers/index"],
             priority="blocking",
+            standards={"iso_25010": ["4.1.2"]},
         ),
         Requirement(
             id="CAT-HGF-ATTN-003",
@@ -104,6 +106,7 @@ def attention_masks() -> list[Requirement]:
                 "https://arxiv.org/abs/1706.03762",
             ],
             priority="high",
+            standards={"ieee_754": ["5.4"]},
         ),
         Requirement(
             id="CAT-HGF-ATTN-005",
@@ -141,5 +144,30 @@ def attention_masks() -> list[Requirement]:
             ],
             source=["https://huggingface.co/docs/transformers/index"],
             priority="medium",
+        ),
+        Requirement(
+            id="CAT-HGF-ATTN-007",
+            statement=(
+                "The inference pipeline shall use the same floating-point precision "
+                "(dtype) for input embeddings, attention computation, and output "
+                "projections, or shall document each precision transition point "
+                "and its numerical impact."
+            ),
+            rationale=(
+                "Mixed-precision inference without explicit dtype management causes "
+                "silent precision loss at type-conversion boundaries (IEEE 754 clause "
+                "5.4). This degrades output quality in ways that are difficult to debug."
+            ),
+            verification_method="test",
+            acceptance_criteria=[
+                "All tensors in the attention path have consistent dtype, or each "
+                "dtype transition is documented with its numerical impact.",
+            ],
+            source=["https://huggingface.co/docs/transformers/index"],
+            priority="high",
+            standards={
+                "ieee_754": ["5.4"],
+                "iso_25010": ["4.1.2"],
+            },
         ),
     ]

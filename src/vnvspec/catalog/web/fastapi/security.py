@@ -43,7 +43,11 @@ def security_baseline() -> list[Requirement]:
             ],
             source=["https://owasp.org/API-Security/editions/2023/en/0x00-header/"],
             priority="blocking",
-            standards={"owasp_api_top10_2023": ["API1:2023"]},
+            standards={
+                "owasp_api_top10_2023": ["API1:2023"],
+                "iso_sae_21434": ["10"],
+                "iso_25010": ["4.6.4"],
+            },
         ),
         # --- API2:2023 Broken Authentication ---
         Requirement(
@@ -65,7 +69,10 @@ def security_baseline() -> list[Requirement]:
             ],
             source=["https://owasp.org/API-Security/editions/2023/en/0x00-header/"],
             priority="blocking",
-            standards={"owasp_api_top10_2023": ["API2:2023"]},
+            standards={
+                "owasp_api_top10_2023": ["API2:2023"],
+                "iso_25010": ["4.6.5"],
+            },
         ),
         # --- API3:2023 Broken Object Property Level Authorization (BOPLA) ---
         Requirement(
@@ -87,7 +94,10 @@ def security_baseline() -> list[Requirement]:
             ],
             source=["https://owasp.org/API-Security/editions/2023/en/0x00-header/"],
             priority="blocking",
-            standards={"owasp_api_top10_2023": ["API3:2023"]},
+            standards={
+                "owasp_api_top10_2023": ["API3:2023"],
+                "iso_25010": ["4.6.1"],
+            },
         ),
         # --- API4:2023 Unrestricted Resource Consumption ---
         Requirement(
@@ -172,7 +182,10 @@ def security_baseline() -> list[Requirement]:
             ],
             source=["https://owasp.org/API-Security/editions/2023/en/0x00-header/"],
             priority="blocking",
-            standards={"owasp_api_top10_2023": ["API7:2023"]},
+            standards={
+                "owasp_api_top10_2023": ["API7:2023"],
+                "iso_sae_21434": ["10"],
+            },
         ),
         # --- API8:2023 Security Misconfiguration ---
         Requirement(
@@ -198,7 +211,11 @@ def security_baseline() -> list[Requirement]:
                 "https://datatracker.ietf.org/doc/rfc9457/",
             ],
             priority="blocking",
-            standards={"owasp_api_top10_2023": ["API8:2023"]},
+            standards={
+                "owasp_api_top10_2023": ["API8:2023"],
+                "nasa_se_handbook": ["6.5"],
+                "iso_25010": ["4.6.6"],
+            },
         ),
         # --- API9:2023 Improper Inventory Management ---
         Requirement(
@@ -243,6 +260,9 @@ def security_baseline() -> list[Requirement]:
             ],
             source=["https://owasp.org/API-Security/editions/2023/en/0x00-header/"],
             priority="high",
-            standards={"owasp_api_top10_2023": ["API10:2023"]},
+            standards={
+                "owasp_api_top10_2023": ["API10:2023"],
+                "iso_25010": ["4.5.3"],
+            },
         ),
     ]

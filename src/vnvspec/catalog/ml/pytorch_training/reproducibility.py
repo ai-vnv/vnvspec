@@ -40,7 +40,12 @@ def reproducibility() -> list[Requirement]:
             ],
             source=["https://docs.pytorch.org/docs/stable/notes/randomness.html"],
             priority="blocking",
-            standards={"nist_ai_rmf": ["MS-2.7"]},
+            standards={
+                "nist_ai_rmf": ["MS-2.7"],
+                "ieee_754": ["11"],
+                "nasa_se_handbook": ["5.3"],
+                "do_178c": ["6.3"],
+            },
         ),
         Requirement(
             id="CAT-PYT-REPRO-002",
@@ -60,7 +65,11 @@ def reproducibility() -> list[Requirement]:
             ],
             source=["https://docs.pytorch.org/docs/stable/notes/randomness.html"],
             priority="blocking",
-            standards={"nist_ai_rmf": ["MS-2.7"]},
+            standards={
+                "nist_ai_rmf": ["MS-2.7"],
+                "ieee_754": ["11"],
+                "iso_25010": ["4.5.4"],
+            },
         ),
         Requirement(
             id="CAT-PYT-REPRO-003",
@@ -139,6 +148,10 @@ def reproducibility() -> list[Requirement]:
             ],
             source=["https://docs.pytorch.org/docs/stable/notes/randomness.html"],
             priority="medium",
-            standards={"nist_ai_rmf": ["MS-2.7"]},
+            standards={
+                "nist_ai_rmf": ["MS-2.7"],
+                "nasa_se_handbook": ["6.5"],
+                "incose_se_handbook": ["5.5"],
+            },
         ),
     ]

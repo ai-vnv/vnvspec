@@ -45,7 +45,11 @@ def checkpointing() -> list[Requirement]:
                 "https://karpathy.github.io/2019/04/25/recipe/",
             ],
             priority="blocking",
-            standards={"nist_ai_rmf": ["MS-2.7"]},
+            standards={
+                "nist_ai_rmf": ["MS-2.7"],
+                "nasa_se_handbook": ["6.5"],
+                "sae_arp4754a": ["8"],
+            },
         ),
         Requirement(
             id="CAT-PYT-CHKPT-002",
@@ -143,6 +147,10 @@ def checkpointing() -> list[Requirement]:
             ],
             source=["https://karpathy.github.io/2019/04/25/recipe/"],
             priority="medium",
-            standards={"nist_ai_rmf": ["MS-2.7"]},
+            standards={
+                "nist_ai_rmf": ["MS-2.7"],
+                "iso_25010": ["4.6.2"],
+                "nasa_se_handbook": ["5.3"],
+            },
         ),
     ]

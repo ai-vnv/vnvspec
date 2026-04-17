@@ -77,6 +77,7 @@ def api_design() -> list[Requirement]:
             ],
             source=["https://fastapi.tiangolo.com/"],
             priority="high",
+            standards={"iso_25010": ["4.5.1"]},
         ),
         Requirement(
             id="CAT-FPI-API-004",
@@ -119,7 +120,10 @@ def api_design() -> list[Requirement]:
                 "https://owasp.org/API-Security/editions/2023/en/0x00-header/",
             ],
             priority="blocking",
-            standards={"owasp_api_top10_2023": ["API8:2023"]},
+            standards={
+                "owasp_api_top10_2023": ["API8:2023"],
+                "iso_25010": ["4.6.6"],
+            },
         ),
         Requirement(
             id="CAT-FPI-API-006",

@@ -38,6 +38,7 @@ def observability() -> list[Requirement]:
             ],
             source=["https://fastapi.tiangolo.com/"],
             priority="high",
+            standards={"iso_25010": ["4.7.3"], "incose_se_handbook": ["5.7"]},
         ),
         Requirement(
             id="CAT-FPI-OBS-002",
@@ -57,6 +58,7 @@ def observability() -> list[Requirement]:
             ],
             source=["https://fastapi.tiangolo.com/"],
             priority="high",
+            standards={"iso_25010": ["4.7.3"]},
         ),
         Requirement(
             id="CAT-FPI-OBS-003",
@@ -76,6 +78,7 @@ def observability() -> list[Requirement]:
             ],
             source=["https://fastapi.tiangolo.com/"],
             priority="blocking",
+            standards={"iso_25010": ["4.5.2"]},
         ),
         Requirement(
             id="CAT-FPI-OBS-004",
@@ -113,7 +116,10 @@ def observability() -> list[Requirement]:
             ],
             source=["https://cheatsheetseries.owasp.org/"],
             priority="blocking",
-            standards={"owasp_api_top10_2023": ["API8:2023"]},
+            standards={
+                "owasp_api_top10_2023": ["API8:2023"],
+                "iso_25010": ["4.6.1"],
+            },
         ),
         Requirement(
             id="CAT-FPI-OBS-006",
@@ -133,5 +139,6 @@ def observability() -> list[Requirement]:
             ],
             source=["https://fastapi.tiangolo.com/"],
             priority="medium",
+            standards={"incose_se_handbook": ["5.7"], "iso_25010": ["4.2.1"]},
         ),
     ]

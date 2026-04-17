@@ -41,6 +41,7 @@ def structured_outputs() -> list[Requirement]:
             ],
             source=["https://huggingface.co/docs/transformers/generation_strategies"],
             priority="blocking",
+            standards={"iso_25010": ["4.1.2", "4.5.1"]},
         ),
         Requirement(
             id="CAT-HGF-STRUCT-002",
@@ -59,6 +60,7 @@ def structured_outputs() -> list[Requirement]:
             ],
             source=["https://huggingface.co/docs/transformers/generation_strategies"],
             priority="high",
+            standards={"iso_25010": ["4.7.3"]},
         ),
         Requirement(
             id="CAT-HGF-STRUCT-003",
@@ -99,6 +101,7 @@ def structured_outputs() -> list[Requirement]:
             ],
             source=["https://huggingface.co/docs/transformers/generation_strategies"],
             priority="medium",
+            standards={"iso_25010": ["4.5.3"]},
         ),
         Requirement(
             id="CAT-HGF-STRUCT-005",

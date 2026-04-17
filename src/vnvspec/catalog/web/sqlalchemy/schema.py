@@ -39,6 +39,10 @@ def schema() -> list[Requirement]:
             ],
             source=["https://alembic.sqlalchemy.org/en/latest/"],
             priority="blocking",
+            standards={
+                "nasa_se_handbook": ["6.5"],
+                "incose_se_handbook": ["5.5"],
+            },
         ),
         Requirement(
             id="CAT-SQA-SCHM-002",
@@ -111,6 +115,7 @@ def schema() -> list[Requirement]:
             ],
             source=["https://alembic.sqlalchemy.org/en/latest/"],
             priority="high",
+            standards={"iso_25010": ["4.5.4"], "nasa_se_handbook": ["6.5"]},
         ),
         Requirement(
             id="CAT-SQA-SCHM-006",

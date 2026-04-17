@@ -40,7 +40,11 @@ def loss_validation() -> list[Requirement]:
             ],
             source=["https://karpathy.github.io/2019/04/25/recipe/"],
             priority="blocking",
-            standards={"nist_ai_rmf": ["MS-2.3"]},
+            standards={
+                "nist_ai_rmf": ["MS-2.3"],
+                "do_178c": ["6.1"],
+                "sae_j3131": ["10.1"],
+            },
         ),
         Requirement(
             id="CAT-PYT-LOSS-002",
@@ -60,6 +64,10 @@ def loss_validation() -> list[Requirement]:
             ],
             source=["https://karpathy.github.io/2019/04/25/recipe/"],
             priority="blocking",
+            standards={
+                "ieee_754": ["5.7", "7.1"],
+                "iso_25010": ["4.5.1"],
+            },
         ),
         Requirement(
             id="CAT-PYT-LOSS-003",
@@ -79,7 +87,11 @@ def loss_validation() -> list[Requirement]:
             ],
             source=["https://karpathy.github.io/2019/04/25/recipe/"],
             priority="blocking",
-            standards={"nist_ai_rmf": ["MS-2.3"]},
+            standards={
+                "nist_ai_rmf": ["MS-2.3"],
+                "do_178c": ["6.1"],
+                "nasa_se_handbook": ["5.3"],
+            },
         ),
         Requirement(
             id="CAT-PYT-LOSS-004",
@@ -138,5 +150,35 @@ def loss_validation() -> list[Requirement]:
             ],
             source=["https://karpathy.github.io/2019/04/25/recipe/"],
             priority="medium",
+        ),
+        Requirement(
+            id="CAT-PYT-LOSS-007",
+            statement=(
+                "The training loop shall use numerically stable implementations of "
+                "common loss functions (log-sum-exp, cross-entropy) rather than naive "
+                "formulations that are prone to overflow or underflow."
+            ),
+            rationale=(
+                "Naive implementations of log(sum(exp(x))) overflow for large x and "
+                "underflow for negative x. PyTorch provides numerically stable "
+                "alternatives (torch.logsumexp, F.cross_entropy with logits) that "
+                "should always be preferred."
+            ),
+            verification_method="test",
+            acceptance_criteria=[
+                "Loss functions use torch.nn.functional.cross_entropy (not manual "
+                "softmax + log), or torch.logsumexp where applicable.",
+                "Loss values remain finite for inputs in the range [-100, 100].",
+            ],
+            source=[
+                "https://docs.pytorch.org/docs/stable/generated/torch.logsumexp.html",
+                "https://karpathy.github.io/2019/04/25/recipe/",
+            ],
+            priority="blocking",
+            standards={
+                "ieee_754": ["6.1", "7.4", "7.5"],
+                "nist_ai_rmf": ["MS-2.3"],
+                "iso_25010": ["4.1.2"],
+            },
         ),
     ]

@@ -101,7 +101,11 @@ def data_loading() -> list[Requirement]:
                 "https://docs.pytorch.org/docs/stable/notes/randomness.html",
             ],
             priority="high",
-            standards={"nist_ai_rmf": ["MS-2.7"]},
+            standards={
+                "nist_ai_rmf": ["MS-2.7"],
+                "ieee_754": ["11"],
+                "do_178c": ["6.3"],
+            },
         ),
         Requirement(
             id="CAT-PYT-DATA-005",
@@ -120,6 +124,9 @@ def data_loading() -> list[Requirement]:
             ],
             source=["https://karpathy.github.io/2019/04/25/recipe/"],
             priority="high",
+            standards={
+                "incose_se_handbook": ["5.7"],
+            },
         ),
         Requirement(
             id="CAT-PYT-DATA-006",

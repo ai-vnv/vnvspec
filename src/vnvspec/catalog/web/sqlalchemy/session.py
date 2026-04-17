@@ -41,6 +41,7 @@ def session() -> list[Requirement]:
             ],
             source=["https://docs.sqlalchemy.org/en/20/"],
             priority="blocking",
+            standards={"iso_25010": ["4.6.1"], "iso_sae_21434": ["10"]},
         ),
         Requirement(
             id="CAT-SQA-SESS-002",
@@ -60,6 +61,7 @@ def session() -> list[Requirement]:
             ],
             source=["https://docs.sqlalchemy.org/en/20/core/pooling.html"],
             priority="high",
+            standards={"iso_25010": ["4.2.2", "4.2.3"]},
         ),
         Requirement(
             id="CAT-SQA-SESS-003",
@@ -97,6 +99,7 @@ def session() -> list[Requirement]:
             ],
             source=["https://docs.sqlalchemy.org/en/20/core/pooling.html"],
             priority="high",
+            standards={"iso_25010": ["4.5.2"]},
         ),
         Requirement(
             id="CAT-SQA-SESS-005",
