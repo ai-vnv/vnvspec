@@ -96,6 +96,7 @@ omit = [
     "src/vnvspec/torch/transformer.py",
     "src/vnvspec/torch/autoregressive.py",
     "src/vnvspec/torch/vlm.py",
+    "src/vnvspec/cli/*",
 ]
 
 [tool.coverage.report]
