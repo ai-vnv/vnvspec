@@ -21,9 +21,31 @@ jobs:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v3
       - run: uv python install 3.12
-      - run: uv sync --extra docs
+      - run: uv sync --all-extras
       - name: Build docs
         run: uv run mkdocs build -d site
+
+      - name: Run self-assessment and build dashboard
+        run: |
+          uv run pytest -p no:vnvspec \
+            --vnvspec-spec=.vnvspec/self-spec.yaml \
+            --vnvspec-report=.vnvspec/pytest-self-report.json \
+            --ignore=packages -q || true
+          uv run python -c "
+          from vnvspec import Spec
+          from vnvspec.core.assessment import Report
+          from vnvspec.exporters.dashboard import export_dashboard
+          import json
+          spec = Spec.from_yaml('.vnvspec/self-spec.yaml')
+          report = Report.model_validate(json.loads(open('.vnvspec/pytest-self-report.json').read()))
+          export_dashboard(
+              spec, report,
+              output_dir='site/dashboard',
+              dashboard_url='https://ai-vnv.github.io/vnvspec/dashboard/',
+          )
+          print(f'Dashboard: {len(spec.requirements)} requirements')
+          "
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site/
