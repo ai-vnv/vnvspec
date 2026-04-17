@@ -21,7 +21,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - `Spec.extend(*requirements)` for composing catalog modules into a spec.
 - YAML/TOML/JSON spec I/O: `Spec.from_yaml()`, `Spec.to_yaml()`, `Spec.from_toml()`, `Spec.to_toml()`, `Spec.from_json()`, `Spec.to_json()`.
 - `vnvspec init --format yaml|toml|py` flag for scaffolding specs in different formats.
-- New dependencies: `pyyaml>=6.0`, `tomli-w>=1.0`.
+- New dependencies: `pyyaml>=6.0`, `tomli-w>=1.0`, `openpyxl>=3.1`.
+- Compliance matrix exporter (`export_compliance_matrix()`) in XLSX, CSV, and HTML formats.
+- `standard_gap_analysis()` for analyzing spec coverage against standards registries.
+- `GapReport` and `ClauseCoverage` models for structured gap analysis results.
 
 ## [0.1.0] — 2026-04-17
 

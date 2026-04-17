@@ -16,7 +16,13 @@ from vnvspec.core.hazard import Hazard
 from vnvspec.core.odd import ODD
 from vnvspec.core.requirement import Requirement
 from vnvspec.core.spec import Spec
-from vnvspec.core.trace import TraceLink, build_trace_graph, coverage_report
+from vnvspec.core.trace import (
+    GapReport,
+    TraceLink,
+    build_trace_graph,
+    coverage_report,
+    standard_gap_analysis,
+)
 
 __all__ = [
     "ODD",
@@ -24,6 +30,7 @@ __all__ = [
     "ContractError",
     "Evidence",
     "EvidenceCollector",
+    "GapReport",
     "Hazard",
     "IOContract",
     "Invariant",
@@ -37,4 +44,5 @@ __all__ = [
     "__version__",
     "build_trace_graph",
     "coverage_report",
+    "standard_gap_analysis",
 ]
