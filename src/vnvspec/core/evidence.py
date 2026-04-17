@@ -22,7 +22,7 @@ from __future__ import annotations
 from datetime import UTC, datetime
 from typing import Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 EvidenceKind = Literal["test", "analysis", "inspection", "demonstration", "simulation"]
 Verdict = Literal["pass", "fail", "inconclusive"]
@@ -31,15 +31,20 @@ Verdict = Literal["pass", "fail", "inconclusive"]
 class Evidence(BaseModel):
     """A single piece of verification evidence.
 
+    The ``details`` field accepts either a ``dict`` or a plain ``str``.
+    A bare string is automatically wrapped into ``{"message": "..."}``
+    so the on-disk JSON shape stays stable.
+
     Example:
         >>> e = Evidence(
         ...     id="EV-002",
         ...     requirement_id="REQ-002",
         ...     kind="analysis",
         ...     verdict="pass",
+        ...     details="looks good",
         ... )
-        >>> e.kind
-        'analysis'
+        >>> e.details
+        {'message': 'looks good'}
     """
 
     model_config = {"frozen": True}
@@ -56,3 +61,11 @@ class Evidence(BaseModel):
     details: dict[str, Any] = Field(
         default_factory=dict, description="Additional details about the evidence."
     )
+
+    @model_validator(mode="before")
+    @classmethod
+    def _wrap_str_details(cls, data: Any) -> Any:
+        """Auto-wrap a bare ``str`` details value into ``{"message": ...}``."""
+        if isinstance(data, dict) and "details" in data and isinstance(data["details"], str):
+            data = {**data, "details": {"message": data["details"]}}
+        return data

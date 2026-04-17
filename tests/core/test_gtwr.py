@@ -5,7 +5,9 @@ Each rule has at least one pass case and one fail case.
 
 from __future__ import annotations
 
-from vnvspec.core._internal.gtwr_rules import RuleViolation, check_all
+import pytest
+
+from vnvspec.core._internal.gtwr_rules import RuleProfile, RuleViolation, check_all
 from vnvspec.core.requirement import Requirement
 
 
@@ -238,3 +240,65 @@ class TestIntegration:
         )
         assert v.rule == "R1"
         assert v.name == "Necessary"
+
+
+# --- Rule profiles ---
+
+
+class TestRuleProfiles:
+    def test_formal_is_default(self) -> None:
+        """Formal profile produces the same results as no profile."""
+        req = _good_req(statement="The system shall handle 500 requests.")
+        v_default = check_all(req)
+        v_formal = check_all(req, profile=RuleProfile.FORMAL)
+        assert len(v_default) == len(v_formal)
+
+    @pytest.mark.vnvspec("REQ-SELF-PROFILE-001")
+    def test_web_app_demotes_r6(self) -> None:
+        """web-app profile demotes R6 (unit-bearing) to info."""
+        req = _good_req(statement="The system shall handle 500 requests.")
+        formal_v = check_all(req, profile=RuleProfile.FORMAL)
+        webapp_v = check_all(req, profile=RuleProfile.WEB_APP)
+        r6_formal = [v for v in formal_v if v.rule == "R6"]
+        r6_webapp = [v for v in webapp_v if v.rule == "R6"]
+        assert len(r6_formal) == 1
+        assert r6_formal[0].severity == "warning"
+        assert len(r6_webapp) == 1
+        assert r6_webapp[0].severity == "info"
+
+    def test_web_app_demotes_r7(self) -> None:
+        """web-app profile demotes R7 (shall-language) to info."""
+        req = _good_req(statement="The service returns a 200 status code.")
+        webapp_v = check_all(req, profile=RuleProfile.WEB_APP)
+        r7_webapp = [v for v in webapp_v if v.rule == "R7"]
+        assert len(r7_webapp) == 1
+        assert r7_webapp[0].severity == "info"
+
+    def test_embedded_promotes_r5(self) -> None:
+        """embedded profile promotes R5 (feasible) to error."""
+        req = _good_req(statement="The system shall always produce correct output.")
+        embedded_v = check_all(req, profile=RuleProfile.EMBEDDED)
+        r5_embedded = [v for v in embedded_v if v.rule == "R5"]
+        assert len(r5_embedded) == 1
+        assert r5_embedded[0].severity == "error"
+
+    def test_web_app_reduces_violations(self) -> None:
+        """web-app profile reduces error-level violations vs formal."""
+        req = _good_req(statement="The endpoint returns JSON with 200 status code.")
+        formal_errors = [
+            v for v in check_all(req, profile=RuleProfile.FORMAL) if v.severity == "error"
+        ]
+        webapp_errors = [
+            v for v in check_all(req, profile=RuleProfile.WEB_APP) if v.severity == "error"
+        ]
+        assert len(webapp_errors) <= len(formal_errors)
+
+    def test_check_quality_with_profile(self) -> None:
+        """check_quality method accepts profile parameter."""
+        req = _good_req(statement="The system shall handle 500 requests.")
+        v_formal = req.check_quality(profile=RuleProfile.FORMAL)
+        v_webapp = req.check_quality(profile=RuleProfile.WEB_APP)
+        r6_formal = [v for v in v_formal if v.rule == "R6"]
+        r6_webapp = [v for v in v_webapp if v.rule == "R6"]
+        assert r6_formal[0].severity == "warning"
+        assert r6_webapp[0].severity == "info"

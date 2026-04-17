@@ -1,6 +1,6 @@
 [project]
 name = "vnvspec"
-version = "0.1.0"
+version = "0.2.0"
 description = "V&V-grade specifications for engineered systems — AI, optimization, simulation, and physics."
 readme = "README.md"
 license = "Apache-2.0"
@@ -11,6 +11,9 @@ requires-python = ">=3.11"
 dependencies = [
     "pydantic>=2.7",
     "networkx>=3.2",
+    "pyyaml>=6.0",
+    "tomli-w>=1.0",
+    "openpyxl>=3.1",
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -43,6 +46,8 @@ dev = [
     "codespell>=2.2",
     "pre-commit>=3.7",
     "networkx-stubs>=0.0.1",
+    "types-PyYAML>=6.0",
+    "types-openpyxl>=0.1",
     "pandas-stubs",
     "hypothesis>=6.100",
     "pandera[pandas]>=0.19",
@@ -75,7 +80,10 @@ extend-exclude = ["notebooks"]
 select = ["E", "F", "I", "N", "UP", "B", "A", "C4", "PL", "RUF"]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**" = ["PLR2004", "E402"]
+"tests/**" = ["PLR2004", "E402", "PLC0415", "E741"]
+"src/vnvspec/exporters/dashboard.py" = ["E501", "PLR0913", "PLR2004"]
+"packages/**/tests/**" = ["PLR2004", "E402", "PLC0415", "E741", "I001"]
+"scripts/**" = ["PLC0415", "E501", "E741", "PLW1510"]
 
 [tool.mypy]
 strict = true
@@ -92,14 +100,15 @@ addopts = "--strict-markers --strict-config"
 
 [tool.coverage.run]
 branch = true
-source = ["vnvspec"]
+source = ["src/vnvspec"]
 omit = [
     "src/vnvspec/torch/transformer.py",
     "src/vnvspec/torch/autoregressive.py",
     "src/vnvspec/torch/vlm.py",
     "src/vnvspec/cli/*",
+    "scripts/*",
 ]
 
 [tool.coverage.report]
-fail_under = 85
+fail_under = 95
 show_missing = true

@@ -19,8 +19,14 @@ Example:
 
 from __future__ import annotations
 
-from typing import Any
+import json
+import tomllib
+from collections.abc import Iterable
+from pathlib import Path
+from typing import Any, Self
 
+import tomli_w
+import yaml
 from pydantic import BaseModel, Field, model_validator
 
 from vnvspec.core.contract import IOContract
@@ -41,6 +47,12 @@ class Spec(BaseModel):
     """
 
     model_config = {"frozen": True}
+
+    _YAML_DUMP_KWARGS: dict[str, Any] = {
+        "default_flow_style": False,
+        "sort_keys": False,
+        "allow_unicode": True,
+    }
 
     name: str = Field(description="Specification name.")
     version: str = Field(default="0.1.0", description="Specification version.")
@@ -132,6 +144,33 @@ class Spec(BaseModel):
         """
         return [e for e in self.evidence if e.requirement_id == requirement_id]
 
+    def extend(self, *additional: Requirement | Iterable[Requirement]) -> Self:
+        """Return a new Spec with additional requirements appended.
+
+        Frozen-model-safe: returns a new instance, never mutates self.
+        Accepts both individual Requirements and iterables (so a catalog
+        function's ``list[Requirement]`` return value can be spread or
+        passed directly).
+
+        Example:
+            >>> from vnvspec.catalog.demo import hello_world
+            >>> spec = Spec(name="demo")
+            >>> spec2 = spec.extend(hello_world())
+            >>> len(spec2.requirements)
+            1
+            >>> len(spec.requirements)  # original unchanged
+            0
+        """
+        collected: list[Requirement] = []
+        for item in additional:
+            if isinstance(item, Requirement):
+                collected.append(item)
+            else:
+                collected.extend(item)
+        data = self.model_dump()
+        data["requirements"] = [*self.requirements, *collected]
+        return type(self).model_validate(data)
+
     def coverage_summary(self) -> dict[str, int]:
         """Return a summary of evidence coverage.
 
@@ -147,3 +186,81 @@ class Spec(BaseModel):
         total = len(self.requirements)
         covered = sum(1 for r in self.requirements if r.id in covered_ids)
         return {"total": total, "covered": covered, "uncovered": total - covered}
+
+    # --- Serialization: YAML / TOML / JSON ---
+
+    @classmethod
+    def from_yaml(cls, path: Path | str) -> Self:
+        """Load a Spec from a YAML file.
+
+        Example:
+            >>> import tempfile, os
+            >>> from vnvspec.core.spec import Spec
+            >>> s = Spec(name="t")
+            >>> p = os.path.join(tempfile.mkdtemp(), "s.yaml")
+            >>> _ = s.to_yaml(p)
+            >>> Spec.from_yaml(p).name
+            't'
+        """
+        path = Path(path)
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        if not isinstance(data, dict):
+            raise SpecError(f"Expected a YAML mapping at top level in {path}")
+        return cls.model_validate(data)
+
+    @classmethod
+    def from_toml(cls, path: Path | str) -> Self:
+        """Load a Spec from a TOML file.
+
+        Example:
+            >>> import tempfile, os
+            >>> from vnvspec.core.spec import Spec
+            >>> s = Spec(name="t")
+            >>> p = os.path.join(tempfile.mkdtemp(), "s.toml")
+            >>> _ = s.to_toml(p)
+            >>> Spec.from_toml(p).name
+            't'
+        """
+        path = Path(path)
+        with path.open("rb") as f:
+            data = tomllib.load(f)
+        return cls.model_validate(data)
+
+    @classmethod
+    def from_json(cls, path: Path | str) -> Self:
+        """Load a Spec from a JSON file."""
+        path = Path(path)
+        data = json.loads(path.read_text(encoding="utf-8"))
+        return cls.model_validate(data)
+
+    def to_yaml(self, path: Path | str | None = None) -> str:
+        """Serialize to YAML. If *path* is given, also write to file.
+
+        Returns the YAML string regardless.
+        """
+        data = json.loads(self.model_dump_json())
+        text: str = yaml.dump(data, **self._YAML_DUMP_KWARGS)
+        if path is not None:
+            Path(path).write_text(text, encoding="utf-8")
+        return text
+
+    def to_toml(self, path: Path | str | None = None) -> str:
+        """Serialize to TOML. If *path* is given, also write to file.
+
+        Returns the TOML string regardless.
+        """
+        data = json.loads(self.model_dump_json())
+        text = tomli_w.dumps(data)
+        if path is not None:
+            Path(path).write_text(text, encoding="utf-8")
+        return text
+
+    def to_json(self, path: Path | str | None = None) -> str:
+        """Serialize to JSON. If *path* is given, also write to file.
+
+        Returns the JSON string regardless.
+        """
+        text = self.model_dump_json(indent=2)
+        if path is not None:
+            Path(path).write_text(text, encoding="utf-8")
+        return text

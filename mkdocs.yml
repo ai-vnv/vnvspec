@@ -70,6 +70,16 @@ nav:
       - Requirement: concepts/requirement.md
       - IO Contract: concepts/io-contract.md
       - Evidence & Assessment: concepts/eve-spec.md
+      - Catalog (Preview): concepts/catalog.md
+      - Spec Formats: concepts/spec-formats.md
+  - Integrations:
+      - pytest: integrations/pytest.md
+      - GitHub Actions: integrations/github-actions.md
+  - Recipes:
+      - Per-Phase Spec Files: recipes/per-phase-spec-files.md
+      - Test Runner Patterns: recipes/test-runner-patterns.md
+  - Migration:
+      - v0.1 to v0.2: migration/v0.1-to-v0.2.md
   - Adapters:
       - PyTorch: adapters/torch.md
   - Standards:

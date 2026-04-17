@@ -9,6 +9,7 @@ are not a substitute for human review.
 
 from __future__ import annotations
 
+import enum
 import re
 from typing import TYPE_CHECKING, Literal
 
@@ -17,7 +18,28 @@ from pydantic import BaseModel, Field
 if TYPE_CHECKING:
     from vnvspec.core.requirement import Requirement
 
-Severity = Literal["error", "warning"]
+Severity = Literal["error", "warning", "info"]
+
+
+class RuleProfile(enum.StrEnum):
+    """Rule profile presets for different project types."""
+
+    FORMAL = "formal"
+    WEB_APP = "web-app"
+    EMBEDDED = "embedded"
+
+
+# Severity overrides per profile. Keys not listed use the rule's default severity.
+_PROFILE_OVERRIDES: dict[RuleProfile, dict[str, Severity]] = {
+    RuleProfile.FORMAL: {},
+    RuleProfile.WEB_APP: {
+        "R6": "info",  # Unit-bearing: web apps rarely have physical units
+        "R7": "info",  # Complete (shall-language): web apps use different vocabulary
+    },
+    RuleProfile.EMBEDDED: {
+        "R5": "error",  # Feasible: stricter for safety-critical embedded
+    },
+}
 
 
 class RuleViolation(BaseModel):
@@ -268,10 +290,16 @@ _ALL_RULES = [
 ]
 
 
-def check_all(req: Requirement) -> list[RuleViolation]:
+def check_all(
+    req: Requirement,
+    *,
+    profile: RuleProfile = RuleProfile.FORMAL,
+) -> list[RuleViolation]:
     """Run all GtWR rules against a requirement.
 
     Returns a list of violations (empty if all rules pass).
+    The *profile* parameter adjusts severity levels for different
+    project types (e.g. "web-app" demotes R6 and R7 to "info").
 
     Example:
         >>> from vnvspec.core.requirement import Requirement
@@ -285,9 +313,14 @@ def check_all(req: Requirement) -> list[RuleViolation]:
         >>> check_all(r)
         []
     """
+    overrides = _PROFILE_OVERRIDES.get(profile, {})
     violations: list[RuleViolation] = []
     for rule_fn in _ALL_RULES:
         violation = rule_fn(req)
         if violation is not None:
+            # Apply profile severity override
+            rule_id = violation.rule
+            if rule_id in overrides:
+                violation = violation.model_copy(update={"severity": overrides[rule_id]})
             violations.append(violation)
     return violations

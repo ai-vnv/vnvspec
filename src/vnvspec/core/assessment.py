@@ -14,7 +14,7 @@ from __future__ import annotations
 from datetime import UTC, datetime
 from typing import Any
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 from vnvspec.core.evidence import Evidence
 
@@ -35,6 +35,10 @@ class AssessmentContext(BaseModel):
 class Report(BaseModel):
     """Assessment report aggregating evidence.
 
+    The ``summary`` field accepts either a ``dict`` or a plain ``str``.
+    A bare string is automatically wrapped into ``{"message": "..."}``
+    so the on-disk JSON shape stays stable.
+
     Example:
         >>> r = Report(spec_name="my-spec", spec_version="1.0")
         >>> len(r.evidence)
@@ -50,6 +54,14 @@ class Report(BaseModel):
     evidence: list[Evidence] = Field(default_factory=list, description="Collected evidence.")
     summary: dict[str, Any] = Field(default_factory=dict, description="Summary statistics.")
     metadata: dict[str, Any] = Field(default_factory=dict, description="Additional metadata.")
+
+    @model_validator(mode="before")
+    @classmethod
+    def _wrap_str_summary(cls, data: Any) -> Any:
+        """Auto-wrap a bare ``str`` summary value into ``{"message": ...}``."""
+        if isinstance(data, dict) and "summary" in data and isinstance(data["summary"], str):
+            data = {**data, "summary": {"message": data["summary"]}}
+        return data
 
     def pass_count(self) -> int:
         """Count evidence with pass verdict.

@@ -146,3 +146,108 @@ def import_graphml(graphml_str: str) -> nx.DiGraph:
     """
     buf = BytesIO(graphml_str.encode("utf-8"))
     return nx.read_graphml(buf)  # type: ignore[no-any-return]  # networkx stubs incomplete
+
+
+class ClauseCoverage(BaseModel):
+    """Coverage status for a single standard clause."""
+
+    model_config = {"frozen": True}
+
+    clause_id: str = Field(description="Registry entry ID.")
+    clause: str = Field(description="Clause number.")
+    title: str = Field(description="Clause title.")
+    normative_level: str = Field(description="shall / should / may / informative.")
+    mapped_requirements: list[str] = Field(
+        default_factory=list, description="Requirement IDs mapped to this clause."
+    )
+    status: Literal["covered", "partial", "gap"] = Field(description="Coverage status.")
+
+
+class GapReport(BaseModel):
+    """Result of a standard gap analysis."""
+
+    model_config = {"frozen": True}
+
+    standard: str = Field(description="Name of the standard analyzed.")
+    total_clauses: int = Field(description="Total normative clauses.")
+    covered: int = Field(description="Clauses with at least one mapped requirement.")
+    gaps: int = Field(description="Clauses with no mapped requirement.")
+    clauses: list[ClauseCoverage] = Field(
+        default_factory=list, description="Per-clause coverage details."
+    )
+
+
+def standard_gap_analysis(
+    spec: Any,
+    standard: str,
+    *,
+    registry: Any | None = None,
+) -> GapReport:
+    """Analyze a spec against a standards registry for coverage gaps.
+
+    Parameters
+    ----------
+    spec:
+        A :class:`~vnvspec.core.spec.Spec` instance.
+    standard:
+        Registry name (e.g. ``"iso_pas_8800"``).
+    registry:
+        Optional pre-loaded :class:`~vnvspec.registries.loader.Registry`.
+        If ``None``, loads from bundled registries.
+
+    Returns
+    -------
+    GapReport
+        Per-clause coverage analysis.
+
+    Example:
+        >>> from vnvspec import Spec
+        >>> spec = Spec(name="empty")
+        >>> report = standard_gap_analysis(spec, "iso_pas_8800")
+        >>> report.gaps > 0
+        True
+    """
+    if registry is None:
+        from vnvspec.registries import load  # noqa: PLC0415
+
+        registry = load(standard)
+
+    # Build a set of all clause IDs that are mapped by spec requirements
+    mapped_clauses: dict[str, list[str]] = {}
+    for req in spec.requirements:
+        for std_name, clause_list in req.standards.items():
+            if std_name == standard:
+                for clause_id in clause_list:
+                    mapped_clauses.setdefault(clause_id, []).append(req.id)
+
+    clauses: list[ClauseCoverage] = []
+    covered_count = 0
+    gap_count = 0
+    normative_entries = [e for e in registry.entries if e.normative_level in ("shall", "should")]
+
+    for entry in normative_entries:
+        req_ids = mapped_clauses.get(entry.clause, [])
+        if req_ids:
+            status: Literal["covered", "partial", "gap"] = "covered"
+            covered_count += 1
+        else:
+            status = "gap"
+            gap_count += 1
+        clauses.append(
+            ClauseCoverage(
+                clause_id=entry.id,
+                clause=entry.clause,
+                title=entry.title,
+                normative_level=entry.normative_level,
+                mapped_requirements=req_ids,
+                status=status,
+            )
+        )
+
+    return GapReport(
+        standard=registry.name,
+        total_clauses=len(normative_entries),
+        covered=covered_count,
+        gaps=gap_count,
+        clauses=clauses,
+    )

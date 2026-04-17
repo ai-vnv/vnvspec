@@ -1,6 +1,8 @@
 """vnvspec — V&V-grade specifications for engineered systems."""
 
 from vnvspec._version import __version__
+from vnvspec.collectors import EvidenceCollector
+from vnvspec.core.assessment import Report
 from vnvspec.core.contract import Invariant, IOContract
 from vnvspec.core.errors import (
     AssessmentError,
@@ -14,16 +16,25 @@ from vnvspec.core.hazard import Hazard
 from vnvspec.core.odd import ODD
 from vnvspec.core.requirement import Requirement
 from vnvspec.core.spec import Spec
-from vnvspec.core.trace import TraceLink, build_trace_graph, coverage_report
+from vnvspec.core.trace import (
+    GapReport,
+    TraceLink,
+    build_trace_graph,
+    coverage_report,
+    standard_gap_analysis,
+)
 
 __all__ = [
     "ODD",
     "AssessmentError",
     "ContractError",
     "Evidence",
+    "EvidenceCollector",
+    "GapReport",
     "Hazard",
     "IOContract",
     "Invariant",
+    "Report",
     "Requirement",
     "RequirementError",
     "Spec",
@@ -33,4 +44,5 @@ __all__ = [
     "__version__",
     "build_trace_graph",
     "coverage_report",
+    "standard_gap_analysis",
 ]

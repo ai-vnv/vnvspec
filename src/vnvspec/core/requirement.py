@@ -22,7 +22,7 @@ from typing import TYPE_CHECKING, Any, Literal
 from pydantic import BaseModel, Field
 
 if TYPE_CHECKING:
-    from vnvspec.core._internal.gtwr_rules import RuleViolation
+    from vnvspec.core._internal.gtwr_rules import RuleProfile, RuleViolation
 
 VerificationMethod = Literal["test", "analysis", "inspection", "demonstration", "simulation"]
 Priority = Literal["blocking", "high", "medium", "low"]
@@ -67,8 +67,14 @@ class Requirement(BaseModel):
         default_factory=dict, description="Arbitrary additional metadata."
     )
 
-    def check_quality(self) -> list[RuleViolation]:
+    def check_quality(self, profile: RuleProfile | None = None) -> list[RuleViolation]:
         """Run INCOSE GtWR rule checks against this requirement.
+
+        Parameters
+        ----------
+        profile:
+            Optional rule profile (``"formal"``, ``"web-app"``, ``"embedded"``).
+            Defaults to ``"formal"`` if not specified.
 
         Returns a list of :class:`RuleViolation` objects, one per failing rule.
         An empty list means the requirement passes all quality checks.
@@ -79,6 +85,11 @@ class Requirement(BaseModel):
             >>> len(violations) > 0
             True
         """
-        from vnvspec.core._internal.gtwr_rules import check_all  # noqa: PLC0415
+        from vnvspec.core._internal.gtwr_rules import (  # noqa: PLC0415
+            RuleProfile,
+            check_all,
+        )
 
-        return check_all(self)
+        if profile is None:
+            profile = RuleProfile.FORMAL
+        return check_all(self, profile=profile)

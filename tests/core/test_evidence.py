@@ -88,3 +88,38 @@ class TestEvidence:
                 verdict="pass",
             )
             assert e.kind == kind
+
+    @pytest.mark.vnvspec("REQ-SELF-ERGO-001")
+    def test_details_accepts_str(self) -> None:
+        e = Evidence(
+            id="EV-STR",
+            requirement_id="REQ-001",
+            kind="test",
+            verdict="pass",
+            details="simple message",  # type: ignore[arg-type]
+        )
+        assert e.details == {"message": "simple message"}
+
+    @pytest.mark.vnvspec("REQ-SELF-ERGO-001")
+    def test_details_accepts_dict(self) -> None:
+        e = Evidence(
+            id="EV-DICT",
+            requirement_id="REQ-001",
+            kind="test",
+            verdict="pass",
+            details={"key": "value", "count": 42},
+        )
+        assert e.details == {"key": "value", "count": 42}
+
+    @pytest.mark.vnvspec("REQ-SELF-ERGO-001")
+    def test_details_str_round_trip(self) -> None:
+        e = Evidence(
+            id="EV-RT",
+            requirement_id="REQ-001",
+            kind="test",
+            verdict="pass",
+            details="round trip",  # type: ignore[arg-type]
+        )
+        data = json.loads(e.model_dump_json())
+        e2 = Evidence.model_validate(data)
+        assert e2.details == {"message": "round trip"}
