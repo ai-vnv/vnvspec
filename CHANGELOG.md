@@ -36,6 +36,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
   - Validates marker references at collection time.
 - `auto_trace()` for regex-based requirement-to-code traceability scanning.
 - `vnvspec.trace` subpackage for automated traceability utilities.
+- Badge SVG exporter (`export_badge()`) — locally generated, no external service.
+- Report diff (`compare_reports()`) for evidence regression detection between reports.
+- `ReportDiff` model with `new_failures`, `regressions`, `added_requirements`, etc.
+- GitHub Actions composite action at `actions/vnvspec/action.yml`.
 
 ## [0.1.0] — 2026-04-17
 

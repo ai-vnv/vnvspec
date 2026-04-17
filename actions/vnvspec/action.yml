@@ -1,0 +1,65 @@
+name: vnvspec
+description: Run vnvspec assessment and post results
+inputs:
+  spec:
+    description: Path to spec file (YAML, TOML, or JSON)
+    required: true
+  report-format:
+    description: Comma-separated formats (html,json,xlsx)
+    default: html,json
+  fail-on:
+    description: "Failure policy: any | blocking | never"
+    default: any
+  python-version:
+    description: Python version to use
+    default: "3.11"
+  comment-pr:
+    description: Post results as PR comment (true/false)
+    default: "false"
+runs:
+  using: composite
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Install vnvspec
+      shell: bash
+      run: pip install vnvspec
+
+    - name: Validate spec
+      shell: bash
+      run: vnvspec validate "${{ inputs.spec }}"
+
+    - name: Run assessment
+      shell: bash
+      id: assess
+      run: |
+        FORMATS="${{ inputs.report-format }}"
+        IFS=',' read -ra FMT_ARRAY <<< "$FORMATS"
+        for fmt in "${FMT_ARRAY[@]}"; do
+          vnvspec export "${{ inputs.spec }}" --format "$fmt" --output "vnvspec-report.$fmt" || true
+        done
+
+    - name: Generate badge
+      shell: bash
+      run: |
+        python -c "
+        from vnvspec.core.assessment import Report
+        from vnvspec.exporters.badge import export_badge
+        import json
+        if __import__('pathlib').Path('vnvspec-report.json').exists():
+            data = json.loads(__import__('pathlib').Path('vnvspec-report.json').read_text())
+            report = Report.model_validate(data)
+            export_badge(report, path='vnvspec-badge.svg')
+        " || true
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: vnvspec-results
+        path: |
+          vnvspec-report.*
+          vnvspec-badge.svg
+        if-no-files-found: ignore
