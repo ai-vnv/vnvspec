@@ -45,7 +45,9 @@ jobs:
       - name: Set up Python ${{ matrix.python-version }}
         run: uv python install ${{ matrix.python-version }}
       - name: Install dependencies
-        run: uv sync --all-extras
+        run: |
+          uv sync --all-extras
+          uv pip install -e packages/pytest-vnvspec
       - name: Run tests
         run: >
           uv run pytest -m "not slow"
@@ -62,3 +64,15 @@ jobs:
           files: coverage.xml
           fail_ci_if_error: false
           token: ${{ secrets.CODECOV_TOKEN }}
+
+  compat:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      - run: uv python install 3.12
+      - run: uv sync --all-extras
+      - name: v0.1 compat
+        run: uv run python scripts/check_v0_1_compat.py
+      - name: v0.2 compat
+        run: uv run python scripts/check_v0_2_compat.py

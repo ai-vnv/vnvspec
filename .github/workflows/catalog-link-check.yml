@@ -1,0 +1,71 @@
+name: Catalog Link Check
+
+on:
+  schedule:
+    - cron: "0 9 * * 1"  # Weekly on Monday 9 AM UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      - run: uv python install 3.12
+      - run: uv sync --all-extras
+
+      - name: Collect source URLs
+        run: |
+          uv run python -c "
+          from vnvspec.catalog._base import discover_catalogs, collect_source_urls
+          catalogs = discover_catalogs()
+          urls = set()
+          for cat in catalogs:
+              urls.update(collect_source_urls(cat))
+          with open('catalog-urls.txt', 'w') as f:
+              for url in sorted(urls):
+                  f.write(url + '\n')
+          print(f'Collected {len(urls)} unique source URLs')
+          "
+
+      - name: Check URLs
+        id: check
+        continue-on-error: true
+        run: |
+          BROKEN=0
+          while IFS= read -r url; do
+            STATUS=$(curl -sL -o /dev/null -w "%{http_code}" --max-time 10 "$url" 2>/dev/null || echo "000")
+            if [ "$STATUS" -ge 400 ] || [ "$STATUS" = "000" ]; then
+              echo "BROKEN: $url (HTTP $STATUS)"
+              BROKEN=$((BROKEN + 1))
+            fi
+          done < catalog-urls.txt
+          echo "broken_count=$BROKEN" >> "$GITHUB_OUTPUT"
+          if [ "$BROKEN" -gt 0 ]; then
+            exit 1
+          fi
+
+      - name: Open issue on broken links
+        if: steps.check.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create \
+            --title "[catalog-drift] Broken source URLs detected" \
+            --label "catalog,drift" \
+            --body "The weekly catalog link check found broken source URLs. Run \`vnvspec catalog audit --check-sources\` locally for details."
+
+  staleness-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      - run: uv python install 3.12
+      - run: uv sync --all-extras
+
+      - name: Check catalog staleness
+        run: uv run vnvspec catalog audit --check-staleness --no-check-versions
