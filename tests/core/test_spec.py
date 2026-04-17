@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 import pytest
 
@@ -151,3 +152,99 @@ class TestSpecSerialization:
         spec2 = Spec.model_validate(data)
         assert spec.name == spec2.name
         assert len(spec2.requirements) == 1
+
+    def test_yaml_round_trip(self, sample_req: Requirement, tmp_path: Path) -> None:
+        spec = Spec(name="test-yaml", requirements=[sample_req])
+        yaml_path = tmp_path / "spec.yaml"
+        spec.to_yaml(yaml_path)
+        spec2 = Spec.from_yaml(yaml_path)
+        assert spec2.name == spec.name
+        assert len(spec2.requirements) == 1
+        assert spec2.requirements[0].id == sample_req.id
+        assert spec2.requirements[0].statement == sample_req.statement
+
+    def test_yaml_string_output(self, sample_req: Requirement) -> None:
+        spec = Spec(name="test-yaml", requirements=[sample_req])
+        text = spec.to_yaml()
+        assert "test-yaml" in text
+        assert "REQ-001" in text
+
+    def test_yaml_round_trip_equality(self, sample_req: Requirement) -> None:
+        spec = Spec(name="rt", requirements=[sample_req])
+        text = spec.to_yaml()
+        spec2 = Spec.model_validate(__import__("yaml").safe_load(text))
+        assert spec.model_dump() == spec2.model_dump()
+
+    def test_toml_round_trip(self, sample_req: Requirement, tmp_path: Path) -> None:
+        spec = Spec(name="test-toml", requirements=[sample_req])
+        toml_path = tmp_path / "spec.toml"
+        spec.to_toml(toml_path)
+        spec2 = Spec.from_toml(toml_path)
+        assert spec2.name == spec.name
+        assert len(spec2.requirements) == 1
+        assert spec2.requirements[0].id == sample_req.id
+
+    def test_toml_string_output(self, sample_req: Requirement) -> None:
+        spec = Spec(name="test-toml", requirements=[sample_req])
+        text = spec.to_toml()
+        assert "test-toml" in text
+
+    def test_toml_round_trip_equality(self, sample_req: Requirement) -> None:
+        spec = Spec(name="rt", requirements=[sample_req])
+        text = spec.to_toml()
+        import tomllib
+
+        data = tomllib.loads(text)
+        spec2 = Spec.model_validate(data)
+        assert spec.model_dump() == spec2.model_dump()
+
+    def test_json_file_round_trip(self, sample_req: Requirement, tmp_path: Path) -> None:
+        spec = Spec(name="test-json", requirements=[sample_req])
+        json_path = tmp_path / "spec.json"
+        spec.to_json(json_path)
+        spec2 = Spec.from_json(json_path)
+        assert spec2.name == spec.name
+        assert len(spec2.requirements) == 1
+
+    def test_yaml_invalid_raises(self, tmp_path: Path) -> None:
+        bad_yaml = tmp_path / "bad.yaml"
+        bad_yaml.write_text("- just a list\n- not a mapping\n")
+        with pytest.raises(SpecError, match="Expected a YAML mapping"):
+            Spec.from_yaml(bad_yaml)
+
+    def test_yaml_complex_spec(self, tmp_path: Path) -> None:
+        """Round-trip a spec with multiple requirements, hazards, and evidence."""
+        reqs = [
+            Requirement(
+                id=f"REQ-{i:03d}",
+                statement=f"The system shall do thing {i}.",
+                rationale=f"Because {i}.",
+                verification_method="test",
+                acceptance_criteria=[f"Criterion {i}"],
+                standards={"iso_pas_8800": [f"6.{i}.1"]},
+            )
+            for i in range(1, 6)
+        ]
+        hazards = [
+            Hazard(
+                id="HAZ-001",
+                description="Bad thing.",
+                severity="S3",
+                exposure="E4",
+                controllability="C3",
+                asil="D",
+                mitigations=["REQ-001"],
+            )
+        ]
+        spec = Spec(
+            name="complex",
+            version="2.0",
+            description="A complex spec.",
+            requirements=reqs,
+            hazards=hazards,
+            metadata={"author": "test"},
+        )
+        yaml_path = tmp_path / "complex.yaml"
+        spec.to_yaml(yaml_path)
+        spec2 = Spec.from_yaml(yaml_path)
+        assert spec.model_dump() == spec2.model_dump()

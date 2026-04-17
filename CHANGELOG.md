@@ -19,6 +19,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - `EvidenceCollector` and `Report` now exported from `vnvspec` top-level.
 - `vnvspec.catalog` namespace (preview) and `vnvspec.catalog.demo` demo module.
 - `Spec.extend(*requirements)` for composing catalog modules into a spec.
+- YAML/TOML/JSON spec I/O: `Spec.from_yaml()`, `Spec.to_yaml()`, `Spec.from_toml()`, `Spec.to_toml()`, `Spec.from_json()`, `Spec.to_json()`.
+- `vnvspec init --format yaml|toml|py` flag for scaffolding specs in different formats.
+- New dependencies: `pyyaml>=6.0`, `tomli-w>=1.0`.
 
 ## [0.1.0] — 2026-04-17
 

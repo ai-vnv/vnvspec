@@ -71,23 +71,48 @@ def main(
 @app.command()
 def init(
     directory: Annotated[Path, typer.Argument(help="Target directory.")] = Path("."),
+    fmt: Annotated[
+        str, typer.Option("--format", "-f", help="Spec file format: yaml, toml, or py.")
+    ] = "yaml",
 ) -> None:
-    """Scaffold a vnvspec.yaml + specs/ directory."""
+    """Scaffold a vnvspec spec file + specs/ directory."""
     spec_dir = directory / "specs"
     spec_dir.mkdir(parents=True, exist_ok=True)
 
-    yaml_path = directory / "vnvspec.yaml"
-    if not yaml_path.exists():
-        yaml_path.write_text(
+    templates: dict[str, tuple[str, str]] = {
+        "yaml": (
+            "vnvspec.yaml",
             "# vnvspec specification\nname: my-system\nversion: 0.1.0\nrequirements: []\n",
-            encoding="utf-8",
+        ),
+        "toml": (
+            "vnvspec.toml",
+            'name = "my-system"\nversion = "0.1.0"\nrequirements = []\n',
+        ),
+        "py": (
+            "vnvspec_spec.py",
+            (
+                '"""vnvspec specification."""\n\n'
+                "from vnvspec import Requirement, Spec\n\n"
+                'spec = Spec(name="my-system", version="0.1.0", requirements=[])\n'
+            ),
+        ),
+    }
+    if fmt not in templates:
+        console.print(
+            f"[red]Unknown format:[/red] {fmt}. Available: {', '.join(sorted(templates))}"
         )
-        console.print(f"[green]Created[/green] {yaml_path}")
+        raise typer.Exit(code=ExitCode.USAGE_ERROR)
+
+    filename, content = templates[fmt]
+    spec_path = directory / filename
+    if not spec_path.exists():
+        spec_path.write_text(content, encoding="utf-8")
+        console.print(f"[green]Created[/green] {spec_path}")
     else:
-        console.print(f"[yellow]Already exists[/yellow] {yaml_path}")
+        console.print(f"[yellow]Already exists[/yellow] {spec_path}")
 
     console.print(f"[green]Created[/green] {spec_dir}/")
-    console.print("Run [bold]vnvspec validate vnvspec.yaml[/bold] to check.")
+    console.print(f"Run [bold]vnvspec validate {filename}[/bold] to check.")
 
 
 @app.command()

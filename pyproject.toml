@@ -11,6 +11,8 @@ requires-python = ">=3.11"
 dependencies = [
     "pydantic>=2.7",
     "networkx>=3.2",
+    "pyyaml>=6.0",
+    "tomli-w>=1.0",
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -43,6 +45,7 @@ dev = [
     "codespell>=2.2",
     "pre-commit>=3.7",
     "networkx-stubs>=0.0.1",
+    "types-PyYAML>=6.0",
     "pandas-stubs",
     "hypothesis>=6.100",
     "pandera[pandas]>=0.19",
