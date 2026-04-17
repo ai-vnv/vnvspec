@@ -18,11 +18,15 @@ that map to international standards (ISO/PAS 8800, ISO 21448, UL 4600, EU AI Act
 ### Key features
 
 - **Typed spec language** — Pydantic-based `Spec`, `Requirement`, `IOContract`, `ODD`, `Hazard`, `Evidence` models
-- **INCOSE GtWR quality checker** — catch vague, ambiguous, or unverifiable requirements early
-- **Traceability graphs** — link requirements ↔ hazards ↔ evidence ↔ standards clauses
+- **INCOSE GtWR quality checker** — catch vague, ambiguous, or unverifiable requirements early, with configurable profiles (formal, web-app, embedded)
+- **Traceability graphs** — link requirements ↔ hazards ↔ evidence ↔ standards clauses, plus auto-trace scanning
 - **Standards registries** — built-in clause databases for ISO/PAS 8800, ISO 21448, UL 4600, EU AI Act, NIST AI RMF
+- **Compliance matrix** — auditor-grade XLSX/CSV/HTML exports with gap analysis against any standard
 - **Pluggable adapters** — wrap any model (PyTorch, HuggingFace, scikit-learn, ONNX, Pyomo, FMI)
-- **Auto-generated tests** — emit pytest and Hypothesis property tests from specs
+- **EvidenceCollector** — ergonomic context manager for building evidence from assertions and JUnit XML
+- **pytest plugin** — `pytest-vnvspec` captures evidence directly from test results
+- **Multi-format specs** — define specs in Python, YAML, or TOML; lossless round-trips
+- **CI integrations** — GitHub Actions composite action, V&V badge SVG, report diff for regression detection
 - **Rich exports** — HTML reports, Markdown, GSN assurance cases (Mermaid), EU AI Act Annex IV tech docs
 
 ## Installation

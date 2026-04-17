@@ -1,6 +1,6 @@
 [project]
 name = "vnvspec"
-version = "0.1.0"
+version = "0.2.0"
 description = "V&V-grade specifications for engineered systems — AI, optimization, simulation, and physics."
 readme = "README.md"
 license = "Apache-2.0"
@@ -82,6 +82,7 @@ select = ["E", "F", "I", "N", "UP", "B", "A", "C4", "PL", "RUF"]
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["PLR2004", "E402", "PLC0415", "E741"]
 "packages/**/tests/**" = ["PLR2004", "E402", "PLC0415", "E741", "I001"]
+"scripts/**" = ["PLC0415"]
 
 [tool.mypy]
 strict = true
