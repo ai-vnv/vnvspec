@@ -211,8 +211,7 @@ class Spec(BaseModel):
         if suffix == ".json":
             return cls.from_json(path)
         raise SpecError(
-            f"Unsupported file extension '{suffix}' for {path}. "
-            "Use .yaml, .yml, .json, or .toml."
+            f"Unsupported file extension '{suffix}' for {path}. Use .yaml, .yml, .json, or .toml."
         )
 
     @classmethod
