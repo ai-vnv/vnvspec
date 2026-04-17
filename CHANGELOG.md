@@ -26,6 +26,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - New dependency: `packaging>=23`.
 - `CONTRIBUTING-CATALOG.md` — inclusion policy for catalog modules (six-criteria gate).
 - `vnvspec.catalog.ml.pytorch_training` — 30 curated best-practice requirements across 5 sub-modules: `reproducibility` (6), `gradient_health` (6), `checkpointing` (6), `data_loading` (6), `loss_validation` (6). Sources: PyTorch docs, Karpathy's Recipe, NIST AI RMF.
+- `vnvspec.catalog.ml.huggingface_inference` — 24 requirements across 4 sub-modules: `tokenization` (6), `generation` (6), `attention_masks` (6), `structured_outputs` (6). Sources: HuggingFace Transformers docs, Vaswani et al.
+- `vnvspec.catalog.web.fastapi` — 22 requirements across 3 sub-modules: `security` (10, OWASP API Top 10 2023 mapped), `observability` (6), `api_design` (6). Sources: OWASP API Security 2023, FastAPI docs, RFC 9457.
+- `vnvspec.catalog.web.sqlalchemy` — 18 requirements across 3 sub-modules: `transactions` (6), `session` (6), `schema` (6). Sources: SQLAlchemy 2.0 docs, Alembic docs, Cosmic Python.
+- `vnvspec.catalog.optimization.pyomo` — 18 requirements across 3 sub-modules: `solver_status` (6), `constraint_validation` (6), `model_invariants` (6). Sources: Pyomo docs, Hart et al., Williams.
 
 ## [0.2.0] — 2026-04-17
 

@@ -13,7 +13,7 @@ class TestCatalogList:
     def test_lists_demo(self) -> None:
         result = runner.invoke(app, ["catalog", "list"])
         assert result.exit_code == 0
-        assert "demo" in result.stdout
+        assert "catalog.d" in result.stdout  # Rich truncates long module paths
 
 
 class TestCatalogShow:

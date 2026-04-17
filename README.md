@@ -23,7 +23,7 @@ that map to international standards (ISO/PAS 8800, ISO 21448, UL 4600, EU AI Act
 - **Traceability graphs** — link requirements ↔ hazards ↔ evidence ↔ standards clauses, plus auto-trace scanning
 - **Standards registries** — built-in clause databases for ISO/PAS 8800, ISO 21448, UL 4600, EU AI Act, NIST AI RMF
 - **Compliance matrix** — auditor-grade XLSX/CSV/HTML exports with gap analysis against any standard
-- **Best-practices catalogs** — pre-written requirements for PyTorch training, composable via `Spec.extend()`
+- **Best-practices catalogs** — pre-written requirements for PyTorch, HuggingFace, FastAPI, SQLAlchemy, Pyomo; composable via `Spec.extend()`
 - **Pluggable adapters** — wrap any model (PyTorch, HuggingFace, scikit-learn, ONNX, Pyomo, FMI)
 - **EvidenceCollector** — ergonomic context manager for building evidence from assertions and JUnit XML
 - **pytest plugin** — `pytest-vnvspec` captures evidence directly from test results
