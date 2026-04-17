@@ -18,6 +18,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - `Requirement.source` now accepts `list[str]` (multiple URLs) in addition to `str` (auto-normalized to a one-element list). Empty string normalizes to `[]`.
 - `scripts/check_v0_2_compat.py` for v0.2 backward-compatibility enforcement in CI.
 - Catalog test fixture infrastructure (`tests/catalog/conftest.py`) with `validate_catalog_requirement()` for auto-testing catalog modules against the inclusion policy.
+- Catalog infrastructure (`vnvspec.catalog._base`) with `discover_catalogs()`, `all_requirements()`, `check_compatibility()`, and `CatalogInfo`/`CompatibilityReport` dataclasses.
+- `vnvspec catalog list` — list all discovered catalog modules with requirement counts and version pins.
+- `vnvspec catalog show <module>` — show requirements from a catalog module.
+- `vnvspec catalog audit` — audit catalog modules for compatibility with installed packages.
+- `vnvspec catalog import <module>` — export catalog requirements to YAML/TOML/JSON.
+- New dependency: `packaging>=23`.
+- `CONTRIBUTING-CATALOG.md` — inclusion policy for catalog modules (six-criteria gate).
 
 ## [0.2.0] — 2026-04-17
 

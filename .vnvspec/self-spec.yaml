@@ -349,6 +349,19 @@ requirements:
     metadata:
       since: "0.3.0"
 
+  - id: REQ-SELF-CATALOG-001
+    statement: The vnvspec catalog CLI shall provide list, show, audit, and import subcommands.
+    rationale: Discoverability and auditability are essential for a catalog system.
+    verification_method: test
+    acceptance_criteria:
+      - vnvspec catalog list shows at least the demo module.
+      - vnvspec catalog show vnvspec.catalog.demo displays CAT-DEMO-001.
+      - vnvspec catalog audit runs without errors.
+      - vnvspec catalog import vnvspec.catalog.demo produces valid YAML.
+    priority: high
+    metadata:
+      since: "0.3.0"
+
   - id: REQ-SELF-FORMAL-001
     statement: The VerificationMethod type shall accept "formal_proof" as a valid value.
     rationale: Vocabulary reservation for v0.4 formal-methods integration.
