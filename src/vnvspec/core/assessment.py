@@ -12,11 +12,13 @@ Example:
 from __future__ import annotations
 
 from datetime import UTC, datetime
-from typing import Any
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field, model_validator
 
 from vnvspec.core.evidence import Evidence
+
+VerdictPolicy = Literal["strict", "lenient"]
 
 
 class AssessmentContext(BaseModel):
@@ -54,6 +56,14 @@ class Report(BaseModel):
     evidence: list[Evidence] = Field(default_factory=list, description="Collected evidence.")
     summary: dict[str, Any] = Field(default_factory=dict, description="Summary statistics.")
     metadata: dict[str, Any] = Field(default_factory=dict, description="Additional metadata.")
+    verdict_policy: VerdictPolicy = Field(
+        default="strict",
+        description=(
+            "Verdict roll-up policy. 'strict' (default): inconclusive evidence "
+            "yields an inconclusive verdict. 'lenient': inconclusive rolls up "
+            "to pass when no failures are present."
+        ),
+    )
 
     @model_validator(mode="before")
     @classmethod
@@ -83,10 +93,29 @@ class Report(BaseModel):
         """
         return sum(1 for e in self.evidence if e.verdict == "fail")
 
-    def verdict(self) -> str:
-        """Overall verdict: 'pass' if no fails, 'fail' otherwise.
+    def inconclusive_count(self) -> int:
+        """Count evidence with inconclusive verdict.
 
-        Returns 'inconclusive' if no evidence exists.
+        Example:
+            >>> r = Report(spec_name="test")
+            >>> r.inconclusive_count()
+            0
+        """
+        return sum(1 for e in self.evidence if e.verdict == "inconclusive")
+
+    def verdict(self) -> str:
+        """Overall verdict with three-way semantics.
+
+        Under ``verdict_policy="strict"`` (default):
+        - No evidence → ``"inconclusive"``
+        - Any fail → ``"fail"``
+        - Any inconclusive (no fails) → ``"inconclusive"``
+        - All pass → ``"pass"``
+
+        Under ``verdict_policy="lenient"``:
+        - No evidence → ``"inconclusive"``
+        - Any fail → ``"fail"``
+        - Otherwise → ``"pass"`` (inconclusive treated as pass)
 
         Example:
             >>> r = Report(spec_name="test")
@@ -95,4 +124,8 @@ class Report(BaseModel):
         """
         if not self.evidence:
             return "inconclusive"
-        return "fail" if self.fail_count() > 0 else "pass"
+        if self.fail_count() > 0:
+            return "fail"
+        if self.verdict_policy == "strict" and self.inconclusive_count() > 0:
+            return "inconclusive"
+        return "pass"

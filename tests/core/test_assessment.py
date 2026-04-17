@@ -50,9 +50,42 @@ class TestReport:
         report = Report(spec_name="test", evidence=[ev])
         assert report.verdict() == "fail"
 
-    def test_verdict_inconclusive(self) -> None:
+    def test_verdict_inconclusive_no_evidence(self) -> None:
         report = Report(spec_name="test")
         assert report.verdict() == "inconclusive"
+
+    def test_verdict_inconclusive_not_silently_passed(self) -> None:
+        """Inconclusive evidence must not silently roll up to pass (v0.3 fix)."""
+        ev_pass = Evidence(id="EV-1", requirement_id="R1", kind="test", verdict="pass")
+        ev_inc = Evidence(id="EV-2", requirement_id="R2", kind="test", verdict="inconclusive")
+        report = Report(spec_name="test", evidence=[ev_pass, ev_inc])
+        assert report.verdict() == "inconclusive"
+
+    def test_verdict_policy_lenient_restores_old_behavior(self) -> None:
+        """verdict_policy='lenient' treats inconclusive as pass (escape hatch)."""
+        ev_pass = Evidence(id="EV-1", requirement_id="R1", kind="test", verdict="pass")
+        ev_inc = Evidence(id="EV-2", requirement_id="R2", kind="test", verdict="inconclusive")
+        report = Report(spec_name="test", evidence=[ev_pass, ev_inc], verdict_policy="lenient")
+        assert report.verdict() == "pass"
+
+    def test_verdict_policy_lenient_still_fails_on_fail(self) -> None:
+        ev_fail = Evidence(id="EV-1", requirement_id="R1", kind="test", verdict="fail")
+        ev_inc = Evidence(id="EV-2", requirement_id="R2", kind="test", verdict="inconclusive")
+        report = Report(spec_name="test", evidence=[ev_fail, ev_inc], verdict_policy="lenient")
+        assert report.verdict() == "fail"
+
+    def test_verdict_fail_takes_precedence_over_inconclusive(self) -> None:
+        ev_fail = Evidence(id="EV-1", requirement_id="R1", kind="test", verdict="fail")
+        ev_inc = Evidence(id="EV-2", requirement_id="R2", kind="test", verdict="inconclusive")
+        report = Report(spec_name="test", evidence=[ev_fail, ev_inc])
+        assert report.verdict() == "fail"
+
+    def test_inconclusive_count(self) -> None:
+        ev1 = Evidence(id="EV-1", requirement_id="R1", kind="test", verdict="inconclusive")
+        ev2 = Evidence(id="EV-2", requirement_id="R2", kind="test", verdict="pass")
+        ev3 = Evidence(id="EV-3", requirement_id="R3", kind="test", verdict="inconclusive")
+        report = Report(spec_name="test", evidence=[ev1, ev2, ev3])
+        assert report.inconclusive_count() == 2
 
     def test_json_round_trip(self) -> None:
         ev = Evidence(id="EV-1", requirement_id="R1", kind="test", verdict="pass")

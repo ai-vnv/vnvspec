@@ -310,6 +310,34 @@ requirements:
     metadata:
       since: "0.2.0"
 
+  # ==========================================================================
+  # v0.3.0 requirements — catalog system + verdict fix
+  # ==========================================================================
+
+  # --- Phase 0: Verdict fix ---
+  - id: REQ-SELF-VERDICT-001
+    statement: The Report.verdict() method shall return "inconclusive" when any evidence has an inconclusive verdict and no failures are present (strict policy).
+    rationale: Inconclusive evidence means "we don't know" and must not be silently upgraded to "pass".
+    verification_method: test
+    acceptance_criteria:
+      - A report with pass + inconclusive evidence returns "inconclusive" under strict policy.
+      - A report with pass + inconclusive evidence returns "pass" under lenient policy.
+      - A report with fail + inconclusive evidence returns "fail" under both policies.
+    priority: blocking
+    metadata:
+      since: "0.3.0"
+
+  - id: REQ-SELF-FORMAL-001
+    statement: The VerificationMethod type shall accept "formal_proof" as a valid value.
+    rationale: Vocabulary reservation for v0.4 formal-methods integration.
+    verification_method: test
+    acceptance_criteria:
+      - A Requirement with verification_method="formal_proof" passes validation.
+      - The value round-trips through JSON serialization.
+    priority: medium
+    metadata:
+      since: "0.3.0"
+
   # --- Self-hosting ---
   - id: REQ-SELF-META-001
     statement: The vnvspec self-spec shall be loadable by Spec.from_yaml() and shall pass structural validation.

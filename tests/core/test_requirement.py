@@ -68,3 +68,23 @@ class TestRequirementSerialization:
         d = req.model_dump()
         req2 = Requirement.model_validate(d)
         assert req == req2
+
+
+class TestFormalProof:
+    def test_formal_proof_is_valid_verification_method(self) -> None:
+        req = Requirement(
+            id="REQ-FP-001",
+            statement="The model shall be robust to L-inf perturbations.",
+            verification_method="formal_proof",
+        )
+        assert req.verification_method == "formal_proof"
+
+    def test_formal_proof_round_trips(self) -> None:
+        req = Requirement(
+            id="REQ-FP-001",
+            statement="Test.",
+            verification_method="formal_proof",
+        )
+        data = json.loads(req.model_dump_json())
+        req2 = Requirement.model_validate(data)
+        assert req2.verification_method == "formal_proof"

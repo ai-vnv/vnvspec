@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Changed
+
+- **Behavior change (may affect CI):** `Report.verdict()` now returns `"inconclusive"` when any inconclusive evidence is present and no failures. Previously returned `"pass"` in this case. Pass `verdict_policy="lenient"` to restore old behavior. This change aligns `Report.verdict()` with the existing CLI exit-code semantics (`ExitCode.INCONCLUSIVE = 2`).
+
+### Added
+
+- `Report.verdict_policy` field (`"strict"` | `"lenient"`) to control inconclusive roll-up behavior.
+- `Report.inconclusive_count()` method for counting inconclusive evidence.
+- `"formal_proof"` as a valid `VerificationMethod` and `EvidenceKind` value (vocabulary reserved for v0.4 formal-methods integration; no adapter implementation yet).
+
 ## [0.2.0] — 2026-04-17
 
 ### Added

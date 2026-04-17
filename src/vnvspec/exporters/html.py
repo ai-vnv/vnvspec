@@ -68,6 +68,7 @@ def export_html(report: Report, path: Path | None = None) -> str:
         f"<h2>Summary</h2>\n"
         f"<p>Overall verdict: {_verdict_span(report.verdict())}</p>\n"
         f"<p>Pass: {report.pass_count()} | Fail: {report.fail_count()} "
+        f"| Inconclusive: {report.inconclusive_count()} "
         f"| Total: {len(report.evidence)}</p>\n"
         "</div>\n"
         f"<h2>Evidence</h2>\n{evidence_table}\n"

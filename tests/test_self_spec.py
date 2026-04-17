@@ -261,6 +261,6 @@ class TestSelfSpecLoadable:
         spec = Spec.from_yaml(ROOT / ".vnvspec" / "self-spec.yaml")
         for req in spec.requirements:
             assert "since" in req.metadata, f"{req.id} missing metadata.since"
-            assert req.metadata["since"] in ("0.1.0", "0.2.0"), (
+            assert req.metadata["since"] in ("0.1.0", "0.2.0", "0.3.0"), (
                 f"{req.id} has unexpected since={req.metadata['since']}"
             )

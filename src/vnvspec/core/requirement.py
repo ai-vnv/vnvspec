@@ -24,7 +24,9 @@ from pydantic import BaseModel, Field
 if TYPE_CHECKING:
     from vnvspec.core._internal.gtwr_rules import RuleProfile, RuleViolation
 
-VerificationMethod = Literal["test", "analysis", "inspection", "demonstration", "simulation"]
+VerificationMethod = Literal[
+    "test", "analysis", "inspection", "demonstration", "simulation", "formal_proof"
+]
 Priority = Literal["blocking", "high", "medium", "low"]
 
 
