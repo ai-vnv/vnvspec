@@ -27,9 +27,10 @@ cov:
 docs:
     uv run mkdocs build --strict
 
-# Run v0.1 compatibility check
+# Run backward compatibility checks
 compat:
     uv run python scripts/check_v0_1_compat.py
+    uv run python scripts/check_v0_2_compat.py
 
 # Run all checks (master gate)
 check: lint typecheck cov compat

@@ -21,6 +21,6 @@ def hello_world() -> list[Requirement]:
             rationale="Smoke-test requirement to validate catalog import surface.",
             verification_method="test",
             acceptance_criteria=["greet('hello') == 'hello, world'"],
-            source="https://ai-vnv.github.io/vnvspec/catalog/demo/",
+            source="https://ai-vnv.github.io/vnvspec/catalog/demo/",  # type: ignore[arg-type]
         ),
     ]

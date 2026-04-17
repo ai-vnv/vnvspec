@@ -15,6 +15,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - `Report.verdict_policy` field (`"strict"` | `"lenient"`) to control inconclusive roll-up behavior.
 - `Report.inconclusive_count()` method for counting inconclusive evidence.
 - `"formal_proof"` as a valid `VerificationMethod` and `EvidenceKind` value (vocabulary reserved for v0.4 formal-methods integration; no adapter implementation yet).
+- `Requirement.source` now accepts `list[str]` (multiple URLs) in addition to `str` (auto-normalized to a one-element list). Empty string normalizes to `[]`.
+- `scripts/check_v0_2_compat.py` for v0.2 backward-compatibility enforcement in CI.
+- Catalog test fixture infrastructure (`tests/catalog/conftest.py`) with `validate_catalog_requirement()` for auto-testing catalog modules against the inclusion policy.
 
 ## [0.2.0] — 2026-04-17
 

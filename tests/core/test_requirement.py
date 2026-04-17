@@ -70,6 +70,42 @@ class TestRequirementSerialization:
         assert req == req2
 
 
+class TestSourceField:
+    def test_source_default_is_empty_list(self) -> None:
+        req = Requirement(id="REQ-001", statement="Test.")
+        assert req.source == []
+
+    def test_source_str_normalized_to_list(self) -> None:
+        req = Requirement(
+            id="REQ-001",
+            statement="Test.",
+            source="https://example.com",  # type: ignore[arg-type]
+        )
+        assert req.source == ["https://example.com"]
+
+    def test_source_empty_str_normalized_to_empty_list(self) -> None:
+        req = Requirement(id="REQ-001", statement="Test.", source="")  # type: ignore[arg-type]
+        assert req.source == []
+
+    def test_source_list_preserved(self) -> None:
+        req = Requirement(
+            id="REQ-001",
+            statement="Test.",
+            source=["https://a.com", "https://b.com"],
+        )
+        assert req.source == ["https://a.com", "https://b.com"]
+
+    def test_source_round_trips_json(self) -> None:
+        req = Requirement(
+            id="REQ-001",
+            statement="Test.",
+            source=["https://a.com", "https://b.com"],
+        )
+        data = json.loads(req.model_dump_json())
+        req2 = Requirement.model_validate(data)
+        assert req2.source == ["https://a.com", "https://b.com"]
+
+
 class TestFormalProof:
     def test_formal_proof_is_valid_verification_method(self) -> None:
         req = Requirement(

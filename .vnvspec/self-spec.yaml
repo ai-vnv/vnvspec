@@ -327,6 +327,28 @@ requirements:
     metadata:
       since: "0.3.0"
 
+  - id: REQ-SELF-SOURCE-001
+    statement: The Requirement.source field shall accept both str and list[str], auto-normalizing a bare string to a one-element list.
+    rationale: Catalogs cite multiple source URLs; backward compatibility requires accepting a single string.
+    verification_method: test
+    acceptance_criteria:
+      - Requirement(source="url") normalizes to source=["url"].
+      - Requirement(source=["a", "b"]) preserves the list.
+      - Requirement() defaults to source=[].
+    priority: high
+    metadata:
+      since: "0.3.0"
+
+  - id: REQ-SELF-COMPAT-002
+    statement: Every public symbol exported by vnvspec v0.2.0 shall remain importable in v0.3.0 with the same signature.
+    rationale: The v0.3 backward-compatibility contract is enforced in CI.
+    verification_method: test
+    acceptance_criteria:
+      - scripts/check_v0_2_compat.py exits with code 0.
+    priority: blocking
+    metadata:
+      since: "0.3.0"
+
   - id: REQ-SELF-FORMAL-001
     statement: The VerificationMethod type shall accept "formal_proof" as a valid value.
     rationale: Vocabulary reservation for v0.4 formal-methods integration.

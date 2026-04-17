@@ -19,7 +19,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 if TYPE_CHECKING:
     from vnvspec.core._internal.gtwr_rules import RuleProfile, RuleViolation
@@ -32,6 +32,10 @@ Priority = Literal["blocking", "high", "medium", "low"]
 
 class Requirement(BaseModel):
     """A single V&V requirement.
+
+    The ``source`` field accepts a single string (auto-normalized to a
+    one-element list) or a list of strings. An empty string is normalized
+    to an empty list for consistency.
 
     Example:
         >>> r = Requirement(
@@ -50,8 +54,22 @@ class Requirement(BaseModel):
     id: str = Field(description="Unique requirement identifier, e.g. REQ-001.")
     statement: str = Field(description="The requirement statement (shall-language).")
     rationale: str = Field(default="", description="Why this requirement exists.")
-    source: str = Field(default="", description="Origin of the requirement.")
+    source: list[str] = Field(
+        default_factory=list,
+        description="Source URLs or references for this requirement.",
+    )
     priority: Priority = Field(default="medium", description="Requirement priority level.")
+
+    @model_validator(mode="before")
+    @classmethod
+    def _normalize_source(cls, data: Any) -> Any:
+        """Normalize source: str → list[str], empty str → []."""
+        if isinstance(data, dict) and "source" in data:
+            src = data["source"]
+            if isinstance(src, str):
+                data = {**data, "source": [src] if src else []}
+        return data
+
     verification_method: VerificationMethod = Field(
         default="test", description="How the requirement is verified."
     )
