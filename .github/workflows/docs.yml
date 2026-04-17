@@ -22,12 +22,13 @@ jobs:
       - uses: astral-sh/setup-uv@v3
       - run: uv python install 3.12
       - run: uv sync --all-extras
+      - run: uv pip install -e packages/pytest-vnvspec
       - name: Build docs
         run: uv run mkdocs build -d site
 
       - name: Run self-assessment and build dashboard
         run: |
-          uv run pytest -p no:vnvspec \
+          uv run pytest -p no:vnvspec -p pytest_vnvspec.plugin \
             --vnvspec-spec=.vnvspec/self-spec.yaml \
             --vnvspec-report=.vnvspec/pytest-self-report.json \
             --ignore=packages -q || true
