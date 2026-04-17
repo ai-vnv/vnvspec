@@ -34,6 +34,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
   - `--vnvspec-spec`, `--vnvspec-report`, `--vnvspec-fail-on` CLI options.
   - Auto-generates inconclusive evidence for unlinked test requirements.
   - Validates marker references at collection time.
+- `auto_trace()` for regex-based requirement-to-code traceability scanning.
+- `vnvspec.trace` subpackage for automated traceability utilities.
 
 ## [0.1.0] — 2026-04-17
 

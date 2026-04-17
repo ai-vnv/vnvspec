@@ -80,7 +80,8 @@ extend-exclude = ["notebooks"]
 select = ["E", "F", "I", "N", "UP", "B", "A", "C4", "PL", "RUF"]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**" = ["PLR2004", "E402", "PLC0415"]
+"tests/**" = ["PLR2004", "E402", "PLC0415", "E741"]
+"packages/**/tests/**" = ["PLR2004", "E402", "PLC0415", "E741", "I001"]
 
 [tool.mypy]
 strict = true
