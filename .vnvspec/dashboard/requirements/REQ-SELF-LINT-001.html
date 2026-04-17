@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REQ-SELF-LINT-001 — The vnvspec source code shall pass ruff format and</title>
+<style>:root {
+  --bg: #ffffff; --fg: #1a1a2e; --accent: #0f3460; --accent2: #16213e;
+  --pass: #16a34a; --fail: #dc2626; --inconclusive: #d97706; --info: #6366f1;
+  --border: #e2e8f0; --bg2: #f8fafc; --bg3: #f1f5f9;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a; --fg: #e2e8f0; --accent: #60a5fa; --accent2: #93c5fd;
+    --border: #334155; --bg2: #1e293b; --bg3: #1e293b;
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg);
+  color: var(--fg); line-height: 1.6; }
+.container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+header { background: var(--accent2); color: #fff; padding: 2rem 0; margin-bottom: 2rem; }
+header .container { display: flex; align-items: center; gap: 1.5rem; }
+header h1 { font-size: 1.5rem; font-weight: 600; }
+header .badge { flex-shrink: 0; }
+nav { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0.5rem 0; }
+nav .container { display: flex; gap: 1rem; flex-wrap: wrap; }
+nav a { color: var(--accent); text-decoration: none; padding: 0.25rem 0.75rem;
+  border-radius: 4px; font-size: 0.875rem; }
+nav a:hover { background: var(--bg3); }
+nav a.active { background: var(--accent); color: #fff; }
+h2 { color: var(--accent); margin: 1.5rem 0 0.75rem; font-size: 1.25rem;
+  border-bottom: 2px solid var(--border); padding-bottom: 0.5rem; }
+h3 { color: var(--accent); margin: 1rem 0 0.5rem; font-size: 1.1rem; }
+table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.9rem; }
+th, td { border: 1px solid var(--border); padding: 0.5rem 0.75rem; text-align: left; }
+th { background: var(--bg2); font-weight: 600; }
+tr:hover { background: var(--bg3); }
+.pass { color: var(--pass); font-weight: 700; }
+.fail { color: var(--fail); font-weight: 700; }
+.inconclusive { color: var(--inconclusive); font-weight: 700; }
+.card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+  padding: 1.25rem; margin: 0.75rem 0; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem; margin: 1rem 0; }
+.stat { text-align: center; padding: 1rem; background: var(--bg2); border-radius: 8px;
+  border: 1px solid var(--border); }
+.stat .number { font-size: 2rem; font-weight: 700; }
+.stat .label { font-size: 0.8rem; color: var(--fg); opacity: 0.7; text-transform: uppercase; }
+.tag { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px;
+  font-size: 0.75rem; font-weight: 600; }
+.tag-pass { background: #dcfce7; color: #166534; }
+.tag-fail { background: #fee2e2; color: #991b1b; }
+.tag-inconclusive { background: #fef3c7; color: #92400e; }
+.tag-version { background: #e0e7ff; color: #3730a3; }
+.tag-blocking { background: #fee2e2; color: #991b1b; }
+.tag-high { background: #fef3c7; color: #92400e; }
+.tag-medium { background: #e0e7ff; color: #3730a3; }
+.tag-low { background: #f1f5f9; color: #475569; }
+.timeline { border-left: 3px solid var(--border); padding-left: 1rem; margin: 1rem 0; }
+.timeline-entry { margin-bottom: 0.75rem; padding: 0.5rem; }
+a { color: var(--accent); }
+.footer { margin-top: 3rem; padding: 1rem 0; border-top: 1px solid var(--border);
+  font-size: 0.8rem; opacity: 0.6; text-align: center; }
+</style>
+</head>
+<body>
+<header><div class="container"><h1>REQ-SELF-LINT-001 — The vnvspec source code shall pass ruff format and</h1></div></header>
+<nav><div class="container"><a href="../index.html">Dashboard</a>
+<a href="../requirements/REQ-SELF-FROZEN-001.html">REQ-SELF-FROZEN-001</a>
+<a href="../requirements/REQ-SELF-PYDANTIC-001.html">REQ-SELF-PYDANTIC-001</a>
+<a href="../requirements/REQ-SELF-SPEC-001.html">REQ-SELF-SPEC-001</a>
+<a href="../requirements/REQ-SELF-TRACE-GRAPH-001.html">REQ-SELF-TRACE-GRAPH-001</a>
+<a href="../requirements/REQ-SELF-GTWR-001.html">REQ-SELF-GTWR-001</a>
+<a href="../requirements/REQ-SELF-REGISTRIES-001.html">REQ-SELF-REGISTRIES-001</a>
+<a href="../requirements/REQ-SELF-EXPORT-001.html">REQ-SELF-EXPORT-001</a>
+<a href="../requirements/REQ-SELF-ERRORS-001.html">REQ-SELF-ERRORS-001</a>
+<a href="../requirements/REQ-SELF-COMPAT-001.html">REQ-SELF-COMPAT-001</a>
+<a href="../requirements/REQ-SELF-FROZEN-002.html">REQ-SELF-FROZEN-002</a>
+<a href="../requirements/REQ-SELF-TYPES-001.html">REQ-SELF-TYPES-001</a>
+<a href="../requirements/REQ-SELF-LINT-001.html" class="active">REQ-SELF-LINT-001</a>
+<a href="../requirements/REQ-SELF-COV-001.html">REQ-SELF-COV-001</a>
+<a href="../requirements/REQ-SELF-DOCS-001.html">REQ-SELF-DOCS-001</a>
+<a href="../requirements/REQ-SELF-ERGO-001.html">REQ-SELF-ERGO-001</a>
+<a href="../requirements/REQ-SELF-ERGO-002.html">REQ-SELF-ERGO-002</a>
+<a href="../requirements/REQ-SELF-CLI-001.html">REQ-SELF-CLI-001</a>
+<a href="../requirements/REQ-SELF-COLLECTOR-001.html">REQ-SELF-COLLECTOR-001</a>
+<a href="../requirements/REQ-SELF-IO-001.html">REQ-SELF-IO-001</a>
+<a href="../requirements/REQ-SELF-GAP-001.html">REQ-SELF-GAP-001</a>
+<a href="../requirements/REQ-SELF-PROFILE-001.html">REQ-SELF-PROFILE-001</a>
+<a href="../requirements/REQ-SELF-TRACE-001.html">REQ-SELF-TRACE-001</a>
+<a href="../requirements/REQ-SELF-BADGE-001.html">REQ-SELF-BADGE-001</a>
+<a href="../requirements/REQ-SELF-DIFF-001.html">REQ-SELF-DIFF-001</a>
+<a href="../requirements/REQ-SELF-DEP-001.html">REQ-SELF-DEP-001</a>
+<a href="../requirements/REQ-SELF-META-001.html">REQ-SELF-META-001</a>
+</div></nav>
+<main class="container">
+    <div class="card">
+      <h3>REQ-SELF-LINT-001 <span class="tag tag-inconclusive">inconclusive</span>
+          <span class="tag tag-blocking">blocking</span>
+          <span class="tag tag-version">since 0.1.0</span></h3>
+      <p><strong>Statement:</strong> The vnvspec source code shall pass ruff format and ruff check with zero errors.</p>
+      <p><strong>Rationale:</strong> Consistent formatting and lint rules reduce review friction.</p>
+      <p><strong>Verification Method:</strong> analysis</p>
+      <p><strong>Last Checked:</strong> Never</p>
+    </div>
+
+    <h2>Acceptance Criteria</h2>
+    <ul>
+    <li>ruff format --check . reports all files formatted.</li>
+<li>ruff check . reports all checks passed.</li>
+</ul>
+
+<h2>Evidence</h2>
+<p class="inconclusive">No evidence collected for this requirement.</p>
+</main>
+<div class="footer">Generated by <a href="https://github.com/ai-vnv/vnvspec">vnvspec</a> v0.2.0</div>
+</body>
+</html>

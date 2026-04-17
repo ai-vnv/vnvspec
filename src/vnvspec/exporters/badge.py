@@ -48,6 +48,7 @@ def export_badge(
     *,
     path: Path | str,
     style: Literal["flat", "for-the-badge"] = "flat",
+    dashboard_url: str | None = None,
 ) -> Path:
     """Generate a V&V status badge as SVG.
 
@@ -103,6 +104,12 @@ def export_badge(
         text=text,
         color=color,
     )
+
+    if dashboard_url:
+        svg = svg.replace(
+            "<g clip-path",
+            f'<a href="{dashboard_url}" target="_blank"><g clip-path',
+        ).replace("</svg>", "</a>\n</svg>")
 
     path.write_text(svg, encoding="utf-8")
     return path

@@ -16,10 +16,10 @@ import pytest
 from pydantic import ValidationError
 
 from vnvspec import (
+    ODD,
     Evidence,
     Hazard,
     IOContract,
-    ODD,
     Requirement,
     Spec,
     TraceLink,
@@ -60,7 +60,10 @@ class TestPydanticModels:
     @pytest.mark.vnvspec("REQ-SELF-PYDANTIC-001")
     def test_evidence_round_trip(self) -> None:
         e = Evidence(
-            id="EV-1", requirement_id="R-1", kind="test", verdict="pass",
+            id="EV-1",
+            requirement_id="R-1",
+            kind="test",
+            verdict="pass",
             details={"key": "val"},
         )
         data = json.loads(e.model_dump_json())
@@ -87,8 +90,14 @@ class TestSpecValidation:
 
     @pytest.mark.vnvspec("REQ-SELF-SPEC-001")
     def test_duplicate_hazard_ids_rejected(self) -> None:
-        h = Hazard(id="H-1", description="X.", severity="S1", exposure="E1",
-                   controllability="C1", asil="QM")
+        h = Hazard(
+            id="H-1",
+            description="X.",
+            severity="S1",
+            exposure="E1",
+            controllability="C1",
+            asil="QM",
+        )
         with pytest.raises(SpecError, match="Duplicate hazard IDs"):
             Spec(name="bad", hazards=[h, h])
 
@@ -161,7 +170,8 @@ class TestExporters:
         )
 
         report = Report(
-            spec_name="test", spec_version="1.0",
+            spec_name="test",
+            spec_version="1.0",
             evidence=[Evidence(id="E1", requirement_id="R1", kind="test", verdict="pass")],
         )
         html = export_html(report)
@@ -195,7 +205,10 @@ class TestBackwardCompat:
     def test_v01_symbols_importable(self) -> None:
         result = subprocess.run(
             [sys.executable, str(ROOT / "scripts" / "check_v0_1_compat.py")],
-            capture_output=True, text=True, cwd=str(ROOT), check=False,
+            capture_output=True,
+            text=True,
+            cwd=str(ROOT),
+            check=False,
         )
         assert result.returncode == 0, result.stdout + result.stderr
 
