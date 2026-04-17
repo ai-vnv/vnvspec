@@ -15,6 +15,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - Structured CLI exit codes: 0 (OK), 1 (failures), 2 (inconclusive), 3 (spec validation error), 4 (usage error), 5 (internal error).
 - `ExitCode` enum exported from `vnvspec.cli.main`.
 - Deprecation infrastructure (`vnvspec._deprecation.deprecated` decorator) for future symbol lifecycle management.
+- `EvidenceCollector` context manager for ergonomic evidence collection with `check()`, `record()`, and `from_pytest_junit()` methods.
+- `EvidenceCollector` and `Report` now exported from `vnvspec` top-level.
 
 ## [0.1.0] — 2026-04-17
 

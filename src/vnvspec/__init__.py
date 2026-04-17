@@ -1,6 +1,8 @@
 """vnvspec — V&V-grade specifications for engineered systems."""
 
 from vnvspec._version import __version__
+from vnvspec.collectors import EvidenceCollector
+from vnvspec.core.assessment import Report
 from vnvspec.core.contract import Invariant, IOContract
 from vnvspec.core.errors import (
     AssessmentError,
@@ -21,9 +23,11 @@ __all__ = [
     "AssessmentError",
     "ContractError",
     "Evidence",
+    "EvidenceCollector",
     "Hazard",
     "IOContract",
     "Invariant",
+    "Report",
     "Requirement",
     "RequirementError",
     "Spec",
