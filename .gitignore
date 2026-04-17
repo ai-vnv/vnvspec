@@ -35,6 +35,9 @@ site/
 .DS_Store
 Thumbs.db
 
+# Lock files
+uv.lock
+
 # Environment
 .env
 .env.local

@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [0.3.2] — 2026-04-17
+
+### Fixed
+
+- Add `typer` and `rich` to package dependencies (were imported by CLI but not declared, causing `ImportError` on clean install).
+- Replace hardcoded version smoke test with semver format check.
+
+### Added
+
+- REQ-SELF-PKG-001: all runtime imports must be declared in `pyproject.toml` dependencies.
+- `tests/test_deps.py` — automatically catches undeclared third-party imports.
+
 ## [0.3.1] — 2026-04-17
 
 ### Fixed
