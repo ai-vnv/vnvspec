@@ -1,6 +1,6 @@
 [project]
 name = "vnvspec"
-version = "0.2.0"
+version = "0.3.0"
 description = "V&V-grade specifications for engineered systems — AI, optimization, simulation, and physics."
 readme = "README.md"
 license = "Apache-2.0"

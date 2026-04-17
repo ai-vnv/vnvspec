@@ -7,7 +7,7 @@
 # Each requirement carries metadata.since to track which version introduced it.
 
 name: vnvspec-self
-version: "0.2.0"
+version: "0.3.0"
 description: >
   Self-hosting specification for the vnvspec package. Every requirement here
   is verified by the vnvspec test suite, lint/typecheck infrastructure, or
