@@ -4,7 +4,38 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
-## [Unreleased]
+## [0.3.0] — 2026-04-17
+
+### Changed
+
+- **Behavior change (may affect CI):** `Report.verdict()` now returns `"inconclusive"` when any inconclusive evidence is present and no failures. Previously returned `"pass"` in this case. Pass `verdict_policy="lenient"` to restore old behavior. This change aligns `Report.verdict()` with the existing CLI exit-code semantics (`ExitCode.INCONCLUSIVE = 2`).
+
+### Added
+
+- `Report.verdict_policy` field (`"strict"` | `"lenient"`) to control inconclusive roll-up behavior.
+- `Report.inconclusive_count()` method for counting inconclusive evidence.
+- `"formal_proof"` as a valid `VerificationMethod` and `EvidenceKind` value (vocabulary reserved for v0.4 formal-methods integration; no adapter implementation yet).
+- `Requirement.source` now accepts `list[str]` (multiple URLs) in addition to `str` (auto-normalized to a one-element list). Empty string normalizes to `[]`.
+- `scripts/check_v0_2_compat.py` for v0.2 backward-compatibility enforcement in CI.
+- Catalog test fixture infrastructure (`tests/catalog/conftest.py`) with `validate_catalog_requirement()` for auto-testing catalog modules against the inclusion policy.
+- Catalog infrastructure (`vnvspec.catalog._base`) with `discover_catalogs()`, `all_requirements()`, `check_compatibility()`, and `CatalogInfo`/`CompatibilityReport` dataclasses.
+- `vnvspec catalog list` — list all discovered catalog modules with requirement counts and version pins.
+- `vnvspec catalog show <module>` — show requirements from a catalog module.
+- `vnvspec catalog audit` — audit catalog modules for compatibility with installed packages.
+- `vnvspec catalog import <module>` — export catalog requirements to YAML/TOML/JSON.
+- New dependency: `packaging>=23`.
+- `CONTRIBUTING-CATALOG.md` — inclusion policy for catalog modules (six-criteria gate).
+- `vnvspec.catalog.ml.pytorch_training` — 30 curated best-practice requirements across 5 sub-modules: `reproducibility` (6), `gradient_health` (6), `checkpointing` (6), `data_loading` (6), `loss_validation` (6). Sources: PyTorch docs, Karpathy's Recipe, NIST AI RMF.
+- `vnvspec.catalog.ml.huggingface_inference` — 24 requirements across 4 sub-modules: `tokenization` (6), `generation` (6), `attention_masks` (6), `structured_outputs` (6). Sources: HuggingFace Transformers docs, Vaswani et al.
+- `vnvspec.catalog.web.fastapi` — 22 requirements across 3 sub-modules: `security` (10, OWASP API Top 10 2023 mapped), `observability` (6), `api_design` (6). Sources: OWASP API Security 2023, FastAPI docs, RFC 9457.
+- `vnvspec.catalog.web.sqlalchemy` — 18 requirements across 3 sub-modules: `transactions` (6), `session` (6), `schema` (6). Sources: SQLAlchemy 2.0 docs, Alembic docs, Cosmic Python.
+- `vnvspec.catalog.optimization.pyomo` — 19 requirements across 3 sub-modules: `solver_status` (6), `constraint_validation` (7), `model_invariants` (6). Sources: Pyomo docs, Hart et al., Williams.
+- Standards mappings across all catalogs: NASA SE Handbook (SP-2016-6105), INCOSE SE Handbook, IEEE 754-2019, ISO/IEC 25010:2023, DO-178C, SAE ARP4754A, SAE J3131, ISO/SAE 21434. 10 standards frameworks total, 75% of requirements mapped.
+- 4 new IEEE 754 floating-point requirements: gradient overflow/underflow detection (PyTorch), numerically stable loss functions (PyTorch), mixed-precision dtype consistency (HuggingFace), compensated summation (Pyomo).
+- `docs/catalog/standards-mapping.md` — comprehensive reference for all standards mappings.
+- `export_shields_endpoint()` exporter — generates Shields.io endpoint JSON for dynamic README badges (green/yellow/red/grey).
+- `vnvspec export-shields-endpoint` CLI command.
+- Upgraded GitHub Actions composite action (`actions/vnvspec/action.yml`) with `publish-badge`, `verdict-policy`, and `comment-pr` inputs. Badge JSON auto-published to gh-pages; PR comments posted with verdict summary.
 
 ## [0.2.0] — 2026-04-17
 

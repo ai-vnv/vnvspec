@@ -9,6 +9,7 @@ from vnvspec.exporters.gsn_mermaid import export_gsn_mermaid
 from vnvspec.exporters.html import export_html
 from vnvspec.exporters.json_export import export_json
 from vnvspec.exporters.markdown import export_markdown
+from vnvspec.exporters.shields_endpoint import export_shields_endpoint
 from vnvspec.exporters.techdoc_annex_iv import export_annex_iv
 
 __all__ = [
@@ -20,4 +21,5 @@ __all__ = [
     "export_html",
     "export_json",
     "export_markdown",
+    "export_shields_endpoint",
 ]

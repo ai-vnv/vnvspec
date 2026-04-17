@@ -24,7 +24,9 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field, model_validator
 
-EvidenceKind = Literal["test", "analysis", "inspection", "demonstration", "simulation"]
+EvidenceKind = Literal[
+    "test", "analysis", "inspection", "demonstration", "simulation", "formal_proof"
+]
 Verdict = Literal["pass", "fail", "inconclusive"]
 
 

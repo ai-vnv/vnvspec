@@ -26,4 +26,4 @@ class TestDemoCatalog:
         assert req.verification_method == "test"
         assert len(req.acceptance_criteria) == 1
         assert req.rationale != ""
-        assert req.source != ""
+        assert len(req.source) > 0

@@ -49,6 +49,9 @@ app = typer.Typer(
 registries_app = typer.Typer(help="Browse standards registries.")
 app.add_typer(registries_app, name="registries")
 
+catalog_app = typer.Typer(help="Browse and audit best-practices catalogs.")
+app.add_typer(catalog_app, name="catalog")
+
 console = Console()
 
 
@@ -254,6 +257,32 @@ def export(
         console.print(result)
 
 
+@app.command("export-shields-endpoint")
+def export_shields_endpoint_cmd(
+    report_path: Annotated[Path, typer.Argument(help="Path to report JSON.")],
+    output: Annotated[
+        Path,
+        typer.Option("--output", "-o", help="Output JSON file path."),
+    ] = Path("vnv-badge.json"),
+    label: Annotated[
+        str,
+        typer.Option("--label", "-l", help="Badge label text."),
+    ] = "V&V",
+) -> None:
+    """Export a Shields.io endpoint JSON file for dynamic badges."""
+    from vnvspec.core.assessment import Report  # noqa: PLC0415
+    from vnvspec.exporters.shields_endpoint import export_shields_endpoint  # noqa: PLC0415
+
+    if not report_path.exists():
+        console.print(f"[red]Error:[/red] {report_path} not found.")
+        raise typer.Exit(code=ExitCode.USAGE_ERROR)
+
+    data = json.loads(report_path.read_text(encoding="utf-8"))
+    report = Report.model_validate(data)
+    result = export_shields_endpoint(report, path=output, label=label)
+    console.print(f"[green]Exported[/green] {result}")
+
+
 @registries_app.command("list")
 def registries_list() -> None:
     """List available standards registries."""
@@ -295,3 +324,208 @@ def registries_show(
         console.print(
             f"[dim]Showing {limit} of {len(registry.entries)}. Use --limit to see more.[/dim]"
         )
+
+
+# ---------------------------------------------------------------------------
+# catalog subcommands
+# ---------------------------------------------------------------------------
+
+
+@catalog_app.command("list")
+def catalog_list() -> None:
+    """List all discovered catalog modules."""
+    from vnvspec.catalog._base import discover_catalogs  # noqa: PLC0415
+
+    catalogs = discover_catalogs()
+    if not catalogs:
+        console.print("[yellow]No catalog modules found.[/yellow]")
+        return
+
+    table = Table(title="Available Catalogs")
+    table.add_column("Module", style="bold")
+    table.add_column("Requirements", justify="right")
+    table.add_column("Compatible With")
+    table.add_column("Description")
+
+    for cat in catalogs:
+        table.add_row(
+            cat.module_path,
+            str(cat.requirement_count),
+            cat.compatible_with or "—",
+            cat.doc[:60] + "…" if len(cat.doc) > 60 else cat.doc,  # noqa: PLR2004
+        )
+
+    console.print(table)
+
+
+@catalog_app.command("show")
+def catalog_show(
+    module: Annotated[str, typer.Argument(help="Catalog module path, e.g. vnvspec.catalog.demo")],
+) -> None:
+    """Show requirements from a catalog module."""
+    from vnvspec.catalog._base import all_requirements  # noqa: PLC0415
+
+    try:
+        import importlib  # noqa: PLC0415
+
+        mod = importlib.import_module(module)
+    except ImportError as exc:
+        console.print(f"[red]Error:[/red] cannot import {module}: {exc}")
+        raise typer.Exit(code=ExitCode.USAGE_ERROR) from exc
+
+    reqs = all_requirements(mod)
+    if not reqs:
+        console.print(f"[yellow]No requirements found in {module}.[/yellow]")
+        return
+
+    table = Table(title=f"{module} ({len(reqs)} requirements)")
+    table.add_column("ID", style="bold")
+    table.add_column("Priority")
+    table.add_column("Method")
+    table.add_column("Statement")
+
+    for req in reqs:
+        stmt = req.statement[:70] + "…" if len(req.statement) > 70 else req.statement  # noqa: PLR2004
+        table.add_row(req.id, req.priority, req.verification_method, stmt)
+
+    console.print(table)
+
+
+@catalog_app.command("audit")
+def catalog_audit(
+    check_versions: Annotated[
+        bool, typer.Option("--check-versions", help="Check version compatibility.")
+    ] = True,
+    check_staleness: Annotated[
+        bool, typer.Option("--check-staleness", help="Check last-reviewed dates.")
+    ] = False,
+    check_sources: Annotated[
+        bool, typer.Option("--check-sources", help="Collect source URLs (no HTTP check).")
+    ] = False,
+) -> None:
+    """Audit catalog modules for compatibility, staleness, and source URLs."""
+    from vnvspec.catalog._base import (  # noqa: PLC0415
+        check_compatibility,
+        collect_source_urls,
+        discover_catalogs,
+    )
+    from vnvspec.catalog._base import (  # noqa: PLC0415
+        check_staleness as _check_staleness,
+    )
+
+    catalogs = discover_catalogs()
+    if not catalogs:
+        console.print("[yellow]No catalog modules found.[/yellow]")
+        return
+
+    has_issues = False
+
+    if check_versions:
+        table = Table(title="Version Compatibility")
+        table.add_column("Module", style="bold")
+        table.add_column("Version Pin")
+        table.add_column("Installed")
+        table.add_column("Status")
+
+        for cat in catalogs:
+            report = check_compatibility(cat)
+            status_style = {
+                "compatible": "green",
+                "unknown": "yellow",
+                "incompatible": "red",
+            }[report.level]
+            if report.level == "incompatible":
+                has_issues = True
+            table.add_row(
+                cat.module_path,
+                cat.compatible_with or "—",
+                report.installed_version or "—",
+                f"[{status_style}]{report.level}[/{status_style}]",
+            )
+        console.print(table)
+
+    if check_staleness:
+        table = Table(title="Staleness Check")
+        table.add_column("Module", style="bold")
+        table.add_column("Last Reviewed")
+        table.add_column("Days Ago")
+        table.add_column("Status")
+
+        for cat in catalogs:
+            sr = _check_staleness(cat)
+            status_style = {
+                "fresh": "green",
+                "stale": "yellow",
+                "expired": "red",
+                "unknown": "dim",
+            }[sr.level]
+            if sr.level == "expired":
+                has_issues = True
+            table.add_row(
+                cat.module_path,
+                sr.last_reviewed or "—",
+                str(sr.days_since_review) if sr.days_since_review is not None else "—",
+                f"[{status_style}]{sr.level}[/{status_style}]",
+            )
+        console.print(table)
+
+    if check_sources:
+        table = Table(title="Source URLs")
+        table.add_column("Module", style="bold")
+        table.add_column("URLs", justify="right")
+
+        for cat in catalogs:
+            urls = collect_source_urls(cat)
+            table.add_row(cat.module_path, str(len(urls)))
+
+        console.print(table)
+
+    if has_issues:
+        raise typer.Exit(code=ExitCode.ASSESSMENT_FAILURES)
+
+
+@catalog_app.command("import")
+def catalog_import(
+    module: Annotated[str, typer.Argument(help="Catalog module path.")],
+    fmt: Annotated[
+        str,
+        typer.Option("--format", "-f", help="Output format: yaml, toml, or json."),
+    ] = "yaml",
+    output: Annotated[
+        Path | None,
+        typer.Option("--output", "-o", help="Output file path."),
+    ] = None,
+) -> None:
+    """Import catalog requirements into a spec file."""
+    from vnvspec.catalog._base import all_requirements  # noqa: PLC0415
+    from vnvspec.core.spec import Spec  # noqa: PLC0415
+
+    try:
+        import importlib  # noqa: PLC0415
+
+        mod = importlib.import_module(module)
+    except ImportError as exc:
+        console.print(f"[red]Error:[/red] cannot import {module}: {exc}")
+        raise typer.Exit(code=ExitCode.USAGE_ERROR) from exc
+
+    reqs = all_requirements(mod)
+    if not reqs:
+        console.print(f"[yellow]No requirements found in {module}.[/yellow]")
+        raise typer.Exit(code=ExitCode.USAGE_ERROR)
+
+    spec = Spec(name=f"catalog-{module.split('.')[-1]}", requirements=reqs)
+
+    serializers = {"yaml": spec.to_yaml, "toml": spec.to_toml, "json": spec.to_json}
+    serializer = serializers.get(fmt)
+    if serializer is None:
+        console.print(
+            f"[red]Unknown format:[/red] {fmt}. Available: {', '.join(sorted(serializers))}"
+        )
+        raise typer.Exit(code=ExitCode.USAGE_ERROR)
+
+    content = serializer()
+    if output:
+        Path(output).write_text(content, encoding="utf-8")
+        console.print(f"[green]Exported[/green] {len(reqs)} requirements to {output}")
+    else:
+        console.print(content)

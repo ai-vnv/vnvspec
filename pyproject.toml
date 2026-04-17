@@ -1,6 +1,6 @@
 [project]
 name = "vnvspec"
-version = "0.2.0"
+version = "0.3.0"
 description = "V&V-grade specifications for engineered systems — AI, optimization, simulation, and physics."
 readme = "README.md"
 license = "Apache-2.0"
@@ -14,6 +14,7 @@ dependencies = [
     "pyyaml>=6.0",
     "tomli-w>=1.0",
     "openpyxl>=3.1",
+    "packaging>=23",
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -30,6 +31,8 @@ classifiers = [
 torch = [
     "torch>=2.3",
     "transformers>=4.40",
+    "protobuf>=4.0",
+    "sentencepiece>=0.1.99",
 ]
 docs = [
     "mkdocs-material>=9.5",
@@ -112,3 +115,6 @@ omit = [
 [tool.coverage.report]
 fail_under = 95
 show_missing = true
+
+[tool.codespell]
+ignore-words-list = "hart"

@@ -90,7 +90,29 @@ def main() -> int:
         # REQ-SELF-META-001: self-spec is loadable
         c.check("REQ-SELF-META-001", True, message="Self-spec loaded successfully (we're running)")
 
-    report = c.build_report(summary="vnvspec v0.2.0 self-assessment")
+        # --- v0.3 requirements ---
+        # REQ-SELF-VERDICT-001: strict verdict semantics
+        _check_verdict_strict(c)
+
+        # REQ-SELF-FORMAL-001: formal_proof is valid
+        _check_formal_proof(c)
+
+        # REQ-SELF-SOURCE-001: source field accepts str and list
+        _check_source_field(c)
+
+        # REQ-SELF-COMPAT-002: v0.2 symbols importable
+        _check_v02_compat(c)
+
+        # REQ-SELF-CATALOG-PYT-001: PyTorch catalog >= 30 requirements
+        _check_pytorch_catalog(c)
+
+        # REQ-SELF-CATALOG-001: catalog CLI works
+        _check_catalog_cli(c)
+
+        # REQ-SELF-SHIELDS-001: shields endpoint produces valid JSON
+        _check_shields_endpoint(c)
+
+    report = c.build_report(summary="vnvspec v0.3.0 self-assessment")
 
     # Write outputs
     REPORT_JSON.write_text(report.model_dump_json(indent=2), encoding="utf-8")
@@ -453,6 +475,191 @@ def _check_deprecation(c: object) -> None:
         and "0.3.0" in str(w[0].message)
     )
     c.check("REQ-SELF-DEP-001", ok, message=f"warning_count={len(w)}, correct_type={ok}")  # type: ignore[union-attr]
+
+
+def _check_verdict_strict(c: object) -> None:
+    from vnvspec import Evidence, Report
+
+    ev_pass = Evidence(id="VP-1", requirement_id="R1", kind="test", verdict="pass")
+    ev_inc = Evidence(id="VP-2", requirement_id="R2", kind="test", verdict="inconclusive")
+    ev_fail = Evidence(id="VP-3", requirement_id="R3", kind="test", verdict="fail")
+
+    # strict: pass+inconclusive → inconclusive
+    r1 = Report(spec_name="t", evidence=[ev_pass, ev_inc])
+    strict_ok = r1.verdict() == "inconclusive"
+
+    # lenient: pass+inconclusive → pass
+    r2 = Report(spec_name="t", evidence=[ev_pass, ev_inc], verdict_policy="lenient")
+    lenient_ok = r2.verdict() == "pass"
+
+    # fail always wins
+    r3 = Report(spec_name="t", evidence=[ev_fail, ev_inc], verdict_policy="lenient")
+    fail_ok = r3.verdict() == "fail"
+
+    c.check(  # type: ignore[union-attr]
+        "REQ-SELF-VERDICT-001",
+        strict_ok and lenient_ok and fail_ok,
+        message=f"strict={strict_ok}, lenient={lenient_ok}, fail_precedence={fail_ok}",
+    )
+
+
+def _check_formal_proof(c: object) -> None:
+    from vnvspec import Requirement
+
+    req = Requirement(id="FP-1", statement="Test.", verification_method="formal_proof")
+    ok = req.verification_method == "formal_proof"
+
+    import json
+
+    data = json.loads(req.model_dump_json())
+    req2 = Requirement.model_validate(data)
+    rt_ok = req2.verification_method == "formal_proof"
+
+    c.check(  # type: ignore[union-attr]
+        "REQ-SELF-FORMAL-001", ok and rt_ok, message=f"construct={ok}, roundtrip={rt_ok}"
+    )
+
+
+def _check_source_field(c: object) -> None:
+    from vnvspec import Requirement
+
+    r1 = Requirement(id="S1", statement="Test.", source="https://example.com")  # type: ignore[arg-type]
+    str_ok = r1.source == ["https://example.com"]
+
+    r2 = Requirement(id="S2", statement="Test.", source=["a", "b"])
+    list_ok = r2.source == ["a", "b"]
+
+    r3 = Requirement(id="S3", statement="Test.")
+    default_ok = r3.source == []
+
+    c.check(  # type: ignore[union-attr]
+        "REQ-SELF-SOURCE-001",
+        str_ok and list_ok and default_ok,
+        message=f"str_norm={str_ok}, list_pass={list_ok}, default_empty={default_ok}",
+    )
+
+
+def _check_v02_compat(c: object) -> None:
+    result = _run([sys.executable, "scripts/check_v0_2_compat.py"])
+    c.check(  # type: ignore[union-attr]
+        "REQ-SELF-COMPAT-002",
+        result.returncode == 0,
+        message=result.stdout.strip() or result.stderr.strip(),
+    )
+
+
+def _check_pytorch_catalog(c: object) -> None:
+    from vnvspec.catalog.ml.pytorch_training import (
+        checkpointing,
+        data_loading,
+        gradient_health,
+        loss_validation,
+        reproducibility,
+    )
+
+    total = sum(
+        len(f())
+        for f in [reproducibility, gradient_health, checkpointing, data_loading, loss_validation]
+    )
+    min_req_count = 30
+    count_ok = total >= min_req_count
+
+    # Check standards coverage
+    all_reqs = []
+    for f in [reproducibility, gradient_health, checkpointing, data_loading, loss_validation]:
+        all_reqs.extend(f())
+    with_stds = sum(1 for r in all_reqs if r.standards)
+    stds_pct = with_stds / len(all_reqs) if all_reqs else 0
+    min_stds_pct = 0.5
+    stds_ok = stds_pct >= min_stds_pct
+
+    # Check GtWR
+    from vnvspec.core._internal.gtwr_rules import RuleProfile
+
+    gtwr_ok = True
+    for req in all_reqs:
+        errors = [v for v in req.check_quality(RuleProfile.FORMAL) if v.severity == "error"]
+        if errors:
+            gtwr_ok = False
+            break
+
+    c.check(  # type: ignore[union-attr]
+        "REQ-SELF-CATALOG-PYT-001",
+        count_ok and stds_ok and gtwr_ok,
+        message=f"count={total}, stds={stds_pct:.0%}, gtwr_clean={gtwr_ok}",
+    )
+
+
+def _check_catalog_cli(c: object) -> None:
+    r1 = _run(["uv", "run", "vnvspec", "catalog", "list"])
+    list_ok = r1.returncode == 0
+
+    r2 = _run(["uv", "run", "vnvspec", "catalog", "show", "vnvspec.catalog.demo"])
+    show_ok = r2.returncode == 0 and "CAT-DEMO-001" in r2.stdout
+
+    r3 = _run(["uv", "run", "vnvspec", "catalog", "audit"])
+    audit_ok = r3.returncode == 0
+
+    c.check(  # type: ignore[union-attr]
+        "REQ-SELF-CATALOG-001",
+        list_ok and show_ok and audit_ok,
+        message=f"list={list_ok}, show={show_ok}, audit={audit_ok}",
+    )
+
+
+def _check_shields_endpoint(c: object) -> None:
+    import json
+    import tempfile
+
+    from vnvspec import Evidence, Report
+    from vnvspec.exporters.shields_endpoint import export_shields_endpoint
+
+    # All pass → green
+    rp = Report(
+        spec_name="t",
+        evidence=[Evidence(id="E1", requirement_id="R", kind="test", verdict="pass")],
+    )
+    with tempfile.TemporaryDirectory() as td:
+        p = Path(td) / "badge.json"
+        export_shields_endpoint(rp, path=p)
+        data = json.loads(p.read_text())
+        green_ok = data["color"] == "green" and data["schemaVersion"] == 1
+
+    # Fail → red
+    rf = Report(
+        spec_name="t",
+        evidence=[Evidence(id="E2", requirement_id="R", kind="test", verdict="fail")],
+    )
+    with tempfile.TemporaryDirectory() as td:
+        p = Path(td) / "badge.json"
+        export_shields_endpoint(rf, path=p)
+        data = json.loads(p.read_text())
+        red_ok = data["color"] == "red"
+
+    # Inconclusive → yellow
+    ri = Report(
+        spec_name="t",
+        evidence=[Evidence(id="E3", requirement_id="R", kind="test", verdict="inconclusive")],
+    )
+    with tempfile.TemporaryDirectory() as td:
+        p = Path(td) / "badge.json"
+        export_shields_endpoint(ri, path=p)
+        data = json.loads(p.read_text())
+        yellow_ok = data["color"] == "yellow"
+
+    # Empty → lightgrey
+    re_ = Report(spec_name="t")
+    with tempfile.TemporaryDirectory() as td:
+        p = Path(td) / "badge.json"
+        export_shields_endpoint(re_, path=p)
+        data = json.loads(p.read_text())
+        grey_ok = data["color"] == "lightgrey"
+
+    c.check(  # type: ignore[union-attr]
+        "REQ-SELF-SHIELDS-001",
+        green_ok and red_ok and yellow_ok and grey_ok,
+        message=f"green={green_ok}, red={red_ok}, yellow={yellow_ok}, grey={grey_ok}",
+    )
 
 
 if __name__ == "__main__":

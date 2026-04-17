@@ -47,6 +47,17 @@ jobs:
           print(f'Dashboard: {len(spec.requirements)} requirements')
           "
 
+      - name: Generate Shields endpoint badge
+        run: |
+          uv run python -c "
+          from vnvspec.core.assessment import Report
+          from vnvspec.exporters.shields_endpoint import export_shields_endpoint
+          import json
+          report = Report.model_validate(json.loads(open('.vnvspec/pytest-self-report.json').read()))
+          export_shields_endpoint(report, path='site/vnv-badge.json')
+          print(f'Badge: {report.verdict()} ({report.pass_count()}/{len(report.evidence)})')
+          "
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site/
