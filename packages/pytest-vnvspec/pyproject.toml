@@ -29,7 +29,7 @@ vnvspec = "pytest_vnvspec.plugin"
 
 [project.urls]
 Homepage = "https://github.com/ai-vnv/vnvspec"
-Documentation = "https://ai-vnv.github.io/vnvspec/integrations/pytest/"
+Documentation = "https://ai-vnv.kfupm.io/vnvspec/integrations/pytest/"
 
 [build-system]
 requires = ["hatchling"]

@@ -7,15 +7,13 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: docs
   cancel-in-progress: true
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -42,7 +40,7 @@ jobs:
           export_dashboard(
               spec, report,
               output_dir='site/dashboard',
-              dashboard_url='https://ai-vnv.github.io/vnvspec/dashboard/',
+              dashboard_url='https://ai-vnv.kfupm.io/vnvspec/dashboard/',
           )
           print(f'Dashboard: {len(spec.requirements)} requirements')
           "
@@ -58,16 +56,18 @@ jobs:
           print(f'Badge: {report.verdict()} ({report.pass_count()}/{len(report.evidence)})')
           "
 
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: site/
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
-    steps:
-      - id: deploy
-        uses: actions/deploy-pages@v4
+      - name: Deploy to lab site
+        env:
+          DEPLOY_TOKEN: ${{ secrets.LAB_SITE_DEPLOY_TOKEN }}
+        run: |
+          cd /tmp
+          git clone --depth 1 https://x-access-token:${DEPLOY_TOKEN}@github.com/mansurarief/ai-vnv-lab-site.git lab-site
+          rm -rf lab-site/vnvspec
+          cp -r $GITHUB_WORKSPACE/site lab-site/vnvspec
+          cd lab-site
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add vnvspec
+          git diff --cached --quiet && echo "No changes to deploy" && exit 0
+          git commit -m "docs: update vnvspec docs from ai-vnv/vnvspec@${GITHUB_SHA::7}"
+          git push

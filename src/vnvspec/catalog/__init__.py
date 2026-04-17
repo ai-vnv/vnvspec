@@ -24,5 +24,5 @@ Each catalog function returns ``list[Requirement]``. Compose with
     spec = Spec(name="my-app", requirements=[my_req])
     spec = spec.extend(hello_world())
 
-See: https://ai-vnv.github.io/vnvspec/concepts/catalog/
+See: https://ai-vnv.kfupm.io/vnvspec/concepts/catalog/
 """

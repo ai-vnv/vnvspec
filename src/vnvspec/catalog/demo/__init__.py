@@ -1,7 +1,7 @@
 """Demo catalog. Returns trivial requirements to validate the catalog convention.
 
 This is NOT a real best-practices catalog. Real catalogs ship in v0.3.
-See: https://ai-vnv.github.io/vnvspec/concepts/catalog/
+See: https://ai-vnv.kfupm.io/vnvspec/concepts/catalog/
 
 Maintainer: vnvspec core team
 Last reviewed: 2026-04-17
@@ -21,6 +21,6 @@ def hello_world() -> list[Requirement]:
             rationale="Smoke-test requirement to validate catalog import surface.",
             verification_method="test",
             acceptance_criteria=["greet('hello') == 'hello, world'"],
-            source="https://ai-vnv.github.io/vnvspec/catalog/demo/",  # type: ignore[arg-type]
+            source="https://ai-vnv.kfupm.io/vnvspec/catalog/demo/",  # type: ignore[arg-type]
         ),
     ]

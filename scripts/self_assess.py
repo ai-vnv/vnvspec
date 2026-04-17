@@ -21,6 +21,51 @@ SELF_SPEC_PATH = ROOT / ".vnvspec" / "self-spec.yaml"
 REPORT_JSON = ROOT / ".vnvspec" / "self-assessment-report.json"
 REPORT_HTML = ROOT / ".vnvspec" / "self-assessment-report.html"
 
+MIN_INCOSE_RULES = 8
+MIN_REGISTRIES = 5
+
+
+def _collect_all_evidence(c: object) -> None:
+    """Run every verification check and collect evidence."""
+    # --- v0.1 requirements ---
+    _check_pydantic(c)
+    _check_unique_ids(c)
+    _check_cycle_rejection(c)
+    _check_gtwr_rules(c)
+    _check_registries(c)
+    _check_exporters(c)
+    _check_errors(c)
+    _check_frozen_models(c)
+
+    # --- v0.2 requirements ---
+    _check_extend_immutability(c)
+    _check_v01_compat(c)
+    _check_mypy(c)
+    _check_ruff(c)
+    _check_coverage(c)
+    _check_docs(c)
+    _check_evidence_details(c)
+    _check_report_summary(c)
+    _check_exit_codes(c)
+    _check_collector_validation(c)
+    _check_io_roundtrip(c)
+    _check_gap_analysis(c)
+    _check_profile(c)
+    _check_auto_trace(c)
+    _check_badge(c)
+    _check_diff(c)
+    _check_deprecation(c)
+    c.check("REQ-SELF-META-001", True, message="Self-spec loaded successfully (we're running)")  # type: ignore[union-attr]
+
+    # --- v0.3 requirements ---
+    _check_verdict_strict(c)
+    _check_formal_proof(c)
+    _check_source_field(c)
+    _check_v02_compat(c)
+    _check_pytorch_catalog(c)
+    _check_catalog_cli(c)
+    _check_shields_endpoint(c)
+
 
 def main() -> int:
     from vnvspec import Spec
@@ -33,84 +78,7 @@ def main() -> int:
     print(f"  {len(spec.requirements)} requirements loaded")
 
     with EvidenceCollector(spec) as c:
-        # REQ-SELF-FROZEN-001: Core models are frozen
-        _check_frozen_models(c)
-
-        # REQ-SELF-FROZEN-002: Spec.extend() doesn't mutate
-        _check_extend_immutability(c)
-
-        # REQ-SELF-COMPAT-001: v0.1 symbols importable
-        _check_v01_compat(c)
-
-        # REQ-SELF-TYPES-001: mypy --strict passes
-        _check_mypy(c)
-
-        # REQ-SELF-LINT-001: ruff passes
-        _check_ruff(c)
-
-        # REQ-SELF-COV-001: coverage >= 85%
-        _check_coverage(c)
-
-        # REQ-SELF-DOCS-001: mkdocs --strict passes
-        _check_docs(c)
-
-        # REQ-SELF-ERGO-001: Evidence.details str|dict
-        _check_evidence_details(c)
-
-        # REQ-SELF-ERGO-002: Report.summary str|dict
-        _check_report_summary(c)
-
-        # REQ-SELF-CLI-001: structured exit codes
-        _check_exit_codes(c)
-
-        # REQ-SELF-COLLECTOR-001: RequirementError on unknown ID
-        _check_collector_validation(c)
-
-        # REQ-SELF-IO-001: YAML/TOML round-trip
-        _check_io_roundtrip(c)
-
-        # REQ-SELF-GAP-001: gap analysis correctness
-        _check_gap_analysis(c)
-
-        # REQ-SELF-PROFILE-001: web-app profile
-        _check_profile(c)
-
-        # REQ-SELF-TRACE-001: auto_trace word boundary
-        _check_auto_trace(c)
-
-        # REQ-SELF-BADGE-001: badge SVG
-        _check_badge(c)
-
-        # REQ-SELF-DIFF-001: report diff regressions
-        _check_diff(c)
-
-        # REQ-SELF-DEP-001: deprecation decorator
-        _check_deprecation(c)
-
-        # REQ-SELF-META-001: self-spec is loadable
-        c.check("REQ-SELF-META-001", True, message="Self-spec loaded successfully (we're running)")
-
-        # --- v0.3 requirements ---
-        # REQ-SELF-VERDICT-001: strict verdict semantics
-        _check_verdict_strict(c)
-
-        # REQ-SELF-FORMAL-001: formal_proof is valid
-        _check_formal_proof(c)
-
-        # REQ-SELF-SOURCE-001: source field accepts str and list
-        _check_source_field(c)
-
-        # REQ-SELF-COMPAT-002: v0.2 symbols importable
-        _check_v02_compat(c)
-
-        # REQ-SELF-CATALOG-PYT-001: PyTorch catalog >= 30 requirements
-        _check_pytorch_catalog(c)
-
-        # REQ-SELF-CATALOG-001: catalog CLI works
-        _check_catalog_cli(c)
-
-        # REQ-SELF-SHIELDS-001: shields endpoint produces valid JSON
-        _check_shields_endpoint(c)
+        _collect_all_evidence(c)
 
     report = c.build_report(summary="vnvspec v0.3.0 self-assessment")
 
@@ -144,6 +112,170 @@ def main() -> int:
 
 def _run(cmd: list[str], cwd: Path = ROOT) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, capture_output=True, text=True, cwd=cwd)
+
+
+def _check_pydantic(c: object) -> None:
+    from pydantic import BaseModel
+
+    from vnvspec import ODD, Evidence, Hazard, IOContract, Requirement, Spec, TraceLink
+    from vnvspec.core.assessment import Report
+
+    models = [Spec, Requirement, Evidence, Hazard, ODD, IOContract, TraceLink, Report]
+    all_ok = all(issubclass(cls, BaseModel) for cls in models)
+    c.check(  # type: ignore[union-attr]
+        "REQ-SELF-PYDANTIC-001",
+        all_ok,
+        message=f"all_basemodel={all_ok}, count={len(models)}",
+    )
+
+
+def _check_unique_ids(c: object) -> None:
+    from vnvspec import Requirement, Spec
+    from vnvspec.core.errors import SpecError
+
+    # Duplicate requirement IDs should raise
+    req_dup_caught = False
+    try:
+        Spec(
+            name="t",
+            requirements=[
+                Requirement(id="R-1", statement="X.", verification_method="test"),
+                Requirement(id="R-1", statement="Y.", verification_method="test"),
+            ],
+        )
+    except SpecError:
+        req_dup_caught = True
+
+    # Unique IDs should be fine
+    unique_ok = True
+    try:
+        Spec(
+            name="t",
+            requirements=[
+                Requirement(id="R-1", statement="X.", verification_method="test"),
+                Requirement(id="R-2", statement="Y.", verification_method="test"),
+            ],
+        )
+    except SpecError:
+        unique_ok = False
+
+    c.check(  # type: ignore[union-attr]
+        "REQ-SELF-SPEC-001",
+        req_dup_caught and unique_ok,
+        message=f"dup_rejected={req_dup_caught}, unique_accepted={unique_ok}",
+    )
+
+
+def _check_cycle_rejection(c: object) -> None:
+    from vnvspec import TraceLink
+    from vnvspec.core.errors import SpecError
+    from vnvspec.core.trace import build_trace_graph
+
+    # Acyclic graph should succeed
+    acyclic_ok = True
+    try:
+        build_trace_graph(
+            [
+                TraceLink(source_id="A", target_id="B", relation="verifies"),
+                TraceLink(source_id="B", target_id="C", relation="verifies"),
+            ]
+        )
+    except SpecError:
+        acyclic_ok = False
+
+    # Cyclic graph should raise
+    cycle_caught = False
+    try:
+        build_trace_graph(
+            [
+                TraceLink(source_id="A", target_id="B", relation="verifies"),
+                TraceLink(source_id="B", target_id="A", relation="verifies"),
+            ]
+        )
+    except SpecError:
+        cycle_caught = True
+
+    c.check(  # type: ignore[union-attr]
+        "REQ-SELF-TRACE-GRAPH-001",
+        acyclic_ok and cycle_caught,
+        message=f"acyclic_ok={acyclic_ok}, cycle_rejected={cycle_caught}",
+    )
+
+
+def _check_gtwr_rules(c: object) -> None:
+    from vnvspec.core._internal.gtwr_rules import _ALL_RULES
+
+    count = len(_ALL_RULES)
+    ok = count >= MIN_INCOSE_RULES
+    rule_names = [r.__name__ for r in _ALL_RULES]
+    c.check(  # type: ignore[union-attr]
+        "REQ-SELF-GTWR-001",
+        ok,
+        message=f"rules={count}, names={rule_names}",
+    )
+
+
+def _check_registries(c: object) -> None:
+    from vnvspec.registries import list_available, load
+
+    available = list_available()
+    count_ok = len(available) >= MIN_REGISTRIES
+
+    # Verify each loads successfully
+    all_load = True
+    for name in available:
+        try:
+            reg = load(name)
+            if not reg.entries:
+                all_load = False
+        except Exception:
+            all_load = False
+
+    c.check(  # type: ignore[union-attr]
+        "REQ-SELF-REGISTRIES-001",
+        count_ok and all_load,
+        message=f"count={len(available)}, names={available}, all_load={all_load}",
+    )
+
+
+def _check_exporters(c: object) -> None:
+    from vnvspec import exporters
+
+    expected = {
+        "export_html",
+        "export_json",
+        "export_markdown",
+        "export_gsn_mermaid",
+        "export_annex_iv",
+    }
+    available = set(exporters.__all__)
+    has_all = expected.issubset(available)
+    c.check(  # type: ignore[union-attr]
+        "REQ-SELF-EXPORT-001",
+        has_all,
+        message=f"required={len(expected)}, available={sorted(available)}",
+    )
+
+
+def _check_errors(c: object) -> None:
+    from vnvspec.core.errors import (
+        AssessmentError,
+        ContractError,
+        RequirementError,
+        SpecError,
+        VnvspecError,
+    )
+
+    classes = [SpecError, RequirementError, ContractError, AssessmentError]
+    all_inherit = all(issubclass(cls, VnvspecError) for cls in classes)
+    all_have_url = all(hasattr(cls("x"), "help_url") and cls("x").help_url for cls in classes)
+    base_is_exception = issubclass(VnvspecError, Exception)
+
+    c.check(  # type: ignore[union-attr]
+        "REQ-SELF-ERRORS-001",
+        all_inherit and all_have_url and base_is_exception,
+        message=f"inherit={all_inherit}, help_urls={all_have_url}, base_ok={base_is_exception}",
+    )
 
 
 def _check_frozen_models(c: object) -> None:
