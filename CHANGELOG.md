@@ -29,6 +29,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - `RuleViolation.severity` now includes `"info"` level alongside `"error"` and `"warning"`.
 - `Requirement.check_quality(profile=...)` parameter for per-project profile selection.
 - CLI `vnvspec validate --profile web-app` flag.
+- `pytest-vnvspec` plugin (separate subpackage at `packages/pytest-vnvspec/`).
+  - `@pytest.mark.vnvspec("REQ-001")` marker to link tests to requirements.
+  - `--vnvspec-spec`, `--vnvspec-report`, `--vnvspec-fail-on` CLI options.
+  - Auto-generates inconclusive evidence for unlinked test requirements.
+  - Validates marker references at collection time.
 
 ## [0.1.0] — 2026-04-17
 
