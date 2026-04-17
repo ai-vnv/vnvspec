@@ -25,6 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 - `vnvspec catalog import <module>` — export catalog requirements to YAML/TOML/JSON.
 - New dependency: `packaging>=23`.
 - `CONTRIBUTING-CATALOG.md` — inclusion policy for catalog modules (six-criteria gate).
+- `vnvspec.catalog.ml.pytorch_training` — 30 curated best-practice requirements across 5 sub-modules: `reproducibility` (6), `gradient_health` (6), `checkpointing` (6), `data_loading` (6), `loss_validation` (6). Sources: PyTorch docs, Karpathy's Recipe, NIST AI RMF.
 
 ## [0.2.0] — 2026-04-17
 

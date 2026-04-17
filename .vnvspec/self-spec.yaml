@@ -349,6 +349,18 @@ requirements:
     metadata:
       since: "0.3.0"
 
+  - id: REQ-SELF-CATALOG-PYT-001
+    statement: The PyTorch training catalog shall provide at least 30 requirements across reproducibility, gradient health, checkpointing, data loading, and loss validation sub-modules.
+    rationale: The PyTorch catalog is the first real catalog and sets the quality bar for all subsequent catalogs.
+    verification_method: test
+    acceptance_criteria:
+      - The catalog provides at least 30 requirements total.
+      - All requirements pass the catalog inclusion policy (GtWR formal, source populated, ID convention).
+      - At least 50% of requirements have standards mappings.
+    priority: high
+    metadata:
+      since: "0.3.0"
+
   - id: REQ-SELF-CATALOG-001
     statement: The vnvspec catalog CLI shall provide list, show, audit, and import subcommands.
     rationale: Discoverability and auditability are essential for a catalog system.
