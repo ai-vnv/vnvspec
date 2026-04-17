@@ -215,6 +215,12 @@ class TestSpecSerialization:
         with pytest.raises(SpecError, match="Expected a YAML mapping"):
             Spec.from_yaml(bad_yaml)
 
+    def test_json_string_output(self, sample_req: Requirement) -> None:
+        spec = Spec(name="test-json", requirements=[sample_req])
+        text = spec.to_json()
+        assert "test-json" in text
+        assert "REQ-001" in text
+
     def test_yaml_complex_spec(self, tmp_path: Path) -> None:
         """Round-trip a spec with multiple requirements, hazards, and evidence."""
         reqs = [

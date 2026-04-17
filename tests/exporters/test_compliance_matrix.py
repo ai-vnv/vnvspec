@@ -114,6 +114,24 @@ class TestComplianceMatrixCSV:
         assert "Coverage Status" in content
 
 
+class TestComplianceMatrixEmptySpec:
+    def test_csv_empty_spec(self, tmp_path: Path) -> None:
+        """An empty spec with no requirements produces a CSV with only gap rows."""
+        spec = Spec(name="empty")
+        report = Report(spec_name="empty")
+        out = tmp_path / "empty.csv"
+        export_compliance_matrix(
+            report,
+            standard="iso_pas_8800",
+            spec=spec,
+            path=out,
+            output_format="csv",
+        )
+        assert out.exists()
+        content = out.read_text()
+        assert "gap" in content
+
+
 class TestComplianceMatrixHTML:
     def test_html_output(
         self,

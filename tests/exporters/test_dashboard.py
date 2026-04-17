@@ -193,3 +193,38 @@ class TestDashboardExporter:
         export_dashboard(sample_spec, sample_report, output_dir=tmp_path / "dash")
         html = (tmp_path / "dash" / "requirements" / "REQ-003.html").read_text()
         assert "No evidence collected" in html
+
+    def test_spec_without_standards(self, tmp_path: Path) -> None:
+        spec = Spec(
+            name="no-standards",
+            requirements=[
+                Requirement(
+                    id="REQ-001",
+                    statement="Simple req.",
+                    verification_method="test",
+                    metadata={"since": "0.1.0"},
+                ),
+            ],
+        )
+        report = Report(spec_name="no-standards", evidence=[])
+        export_dashboard(spec, report, output_dir=tmp_path / "dash")
+        html = (tmp_path / "dash" / "index.html").read_text()
+        assert "Standards Compliance" not in html
+
+    def test_spec_with_unknown_standard(self, tmp_path: Path) -> None:
+        spec = Spec(
+            name="bad-std",
+            requirements=[
+                Requirement(
+                    id="REQ-001",
+                    statement="Simple req.",
+                    verification_method="test",
+                    standards={"nonexistent_standard_xyz": ["1.1"]},
+                    metadata={"since": "0.1.0"},
+                ),
+            ],
+        )
+        report = Report(spec_name="bad-std", evidence=[])
+        # Should not crash on unknown standard
+        export_dashboard(spec, report, output_dir=tmp_path / "dash")
+        assert (tmp_path / "dash" / "index.html").exists()

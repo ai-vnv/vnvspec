@@ -17,11 +17,11 @@ typecheck:
 
 # Run tests with coverage
 test:
-    uv run pytest --cov=vnvspec --cov-report=term-missing
+    uv run pytest -p no:vnvspec --cov=src/vnvspec --cov-report=term-missing
 
 # Run tests and enforce coverage threshold
 cov:
-    uv run pytest --cov=vnvspec --cov-report=term-missing --cov-report=xml --cov-fail-under=85
+    uv run pytest -p no:vnvspec --cov=src/vnvspec --cov-report=term-missing --cov-report=xml --cov-fail-under=95
 
 # Build docs
 docs:

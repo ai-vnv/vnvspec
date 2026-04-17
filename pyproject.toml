@@ -100,7 +100,7 @@ addopts = "--strict-markers --strict-config"
 
 [tool.coverage.run]
 branch = true
-source = ["vnvspec"]
+source = ["src/vnvspec"]
 omit = [
     "src/vnvspec/torch/transformer.py",
     "src/vnvspec/torch/autoregressive.py",
@@ -110,5 +110,5 @@ omit = [
 ]
 
 [tool.coverage.report]
-fail_under = 85
+fail_under = 95
 show_missing = true

@@ -129,6 +129,45 @@ class TestAutoTrace:
         for link in links:
             assert "line" in link.metadata
 
+    def test_extra_patterns(self, sample_spec: Spec, fixture_tree: Path) -> None:
+        """Extra user patterns that match known IDs produce TraceLinks."""
+        links = auto_trace(sample_spec, paths=[fixture_tree], patterns=[r"REQ-\d+"])
+        req_001_links = [l for l in links if l.source_id == "REQ-001"]
+        assert len(req_001_links) >= 2
+
+    def test_extra_patterns_unknown_warns(self, tmp_path: Path) -> None:
+        """Extra pattern matching an unknown ID emits a warning."""
+        spec = Spec(
+            name="t",
+            requirements=[
+                Requirement(
+                    id="REQ-001",
+                    statement="X.",
+                    verification_method="test",
+                )
+            ],
+        )
+        (tmp_path / "code.py").write_text("# UNKNOWN-999 here\n")
+        with pytest.warns(RuntimeWarning, match="UNKNOWN-999"):
+            auto_trace(spec, paths=[tmp_path], patterns=[r"UNKNOWN-\d+"])
+
+    def test_unreadable_file(self, sample_spec: Spec, tmp_path: Path) -> None:
+        """Unreadable files are silently skipped."""
+        bad = tmp_path / "bad.py"
+        bad.write_text("REQ-001 here")
+        bad.chmod(0o000)
+        try:
+            auto_trace(sample_spec, paths=[tmp_path])
+            # Should not crash, may or may not find the link depending on OS
+        finally:
+            bad.chmod(0o644)
+
+    def test_non_text_suffix_skipped(self, sample_spec: Spec, tmp_path: Path) -> None:
+        """Files with non-text suffixes are skipped."""
+        (tmp_path / "data.xyz").write_text("REQ-001 here")
+        links = auto_trace(sample_spec, paths=[tmp_path])
+        assert len(links) == 0
+
     def test_exclude_dirs(self, sample_spec: Spec, fixture_tree: Path) -> None:
         # Create a __pycache__ dir with a matching file
         cache_dir = fixture_tree / "src" / "__pycache__"

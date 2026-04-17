@@ -101,6 +101,22 @@ class TestEvidenceCollectorContextManager:
             ev = c.check("REQ-001", True)
         assert ev.kind == "analysis"
 
+    def test_check_without_message(self, sample_spec: Spec) -> None:
+        with EvidenceCollector(sample_spec) as c:
+            ev = c.check("REQ-001", True)
+        assert "message" not in ev.details
+
+    def test_record_without_message(self, sample_spec: Spec) -> None:
+        with EvidenceCollector(sample_spec) as c:
+            ev = c.record("REQ-001", "pass")
+        assert "message" not in ev.details
+
+    def test_record_with_extra_details(self, sample_spec: Spec) -> None:
+        with EvidenceCollector(sample_spec) as c:
+            ev = c.record("REQ-001", "pass", message="ok", score=0.99)
+        assert ev.details["message"] == "ok"
+        assert ev.details["score"] == 0.99
+
 
 class TestBuildReport:
     def test_auto_summary(self, sample_spec: Spec) -> None:
@@ -211,6 +227,27 @@ class TestJUnitXMLParsing:
 
         assert len(results) == 1
         assert results[0].verdict == "inconclusive"
+
+    def test_parse_error_element(self, sample_spec: Spec, tmp_path: Path) -> None:
+        junit_xml = textwrap.dedent("""\
+            <?xml version="1.0" encoding="utf-8"?>
+            <testsuite name="pytest" tests="1">
+                <testcase classname="tests.test_core" name="test_error" time="0.1">
+                    <properties>
+                        <property name="vnvspec" value="REQ-001" />
+                    </properties>
+                    <error message="RuntimeError">traceback</error>
+                </testcase>
+            </testsuite>
+        """)
+        xml_path = tmp_path / "results.xml"
+        xml_path.write_text(junit_xml)
+
+        with EvidenceCollector(sample_spec) as c:
+            results = c.from_pytest_junit(xml_path)
+
+        assert len(results) == 1
+        assert results[0].verdict == "fail"
 
     def test_unknown_requirement_skipped(self, sample_spec: Spec, tmp_path: Path) -> None:
         junit_xml = textwrap.dedent("""\
