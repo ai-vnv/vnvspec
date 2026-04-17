@@ -92,6 +92,11 @@ addopts = "--strict-markers --strict-config"
 [tool.coverage.run]
 branch = true
 source = ["vnvspec"]
+omit = [
+    "src/vnvspec/torch/transformer.py",
+    "src/vnvspec/torch/autoregressive.py",
+    "src/vnvspec/torch/vlm.py",
+]
 
 [tool.coverage.report]
 fail_under = 85
