@@ -49,10 +49,11 @@ jobs:
       - name: Run tests
         run: >
           uv run pytest -m "not slow"
-          --cov=vnvspec
+          -p no:vnvspec
+          --cov=src/vnvspec
           --cov-report=term-missing
           --cov-report=xml
-          --cov-fail-under=85
+          --cov-fail-under=95
           -q
       - name: Upload coverage to Codecov
         if: matrix.python-version == '3.12'
