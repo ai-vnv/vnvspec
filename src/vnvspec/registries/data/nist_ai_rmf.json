@@ -1,0 +1,297 @@
+{
+  "name": "NIST AI Risk Management Framework (AI 100-1)",
+  "version": "1.0",
+  "published": "2023",
+  "url": "https://www.nist.gov/artificial-intelligence/executive-order-safe-secure-and-trustworthy-artificial-intelligence",
+  "disclaimer": "Informative only. Not a substitute for reading the published standard.",
+  "entries": [
+    {
+      "id": "nist-govern",
+      "clause": "Govern",
+      "title": "Govern function",
+      "summary": "Establishes organizational processes and structures to anticipate, identify, and manage AI risks in alignment with organizational values and policies.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-govern-1",
+      "clause": "Govern 1",
+      "title": "Policies, processes, procedures, and practices",
+      "summary": "Requires documented organizational policies and practices for AI risk management that reflect the organization's values and risk tolerance.",
+      "parent": "nist-govern",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-govern-1.1",
+      "clause": "Govern 1.1",
+      "title": "Legal and regulatory compliance policies",
+      "summary": "Addresses policies ensuring the AI system complies with applicable legal and regulatory requirements throughout its lifecycle.",
+      "parent": "nist-govern-1",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-govern-1.2",
+      "clause": "Govern 1.2",
+      "title": "Trustworthy AI characteristics integration",
+      "summary": "Ensures that trustworthy AI characteristics such as fairness, transparency, and accountability are integrated into organizational policies.",
+      "parent": "nist-govern-1",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-govern-2",
+      "clause": "Govern 2",
+      "title": "Accountability structures",
+      "summary": "Defines clear roles, responsibilities, and lines of accountability for AI risk management across the organization.",
+      "parent": "nist-govern",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-govern-2.1",
+      "clause": "Govern 2.1",
+      "title": "Roles and responsibilities",
+      "summary": "Specifies that roles and responsibilities for AI risk management are clearly defined and assigned to appropriate personnel.",
+      "parent": "nist-govern-2",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-govern-2.2",
+      "clause": "Govern 2.2",
+      "title": "Training and awareness",
+      "summary": "Addresses workforce training and awareness programs to ensure personnel understand AI risks and their management responsibilities.",
+      "parent": "nist-govern-2",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-govern-3",
+      "clause": "Govern 3",
+      "title": "Workforce diversity and AI risk",
+      "summary": "Promotes diverse and multidisciplinary teams to provide broad perspectives in AI risk identification and management.",
+      "parent": "nist-govern",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-govern-4",
+      "clause": "Govern 4",
+      "title": "Organizational risk tolerance",
+      "summary": "Requires that organizational risk tolerances for AI are defined and communicated to guide risk management decisions.",
+      "parent": "nist-govern",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-govern-5",
+      "clause": "Govern 5",
+      "title": "Engagement with stakeholders",
+      "summary": "Addresses processes for engaging relevant internal and external stakeholders in AI risk management decisions.",
+      "parent": "nist-govern",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-govern-6",
+      "clause": "Govern 6",
+      "title": "Policies for third-party AI",
+      "summary": "Establishes governance practices for third-party AI components, services, and data used within the organization.",
+      "parent": "nist-govern",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-map",
+      "clause": "Map",
+      "title": "Map function",
+      "summary": "Establishes context for framing AI risks by identifying and documenting the AI system's purpose, stakeholders, and potential impacts.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-map-1",
+      "clause": "Map 1",
+      "title": "System context and intended purpose",
+      "summary": "Requires documentation of the AI system's intended purpose, operational context, assumptions, and limitations.",
+      "parent": "nist-map",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-map-1.1",
+      "clause": "Map 1.1",
+      "title": "Intended purpose documentation",
+      "summary": "Specifies that the intended purpose of the AI system is clearly defined, documented, and communicated to relevant stakeholders.",
+      "parent": "nist-map-1",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-map-1.2",
+      "clause": "Map 1.2",
+      "title": "Interdisciplinary review of context",
+      "summary": "Promotes review of the AI system context by interdisciplinary teams including domain experts, ethicists, and affected communities.",
+      "parent": "nist-map-1",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-map-2",
+      "clause": "Map 2",
+      "title": "Classification and categorization",
+      "summary": "Requires categorization of the AI system according to its risk level, application domain, and potential for harm.",
+      "parent": "nist-map",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-map-3",
+      "clause": "Map 3",
+      "title": "Benefits and costs assessment",
+      "summary": "Addresses assessment of potential benefits and costs of the AI system to all stakeholders, including affected communities.",
+      "parent": "nist-map",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-map-4",
+      "clause": "Map 4",
+      "title": "Risk identification across lifecycle",
+      "summary": "Covers identification of risks at each phase of the AI lifecycle, from design through deployment and decommissioning.",
+      "parent": "nist-map",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-map-5",
+      "clause": "Map 5",
+      "title": "Impact assessment",
+      "summary": "Requires assessment of potential impacts including on individuals, groups, communities, organizations, and society.",
+      "parent": "nist-map",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-measure",
+      "clause": "Measure",
+      "title": "Measure function",
+      "summary": "Employs quantitative and qualitative methods to analyze, assess, benchmark, and monitor AI risks and their related impacts.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-measure-1",
+      "clause": "Measure 1",
+      "title": "Metrics and measurement approaches",
+      "summary": "Specifies that appropriate metrics and measurement methodologies are identified and applied to evaluate AI system trustworthiness.",
+      "parent": "nist-measure",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-measure-1.1",
+      "clause": "Measure 1.1",
+      "title": "Measurement of trustworthy characteristics",
+      "summary": "Addresses quantitative and qualitative measurement of AI trustworthiness characteristics including accuracy, fairness, and transparency.",
+      "parent": "nist-measure-1",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-measure-2",
+      "clause": "Measure 2",
+      "title": "AI system evaluation",
+      "summary": "Covers evaluation activities including testing, auditing, and assessment of the AI system against defined criteria.",
+      "parent": "nist-measure",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-measure-2.1",
+      "clause": "Measure 2.1",
+      "title": "Test and evaluation planning",
+      "summary": "Requires planning for test and evaluation activities that are proportionate to the risk level and complexity of the AI system.",
+      "parent": "nist-measure-2",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-measure-3",
+      "clause": "Measure 3",
+      "title": "Bias and fairness assessment",
+      "summary": "Addresses identification and measurement of bias in AI systems, including computational, statistical, and societal biases.",
+      "parent": "nist-measure",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-measure-4",
+      "clause": "Measure 4",
+      "title": "Monitoring and continuous measurement",
+      "summary": "Specifies ongoing monitoring of AI system performance and risks after deployment to detect changes in behavior or context.",
+      "parent": "nist-measure",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-manage",
+      "clause": "Manage",
+      "title": "Manage function",
+      "summary": "Allocates resources and implements plans to respond to and recover from identified AI risks on a regular basis.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-manage-1",
+      "clause": "Manage 1",
+      "title": "Risk prioritization and response",
+      "summary": "Requires prioritization of identified AI risks and selection of appropriate response strategies such as mitigation, transfer, or acceptance.",
+      "parent": "nist-manage",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-manage-1.1",
+      "clause": "Manage 1.1",
+      "title": "Risk treatment plans",
+      "summary": "Specifies that risk treatment plans are developed and implemented for prioritized AI risks with assigned responsibilities and timelines.",
+      "parent": "nist-manage-1",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-manage-2",
+      "clause": "Manage 2",
+      "title": "Risk response and recovery",
+      "summary": "Addresses processes for responding to realized AI risks including incident response, escalation, and recovery procedures.",
+      "parent": "nist-manage",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-manage-3",
+      "clause": "Manage 3",
+      "title": "Communication of AI risks",
+      "summary": "Requires clear communication of AI risks to relevant stakeholders including deployers, users, and affected communities.",
+      "parent": "nist-manage",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    },
+    {
+      "id": "nist-manage-4",
+      "clause": "Manage 4",
+      "title": "Residual risk documentation",
+      "summary": "Addresses documentation and communication of residual risks that remain after risk treatment measures have been applied.",
+      "parent": "nist-manage",
+      "normative_level": "should",
+      "source_edition": "NIST AI 100-1 (2023)"
+    }
+  ]
+}

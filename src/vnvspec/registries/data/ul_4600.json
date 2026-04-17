@@ -1,0 +1,297 @@
+{
+  "name": "UL 4600: Standard for Safety for the Evaluation of Autonomous Products",
+  "version": "3.0",
+  "published": "2023",
+  "url": "https://ul.org/UL4600",
+  "disclaimer": "Informative only. Not a substitute for reading the published standard.",
+  "entries": [
+    {
+      "id": "ul4600-5",
+      "clause": "5",
+      "title": "Safety case approach",
+      "summary": "Establishes the requirement for a structured safety case as the primary mechanism for demonstrating autonomous product safety.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-5.1",
+      "clause": "5.1",
+      "title": "Safety case framework",
+      "summary": "Requires construction of a goal-structured safety case using claims, arguments, and evidence to demonstrate safety of the autonomous product.",
+      "parent": "ul4600-5",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-5.2",
+      "clause": "5.2",
+      "title": "Safety case completeness",
+      "summary": "Mandates that the safety case addresses all identified hazards, operational domains, and lifecycle phases of the autonomous product.",
+      "parent": "ul4600-5",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-5.3",
+      "clause": "5.3",
+      "title": "Safety case maintenance",
+      "summary": "Requires ongoing maintenance of the safety case to reflect design changes, new evidence, and field experience throughout the product lifecycle.",
+      "parent": "ul4600-5",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-6",
+      "clause": "6",
+      "title": "Risk assessment",
+      "summary": "Covers systematic identification and evaluation of risks associated with autonomous product operation.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-6.1",
+      "clause": "6.1",
+      "title": "Hazard identification",
+      "summary": "Requires systematic identification of hazards relevant to the autonomous product including novel hazards from autonomy.",
+      "parent": "ul4600-6",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-6.2",
+      "clause": "6.2",
+      "title": "Risk evaluation and prioritization",
+      "summary": "Defines methods for evaluating identified risks by severity and likelihood, and establishing priority for risk mitigation.",
+      "parent": "ul4600-6",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-6.3",
+      "clause": "6.3",
+      "title": "Acceptable risk criteria",
+      "summary": "Requires definition of risk acceptance criteria appropriate to the application domain and severity of potential harm.",
+      "parent": "ul4600-6",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-7",
+      "clause": "7",
+      "title": "Interactions and dependencies",
+      "summary": "Addresses safety considerations for interactions between the autonomous system, humans, infrastructure, and other systems.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-7.1",
+      "clause": "7.1",
+      "title": "Human interaction safety",
+      "summary": "Specifies requirements for safe interaction between the autonomous product and human users, operators, and bystanders.",
+      "parent": "ul4600-7",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-7.2",
+      "clause": "7.2",
+      "title": "Environmental interaction",
+      "summary": "Addresses safety in the context of the autonomous system operating within its physical environment, including edge cases.",
+      "parent": "ul4600-7",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-8",
+      "clause": "8",
+      "title": "Autonomy and decision-making",
+      "summary": "Covers safety requirements for the autonomous decision-making capabilities of the product.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-8.1",
+      "clause": "8.1",
+      "title": "Autonomy level definition",
+      "summary": "Requires clear definition and documentation of the autonomy level at which the product operates and the boundaries of its autonomous behavior.",
+      "parent": "ul4600-8",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-8.2",
+      "clause": "8.2",
+      "title": "Operational design domain",
+      "summary": "Mandates specification of the operational design domain including geographic, environmental, temporal, and traffic conditions under which the product operates.",
+      "parent": "ul4600-8",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-8.3",
+      "clause": "8.3",
+      "title": "Minimal risk condition",
+      "summary": "Requires the system to achieve a minimal risk condition when it can no longer safely perform its intended function.",
+      "parent": "ul4600-8",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-9",
+      "clause": "9",
+      "title": "Sensing, perception, and planning",
+      "summary": "Addresses safety of the perception pipeline, world modeling, and planning algorithms used by the autonomous product.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-9.1",
+      "clause": "9.1",
+      "title": "Sensor sufficiency",
+      "summary": "Requires demonstration that the sensor suite is sufficient for safe operation within the declared operational design domain.",
+      "parent": "ul4600-9",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-9.2",
+      "clause": "9.2",
+      "title": "Perception validation",
+      "summary": "Specifies validation requirements for the perception system including object detection, classification, and tracking accuracy.",
+      "parent": "ul4600-9",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-10",
+      "clause": "10",
+      "title": "Data integrity",
+      "summary": "Covers requirements for data quality, integrity, and management throughout the autonomous product lifecycle.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-10.1",
+      "clause": "10.1",
+      "title": "Training data quality",
+      "summary": "Requires documented processes to ensure training data quality, including representativeness, accuracy, and absence of harmful biases.",
+      "parent": "ul4600-10",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-10.2",
+      "clause": "10.2",
+      "title": "Data provenance and traceability",
+      "summary": "Mandates traceability of data used for training, validation, and testing back to its source and processing history.",
+      "parent": "ul4600-10",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-10.3",
+      "clause": "10.3",
+      "title": "Data security",
+      "summary": "Addresses protection of data against unauthorized modification, corruption, or access that could compromise safety.",
+      "parent": "ul4600-10",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-11",
+      "clause": "11",
+      "title": "Verification and validation",
+      "summary": "Covers V&V activities specific to autonomous products including testing, analysis, and simulation approaches.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-11.1",
+      "clause": "11.1",
+      "title": "V&V strategy for autonomous systems",
+      "summary": "Requires a comprehensive V&V strategy that addresses the challenges unique to autonomous system verification such as combinatorial complexity.",
+      "parent": "ul4600-11",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-11.2",
+      "clause": "11.2",
+      "title": "Testing adequacy",
+      "summary": "Specifies requirements for demonstrating test adequacy including coverage metrics, scenario diversity, and edge case inclusion.",
+      "parent": "ul4600-11",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-11.3",
+      "clause": "11.3",
+      "title": "Simulation in V&V",
+      "summary": "Addresses the role of simulation in verification and validation, including simulation fidelity requirements and gap analysis.",
+      "parent": "ul4600-11",
+      "normative_level": "should",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-11.4",
+      "clause": "11.4",
+      "title": "Machine learning model V&V",
+      "summary": "Specifies V&V requirements unique to machine learning components including robustness testing, performance characterization, and bias evaluation.",
+      "parent": "ul4600-11",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-12",
+      "clause": "12",
+      "title": "Tool qualification and process assurance",
+      "summary": "Addresses qualification of tools used in the development and V&V of autonomous products.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-12.1",
+      "clause": "12.1",
+      "title": "Development tool qualification",
+      "summary": "Requires qualification of development tools that may impact the safety of the autonomous product, including ML training frameworks.",
+      "parent": "ul4600-12",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-13",
+      "clause": "13",
+      "title": "Lifecycle and post-deployment",
+      "summary": "Covers activities during and after deployment including monitoring, maintenance, and decommissioning of autonomous products.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-13.1",
+      "clause": "13.1",
+      "title": "Field performance monitoring",
+      "summary": "Requires continuous monitoring of field performance with mechanisms to detect safety-relevant anomalies and degradation.",
+      "parent": "ul4600-13",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    },
+    {
+      "id": "ul4600-13.2",
+      "clause": "13.2",
+      "title": "Software and model updates",
+      "summary": "Addresses safe deployment of software and model updates including change impact analysis, regression testing, and rollback capability.",
+      "parent": "ul4600-13",
+      "normative_level": "shall",
+      "source_edition": "UL 4600 Ed. 3"
+    }
+  ]
+}

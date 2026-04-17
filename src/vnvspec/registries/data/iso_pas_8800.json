@@ -1,0 +1,342 @@
+{
+  "name": "ISO/PAS 8800: Road vehicles — Safety and artificial intelligence",
+  "version": "1.0",
+  "published": "2024",
+  "url": "https://www.iso.org/standard/83303.html",
+  "disclaimer": "Informative only. Not a substitute for reading the published standard.",
+  "entries": [
+    {
+      "id": "8800-5",
+      "clause": "5",
+      "title": "AI safety lifecycle overview",
+      "summary": "Defines the overall lifecycle for managing safety of AI-based systems in road vehicles, including planning, development, deployment, and decommissioning phases.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-5.1",
+      "clause": "5.1",
+      "title": "General principles for AI safety",
+      "summary": "Establishes foundational principles for ensuring AI components in vehicles meet safety objectives throughout their lifecycle.",
+      "parent": "8800-5",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-5.2",
+      "clause": "5.2",
+      "title": "AI safety plan",
+      "summary": "Requires creation and maintenance of a safety plan that addresses AI-specific risks, responsibilities, and milestones for the development project.",
+      "parent": "8800-5",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-5.3",
+      "clause": "5.3",
+      "title": "Integration with ISO 26262",
+      "summary": "Describes how AI safety activities integrate with the functional safety lifecycle defined in ISO 26262, including ASIL-based tailoring.",
+      "parent": "8800-5",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-5.4",
+      "clause": "5.4",
+      "title": "Integration with ISO 21448 (SOTIF)",
+      "summary": "Explains the relationship between AI safety management and SOTIF processes for handling functional insufficiencies.",
+      "parent": "8800-5",
+      "normative_level": "should",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-6",
+      "clause": "6",
+      "title": "AI safety requirements",
+      "summary": "Covers derivation and specification of safety requirements that are specific to AI components in road vehicles.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-6.1",
+      "clause": "6.1",
+      "title": "Hazard analysis for AI components",
+      "summary": "Requires systematic identification of hazards that may arise from AI-specific failure modes such as misclassification, distributional shift, or adversarial inputs.",
+      "parent": "8800-6",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-6.2",
+      "clause": "6.2",
+      "title": "AI safety requirements specification",
+      "summary": "Defines how to derive safety requirements for AI elements from hazard analysis, including performance boundaries and failure detection requirements.",
+      "parent": "8800-6",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-6.2.1",
+      "clause": "6.2.1",
+      "title": "Functional performance requirements",
+      "summary": "Specifies measurable functional performance criteria that the AI component must satisfy under defined operational conditions.",
+      "parent": "8800-6.2",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-6.2.2",
+      "clause": "6.2.2",
+      "title": "Robustness requirements",
+      "summary": "Addresses requirements for AI model resilience to input variations, noise, and edge cases encountered in vehicle operation.",
+      "parent": "8800-6.2",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-6.3",
+      "clause": "6.3",
+      "title": "Operational design domain specification",
+      "summary": "Requires clear specification of the operational design domain within which the AI system is intended to function safely.",
+      "parent": "8800-6",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-7",
+      "clause": "7",
+      "title": "Data quality and management",
+      "summary": "Addresses the role of data quality in achieving AI safety, covering data collection, annotation, curation, and lifecycle management.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-7.1",
+      "clause": "7.1",
+      "title": "Data quality objectives",
+      "summary": "Requires defining measurable data quality objectives including relevance, completeness, balance, and accuracy of training and validation datasets.",
+      "parent": "8800-7",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-7.2",
+      "clause": "7.2",
+      "title": "Data collection and sourcing",
+      "summary": "Provides guidance on collecting data that is representative of the operational design domain, including real-world and synthetic data sources.",
+      "parent": "8800-7",
+      "normative_level": "should",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-7.3",
+      "clause": "7.3",
+      "title": "Data annotation and labelling",
+      "summary": "Specifies requirements for annotation processes including inter-annotator agreement, label quality, and handling of ambiguous cases.",
+      "parent": "8800-7",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-7.4",
+      "clause": "7.4",
+      "title": "Data sufficiency and coverage",
+      "summary": "Requires demonstration that datasets provide sufficient coverage of the operational domain, including corner cases and rare scenarios.",
+      "parent": "8800-7",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-7.5",
+      "clause": "7.5",
+      "title": "Data versioning and traceability",
+      "summary": "Mandates version control and traceability for all datasets used in training, validation, and testing of AI models.",
+      "parent": "8800-7",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-7.6",
+      "clause": "7.6",
+      "title": "Bias identification and mitigation",
+      "summary": "Addresses identification and mitigation of biases in training data that could lead to unsafe AI behavior in certain conditions.",
+      "parent": "8800-7",
+      "normative_level": "should",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-8",
+      "clause": "8",
+      "title": "Model development and verification",
+      "summary": "Covers the AI model design, training, and verification activities needed to achieve safety objectives.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-8.1",
+      "clause": "8.1",
+      "title": "Model architecture selection",
+      "summary": "Provides guidance on selecting AI model architectures considering safety, interpretability, and the ability to verify behavior.",
+      "parent": "8800-8",
+      "normative_level": "should",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-8.2",
+      "clause": "8.2",
+      "title": "Training process control",
+      "summary": "Requires documented control of the training process including hyperparameter selection, convergence monitoring, and reproducibility.",
+      "parent": "8800-8",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-8.3",
+      "clause": "8.3",
+      "title": "Model verification methods",
+      "summary": "Specifies verification activities for AI models including testing against requirements, formal analysis where applicable, and inspection of learned behavior.",
+      "parent": "8800-8",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-8.3.1",
+      "clause": "8.3.1",
+      "title": "Test-based verification",
+      "summary": "Defines requirements for test-based verification of AI models, including test coverage metrics, test case generation, and pass/fail criteria.",
+      "parent": "8800-8.3",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-8.3.2",
+      "clause": "8.3.2",
+      "title": "Analysis-based verification",
+      "summary": "Addresses analytical methods for verifying AI model properties such as sensitivity analysis, neuron coverage analysis, and formal verification where feasible.",
+      "parent": "8800-8.3",
+      "normative_level": "should",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-8.4",
+      "clause": "8.4",
+      "title": "Model interpretability and explainability",
+      "summary": "Recommends methods to understand and explain AI model decisions to support safety assessment and debugging.",
+      "parent": "8800-8",
+      "normative_level": "should",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-8.5",
+      "clause": "8.5",
+      "title": "Model robustness evaluation",
+      "summary": "Requires evaluation of model robustness against adversarial perturbations, domain shift, and out-of-distribution inputs.",
+      "parent": "8800-8",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-9",
+      "clause": "9",
+      "title": "Validation of AI-based systems",
+      "summary": "Covers validation activities to confirm that the AI system meets its intended safety goals at the vehicle level.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-9.1",
+      "clause": "9.1",
+      "title": "Validation strategy and planning",
+      "summary": "Requires a documented validation strategy that defines scope, methods, acceptance criteria, and the relationship between simulation, track, and field testing.",
+      "parent": "8800-9",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-9.2",
+      "clause": "9.2",
+      "title": "Scenario-based validation",
+      "summary": "Specifies the use of scenario-based approaches for validating AI safety, including logical and concrete scenario derivation.",
+      "parent": "8800-9",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-9.3",
+      "clause": "9.3",
+      "title": "Simulation-based validation",
+      "summary": "Addresses the use of simulation environments for safety validation, including simulation fidelity, coverage, and credibility assessment.",
+      "parent": "8800-9",
+      "normative_level": "should",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-9.4",
+      "clause": "9.4",
+      "title": "Residual risk evaluation",
+      "summary": "Requires evaluation of residual safety risk from the AI component after verification and validation activities are complete.",
+      "parent": "8800-9",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-10",
+      "clause": "10",
+      "title": "Operational phase and monitoring",
+      "summary": "Addresses activities during the operational phase of AI systems in vehicles, including monitoring, updating, and field feedback.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-10.1",
+      "clause": "10.1",
+      "title": "Operational monitoring strategy",
+      "summary": "Requires defining a strategy for monitoring AI system performance during field operation, including degradation detection and alert mechanisms.",
+      "parent": "8800-10",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-10.2",
+      "clause": "10.2",
+      "title": "Performance drift detection",
+      "summary": "Specifies methods for detecting performance drift of deployed AI models due to changes in operating environment or data distribution.",
+      "parent": "8800-10",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-10.3",
+      "clause": "10.3",
+      "title": "Field data collection and feedback",
+      "summary": "Requires processes for collecting field data to support continuous improvement, incident analysis, and model retraining decisions.",
+      "parent": "8800-10",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-10.4",
+      "clause": "10.4",
+      "title": "Model update and change management",
+      "summary": "Addresses the process for safely updating AI models in the field, including impact analysis, re-verification, and rollback procedures.",
+      "parent": "8800-10",
+      "normative_level": "shall",
+      "source_edition": "ISO/PAS 8800:2024"
+    },
+    {
+      "id": "8800-10.5",
+      "clause": "10.5",
+      "title": "Decommissioning considerations",
+      "summary": "Provides guidance on safe decommissioning of AI-based vehicle systems, including data retention and transition planning.",
+      "parent": "8800-10",
+      "normative_level": "should",
+      "source_edition": "ISO/PAS 8800:2024"
+    }
+  ]
+}

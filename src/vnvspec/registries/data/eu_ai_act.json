@@ -1,0 +1,288 @@
+{
+  "name": "EU AI Act (Regulation 2024/1689)",
+  "version": "1.0",
+  "published": "2024",
+  "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+  "disclaimer": "Informative only. Not a substitute for reading the published standard.",
+  "entries": [
+    {
+      "id": "euaia-art6",
+      "clause": "Article 6",
+      "title": "Classification rules for high-risk AI systems",
+      "summary": "Establishes the criteria for classifying AI systems as high-risk based on their intended purpose and the domain of application.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art8",
+      "clause": "Article 8",
+      "title": "Compliance with requirements for high-risk AI systems",
+      "summary": "Requires providers of high-risk AI systems to ensure compliance with all requirements set out in the regulation.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art9",
+      "clause": "Article 9",
+      "title": "Risk management system",
+      "summary": "Mandates establishment of a continuous risk management system throughout the lifecycle of high-risk AI systems.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art9-1",
+      "clause": "Article 9(1)",
+      "title": "Establishment and documentation of risk management",
+      "summary": "Requires a risk management system to be established, implemented, documented, and maintained as a continuous iterative process.",
+      "parent": "euaia-art9",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art9-2",
+      "clause": "Article 9(2)",
+      "title": "Risk identification and analysis",
+      "summary": "Requires identification and analysis of known and reasonably foreseeable risks associated with the high-risk AI system.",
+      "parent": "euaia-art9",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art9-3",
+      "clause": "Article 9(3)",
+      "title": "Risk estimation and evaluation",
+      "summary": "Mandates estimation and evaluation of risks that may emerge during intended use and reasonably foreseeable misuse.",
+      "parent": "euaia-art9",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art9-4",
+      "clause": "Article 9(4)",
+      "title": "Risk mitigation measures",
+      "summary": "Requires adoption of appropriate and targeted risk management measures to address identified risks.",
+      "parent": "euaia-art9",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art9-5",
+      "clause": "Article 9(5)",
+      "title": "Testing for risk management",
+      "summary": "Requires testing of the high-risk AI system to identify the most appropriate risk management measures.",
+      "parent": "euaia-art9",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art10",
+      "clause": "Article 10",
+      "title": "Data and data governance",
+      "summary": "Establishes requirements for data governance and management practices for training, validation, and testing datasets.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art10-2",
+      "clause": "Article 10(2)",
+      "title": "Data governance practices",
+      "summary": "Requires data governance and management practices addressing design choices, data collection processes, and data preparation operations.",
+      "parent": "euaia-art10",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art10-3",
+      "clause": "Article 10(3)",
+      "title": "Dataset quality criteria",
+      "summary": "Specifies that training, validation, and testing datasets must be relevant, sufficiently representative, and as free of errors as possible.",
+      "parent": "euaia-art10",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art10-4",
+      "clause": "Article 10(4)",
+      "title": "Dataset characteristics consideration",
+      "summary": "Requires consideration of the specific characteristics, requirements, and constraints of the geographic, contextual, behavioral, or functional setting.",
+      "parent": "euaia-art10",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art10-5",
+      "clause": "Article 10(5)",
+      "title": "Processing of special categories of data",
+      "summary": "Permits processing of special categories of personal data for bias monitoring and detection purposes under strict conditions.",
+      "parent": "euaia-art10",
+      "normative_level": "may",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art11",
+      "clause": "Article 11",
+      "title": "Technical documentation",
+      "summary": "Requires providers to draw up technical documentation before placing a high-risk AI system on the market.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art12",
+      "clause": "Article 12",
+      "title": "Record-keeping",
+      "summary": "Mandates that high-risk AI systems include automatic logging capabilities to ensure traceability of system functioning.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art13",
+      "clause": "Article 13",
+      "title": "Transparency and provision of information to deployers",
+      "summary": "Requires high-risk AI systems to be designed to enable deployers to interpret output and use the system appropriately.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art14",
+      "clause": "Article 14",
+      "title": "Human oversight",
+      "summary": "Mandates that high-risk AI systems be designed to allow effective human oversight during the period of use.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art14-2",
+      "clause": "Article 14(2)",
+      "title": "Human oversight measures",
+      "summary": "Specifies that human oversight aims to prevent or minimize risks from the high-risk AI system when used in accordance with its intended purpose.",
+      "parent": "euaia-art14",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art15",
+      "clause": "Article 15",
+      "title": "Accuracy, robustness, and cybersecurity",
+      "summary": "Requires high-risk AI systems to achieve appropriate levels of accuracy, robustness, and cybersecurity throughout their lifecycle.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art15-1",
+      "clause": "Article 15(1)",
+      "title": "Accuracy levels",
+      "summary": "Requires high-risk AI systems to be designed to achieve an appropriate level of accuracy for their intended purpose, declared in instructions for use.",
+      "parent": "euaia-art15",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art15-2",
+      "clause": "Article 15(2)",
+      "title": "Robustness and error resilience",
+      "summary": "Mandates that high-risk AI systems are resilient to errors, faults, and inconsistencies within the system or its environment.",
+      "parent": "euaia-art15",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art15-3",
+      "clause": "Article 15(3)",
+      "title": "Robustness through technical redundancy",
+      "summary": "Specifies that robustness may be achieved through technical redundancy solutions including backup or fail-safe plans.",
+      "parent": "euaia-art15",
+      "normative_level": "may",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art15-4",
+      "clause": "Article 15(4)",
+      "title": "Adversarial robustness",
+      "summary": "Requires high-risk AI systems to be resilient against attempts by unauthorized third parties to alter their use by exploiting vulnerabilities.",
+      "parent": "euaia-art15",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art15-5",
+      "clause": "Article 15(5)",
+      "title": "Cybersecurity measures",
+      "summary": "Mandates appropriate cybersecurity measures to protect the AI system against unauthorized access and data manipulation.",
+      "parent": "euaia-art15",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-annexIV",
+      "clause": "Annex IV",
+      "title": "Technical documentation for high-risk AI systems",
+      "summary": "Specifies the contents of technical documentation that providers must prepare for high-risk AI systems.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-annexIV-1",
+      "clause": "Annex IV(1)",
+      "title": "General description of the AI system",
+      "summary": "Requires documentation of the system's intended purpose, developer identity, version, and how the AI system interacts with hardware or software.",
+      "parent": "euaia-annexIV",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-annexIV-2",
+      "clause": "Annex IV(2)",
+      "title": "Detailed description of system elements and development",
+      "summary": "Requires documentation of methods and steps for system development, including design specifications, architecture, and computational resources.",
+      "parent": "euaia-annexIV",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-annexIV-3",
+      "clause": "Annex IV(3)",
+      "title": "Monitoring, functioning, and control description",
+      "summary": "Requires documentation on the system's capabilities and limitations, degree of accuracy, and foreseeable unintended outcomes.",
+      "parent": "euaia-annexIV",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-annexIV-4",
+      "clause": "Annex IV(4)",
+      "title": "Risk management system description",
+      "summary": "Mandates documentation of the risk management system used, including identified risks and risk management measures adopted.",
+      "parent": "euaia-annexIV",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-annexIV-5",
+      "clause": "Annex IV(5)",
+      "title": "Description of changes throughout lifecycle",
+      "summary": "Requires documentation of modifications and changes made to the system throughout its lifecycle, and their impact on compliance.",
+      "parent": "euaia-annexIV",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    },
+    {
+      "id": "euaia-art72",
+      "clause": "Article 72",
+      "title": "Post-market monitoring",
+      "summary": "Requires providers to establish a post-market monitoring system proportionate to the nature and risks of the high-risk AI system.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "Regulation (EU) 2024/1689"
+    }
+  ]
+}

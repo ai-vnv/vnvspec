@@ -1,0 +1,297 @@
+{
+  "name": "ISO 21448: Road vehicles — Safety of the Intended Functionality (SOTIF)",
+  "version": "1.0",
+  "published": "2022",
+  "url": "https://www.iso.org/standard/77490.html",
+  "disclaimer": "Informative only. Not a substitute for reading the published standard.",
+  "entries": [
+    {
+      "id": "21448-5",
+      "clause": "5",
+      "title": "Specification and design",
+      "summary": "Covers activities for specifying the intended functionality and identifying potential insufficiencies in the system design.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-5.1",
+      "clause": "5.1",
+      "title": "Specification of the intended functionality",
+      "summary": "Requires a clear description of the system's intended functionality, operational design domain, and expected behavior.",
+      "parent": "21448-5",
+      "normative_level": "shall",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-5.2",
+      "clause": "5.2",
+      "title": "Definition of acceptance criteria",
+      "summary": "Mandates defining quantitative and qualitative acceptance criteria for the absence of unreasonable risk from functional insufficiencies.",
+      "parent": "21448-5",
+      "normative_level": "shall",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-6",
+      "clause": "6",
+      "title": "Identification and evaluation of hazards caused by functional insufficiencies",
+      "summary": "Describes the systematic identification and evaluation of hazards arising from functional insufficiencies of the intended functionality.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-6.1",
+      "clause": "6.1",
+      "title": "General approach to hazard identification",
+      "summary": "Outlines the overall approach for identifying hazards that can result from system functional insufficiencies or foreseeable misuse.",
+      "parent": "21448-6",
+      "normative_level": "shall",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-6.2",
+      "clause": "6.2",
+      "title": "Identification of functional insufficiencies",
+      "summary": "Requires systematic identification of sensor limitations, algorithm weaknesses, and actuator insufficiencies that may cause hazardous behavior.",
+      "parent": "21448-6",
+      "normative_level": "shall",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-6.3",
+      "clause": "6.3",
+      "title": "Identification of triggering conditions",
+      "summary": "Mandates identification of specific conditions (environmental, operational, human) that can trigger hazardous behavior through functional insufficiencies.",
+      "parent": "21448-6",
+      "normative_level": "shall",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-6.4",
+      "clause": "6.4",
+      "title": "Hazardous event classification",
+      "summary": "Defines how to classify hazardous events resulting from functional insufficiencies based on severity, exposure, and controllability.",
+      "parent": "21448-6",
+      "normative_level": "shall",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-7",
+      "clause": "7",
+      "title": "Identification and evaluation of triggering conditions",
+      "summary": "Provides detailed methods for identifying and evaluating triggering conditions that may lead to hazardous scenarios.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-7.1",
+      "clause": "7.1",
+      "title": "Triggering condition analysis methods",
+      "summary": "Specifies systematic analysis methods such as scenario analysis and fault injection for discovering triggering conditions.",
+      "parent": "21448-7",
+      "normative_level": "shall",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-7.2",
+      "clause": "7.2",
+      "title": "Sensor-related triggering conditions",
+      "summary": "Addresses triggering conditions related to sensor performance limitations including weather, lighting, occlusion, and interference.",
+      "parent": "21448-7",
+      "normative_level": "shall",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-7.3",
+      "clause": "7.3",
+      "title": "Algorithm-related triggering conditions",
+      "summary": "Covers triggering conditions caused by algorithm limitations such as edge cases, insufficient training, or performance degradation.",
+      "parent": "21448-7",
+      "normative_level": "shall",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-7.4",
+      "clause": "7.4",
+      "title": "User-related triggering conditions",
+      "summary": "Identifies triggering conditions arising from foreseeable user behavior, including misuse and failure to intervene when expected.",
+      "parent": "21448-7",
+      "normative_level": "should",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-8",
+      "clause": "8",
+      "title": "Functional modification and risk reduction",
+      "summary": "Describes activities to improve the system design to reduce identified risks from functional insufficiencies and triggering conditions.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-8.1",
+      "clause": "8.1",
+      "title": "Risk treatment options",
+      "summary": "Defines risk treatment strategies including functional improvement, restriction of operational domain, and driver warning mechanisms.",
+      "parent": "21448-8",
+      "normative_level": "shall",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-8.2",
+      "clause": "8.2",
+      "title": "Functional improvements to reduce risk",
+      "summary": "Specifies approaches for reducing risk through design improvements such as sensor fusion, algorithm enhancement, and redundancy.",
+      "parent": "21448-8",
+      "normative_level": "should",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-8.3",
+      "clause": "8.3",
+      "title": "Restriction of operational conditions",
+      "summary": "Addresses limiting the operational conditions under which the system is active as a means to reduce exposure to triggering conditions.",
+      "parent": "21448-8",
+      "normative_level": "should",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-9",
+      "clause": "9",
+      "title": "Verification and validation",
+      "summary": "Covers verification of design measures and validation that the residual risk from functional insufficiencies is acceptably low.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-9.1",
+      "clause": "9.1",
+      "title": "Verification of SOTIF-related design measures",
+      "summary": "Requires verification that design modifications intended to reduce SOTIF risks are correctly implemented and effective.",
+      "parent": "21448-9",
+      "normative_level": "shall",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-9.2",
+      "clause": "9.2",
+      "title": "Validation strategy",
+      "summary": "Mandates a documented validation strategy combining multiple methods to demonstrate acceptable residual risk from functional insufficiencies.",
+      "parent": "21448-9",
+      "normative_level": "shall",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-9.3",
+      "clause": "9.3",
+      "title": "Scenario-based validation methods",
+      "summary": "Specifies the use of scenario catalogs, logical scenarios, and concrete test scenarios for validating SOTIF-related safety.",
+      "parent": "21448-9",
+      "normative_level": "shall",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-9.4",
+      "clause": "9.4",
+      "title": "Simulation-based validation",
+      "summary": "Addresses the use of simulation for validation, including requirements for simulation credibility and environment fidelity.",
+      "parent": "21448-9",
+      "normative_level": "should",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-9.5",
+      "clause": "9.5",
+      "title": "Real-world testing",
+      "summary": "Covers physical testing on proving grounds and public roads as part of the validation strategy for SOTIF.",
+      "parent": "21448-9",
+      "normative_level": "should",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-9.6",
+      "clause": "9.6",
+      "title": "Statistical validation and acceptance criteria",
+      "summary": "Defines statistical methods and criteria for determining when sufficient validation evidence has been gathered to accept residual risk.",
+      "parent": "21448-9",
+      "normative_level": "shall",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-10",
+      "clause": "10",
+      "title": "Evaluation of residual risk",
+      "summary": "Covers the final evaluation of residual risk to determine whether the SOTIF-related risk is acceptable for release.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-10.1",
+      "clause": "10.1",
+      "title": "Known and unknown hazardous scenarios",
+      "summary": "Distinguishes between known hazardous scenarios (identified and mitigated) and unknown hazardous scenarios (residual unknowns), defining the four-area model.",
+      "parent": "21448-10",
+      "normative_level": "shall",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-10.2",
+      "clause": "10.2",
+      "title": "Residual risk quantification",
+      "summary": "Provides approaches for quantifying residual risk including probabilistic methods and exposure-based analyses.",
+      "parent": "21448-10",
+      "normative_level": "shall",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-10.3",
+      "clause": "10.3",
+      "title": "Acceptance of residual risk",
+      "summary": "Defines the criteria and evidence required to determine that residual SOTIF risk is sufficiently low for the intended application.",
+      "parent": "21448-10",
+      "normative_level": "shall",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-11",
+      "clause": "11",
+      "title": "Post-release monitoring",
+      "summary": "Addresses ongoing activities after product release to maintain SOTIF throughout the product lifetime.",
+      "parent": "",
+      "normative_level": "informative",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-11.1",
+      "clause": "11.1",
+      "title": "Field monitoring for SOTIF",
+      "summary": "Requires establishment of field monitoring processes to detect previously unknown triggering conditions and functional insufficiencies.",
+      "parent": "21448-11",
+      "normative_level": "shall",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-11.2",
+      "clause": "11.2",
+      "title": "Incident analysis and feedback",
+      "summary": "Mandates systematic analysis of field incidents related to SOTIF and feeding findings back into the development process.",
+      "parent": "21448-11",
+      "normative_level": "shall",
+      "source_edition": "ISO 21448:2022"
+    },
+    {
+      "id": "21448-11.3",
+      "clause": "11.3",
+      "title": "Continuous improvement",
+      "summary": "Addresses the use of field data and new knowledge to continuously improve the system and reduce residual risk over time.",
+      "parent": "21448-11",
+      "normative_level": "should",
+      "source_edition": "ISO 21448:2022"
+    }
+  ]
+}
