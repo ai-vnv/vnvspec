@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
+## [Unreleased]
+
+### Added
+
+- `vnvspec.catalog.ai.agentic_governance` — new Agentic AI Governance catalog: 26 reusable governance requirements across 4 areas — `tool_governance` (5), `external_information_governance` (7), `human_oversight` (8), `memory_governance` (6). Requirements are informed by the EU AI Act, NIST AI RMF, OWASP guidance for LLM applications, and GDPR; they complement those frameworks rather than claim compliance with them. Stable `CAT-AGT-<AREA>-<NNN>` IDs; no version pin (framework-agnostic, discovered via the demo-module precedent).
+- `docs/catalog/agentic-governance.md` — documentation for the Agentic Governance catalog, added to the MkDocs navigation.
+- `examples/03_agentic_governance/` — runnable, offline example composing the catalog into a `Spec` via `Spec.extend()`.
+
 ## [0.3.2] — 2026-04-17
 
 ### Fixed
