@@ -88,5 +88,7 @@ nav:
       - UL 4600: standards/ul-4600.md
       - EU AI Act: standards/eu-ai-act.md
       - NIST AI RMF: standards/nist-ai-rmf.md
+  - Catalog:
+      - Agentic Governance: catalog/agentic-governance.md
   - Development:
       - Architecture: development/architecture.md
