@@ -107,9 +107,6 @@ addopts = "--strict-markers --strict-config"
 branch = true
 source = ["src/vnvspec"]
 omit = [
-    "src/vnvspec/torch/transformer.py",
-    "src/vnvspec/torch/autoregressive.py",
-    "src/vnvspec/torch/vlm.py",
     "src/vnvspec/cli/*",
     "scripts/*",
 ]
