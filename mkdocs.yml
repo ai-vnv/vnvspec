@@ -90,5 +90,8 @@ nav:
       - NIST AI RMF: standards/nist-ai-rmf.md
   - Catalog:
       - Agentic Governance: catalog/agentic-governance.md
+      - ISO/IEC 42001: catalog/iso-42001.md
+  - Formal Verification:
+      - Z3 Bridge: proofs/z3-bridge.md
   - Development:
       - Architecture: development/architecture.md

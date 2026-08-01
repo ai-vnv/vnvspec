@@ -115,9 +115,8 @@ def list_available() -> list[str]:
     data_dir = _data_path()
     names: list[str] = []
     for item in data_dir.iterdir():
-        name = str(item).rsplit("/", maxsplit=1)[-1]
-        if name.endswith(".json"):
-            names.append(name.removesuffix(".json"))
+        if item.name.endswith(".json"):
+            names.append(item.name.removesuffix(".json"))
     return sorted(names)
 
 

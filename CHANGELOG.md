@@ -9,8 +9,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 ### Added
 
 - `vnvspec.catalog.ai.agentic_governance` — new Agentic AI Governance catalog: 26 reusable governance requirements across 4 areas — `tool_governance` (5), `external_information_governance` (7), `human_oversight` (8), `memory_governance` (6). Requirements are informed by the EU AI Act, NIST AI RMF, OWASP guidance for LLM applications, and GDPR; they complement those frameworks rather than claim compliance with them. Stable `CAT-AGT-<AREA>-<NNN>` IDs; no version pin (framework-agnostic, discovered via the demo-module precedent).
-- `docs/catalog/agentic-governance.md` — documentation for the Agentic Governance catalog, added to the MkDocs navigation.
-- `examples/03_agentic_governance/` — runnable, offline example composing the catalog into a `Spec` via `Spec.extend()`.
+- `vnvspec.proofs` — new Z3 SMT solver formal verification proof bridge: `verify_numeric_range` and `verify_z3_formula` for formal invariant checking producing `Evidence(kind="formal_proof")` artifacts.
+- `vnvspec.catalog.standards.iso_42001` — new ISO/IEC 42001 AI Management System (AIMS) catalog and standards registry database for gap analysis (`management_controls` and `annex_a_controls`).
+- `docs/catalog/agentic-governance.md`, `docs/catalog/iso-42001.md`, and `docs/proofs/z3-bridge.md` — catalog and formal verification documentation.
+- `examples/03_agentic_governance/`, `examples/04_iso_42001_aims/`, and `examples/05_z3_formal_proof/` — runnable examples.
 
 ## [0.3.2] — 2026-04-17
 

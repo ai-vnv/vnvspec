@@ -1,0 +1,279 @@
+{
+  "name": "ISO/IEC 42001:2023 Artificial Intelligence Management System (AIMS)",
+  "version": "1.0",
+  "published": "2023",
+  "url": "https://www.iso.org/standard/81230.html",
+  "disclaimer": "Informative only. Not a substitute for reading the published standard.",
+  "entries": [
+    {
+      "id": "iso-42001-4.1",
+      "clause": "4.1",
+      "title": "Understanding the organization and its context",
+      "summary": "Determine external and internal issues relevant to the organization's purpose and AIMS.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-4.2",
+      "clause": "4.2",
+      "title": "Understanding the needs and expectations of interested parties",
+      "summary": "Identify interested parties relevant to the AIMS and their requirements regarding AI systems.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-4.3",
+      "clause": "4.3",
+      "title": "Determining the scope of the AI management system",
+      "summary": "Define the boundaries and applicability of the AI management system.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-5.1",
+      "clause": "5.1",
+      "title": "Leadership and commitment",
+      "summary": "Top management shall demonstrate leadership and commitment with respect to the AIMS.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-5.2",
+      "clause": "5.2",
+      "title": "AI Policy",
+      "summary": "Top management shall establish an AI policy appropriate to the purpose of the organization.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-5.3",
+      "clause": "5.3",
+      "title": "Organizational roles, responsibilities and authorities",
+      "summary": "Assign and communicate responsibilities and authorities for relevant roles in the AIMS.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-6.1",
+      "clause": "6.1",
+      "title": "Actions to address risks and opportunities",
+      "summary": "Determine risks and opportunities related to AI systems and plan actions to address them.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-6.2",
+      "clause": "6.2",
+      "title": "AI objectives and planning to achieve them",
+      "summary": "Establish measurable AI objectives at relevant functions and levels.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-7.1",
+      "clause": "7.1",
+      "title": "Resources",
+      "summary": "Determine and provide resources needed for the establishment, implementation, and continual improvement of the AIMS.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-7.2",
+      "clause": "7.2",
+      "title": "Competence",
+      "summary": "Ensure personnel operating or managing AI systems are competent on the basis of education, training, or experience.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-7.3",
+      "clause": "7.3",
+      "title": "Awareness",
+      "summary": "Ensure persons doing work under the organization's control are aware of the AI policy and their contribution to AIMS effectiveness.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-7.5",
+      "clause": "7.5",
+      "title": "Documented information",
+      "summary": "Maintain and control documented information required by the AIMS.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-8.1",
+      "clause": "8.1",
+      "title": "Operational planning and control",
+      "summary": "Plan, implement, and control processes needed to meet AI system requirements and implement actions from clause 6.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-8.2",
+      "clause": "8.2",
+      "title": "AI risk assessment",
+      "summary": "Perform AI risk assessments at planned intervals or when significant changes occur.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-8.3",
+      "clause": "8.3",
+      "title": "AI system impact assessment",
+      "summary": "Assess potential impacts of AI systems on individuals, groups, and society throughout their lifecycle.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-9.1",
+      "clause": "9.1",
+      "title": "Monitoring, measurement, analysis and evaluation",
+      "summary": "Determine what needs to be monitored and measured to evaluate AIMS performance.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-9.2",
+      "clause": "9.2",
+      "title": "Internal audit",
+      "summary": "Conduct internal audits at planned intervals to provide information on whether the AIMS conforms to requirements.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-9.3",
+      "clause": "9.3",
+      "title": "Management review",
+      "summary": "Top management shall review the organization's AIMS at planned intervals.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-10.1",
+      "clause": "10.1",
+      "title": "Nonconformity and corrective action",
+      "summary": "React to nonconformities, evaluate the need for action to eliminate causes, and implement corrective actions.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-10.2",
+      "clause": "10.2",
+      "title": "Continual improvement",
+      "summary": "Continually improve the suitability, adequacy, and effectiveness of the AIMS.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-A.2.1",
+      "clause": "A.2.1",
+      "title": "Alignment with organizational policies",
+      "summary": "Ensure AI system management policies align with broader organizational risk and governance policies.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-A.3.1",
+      "clause": "A.3.1",
+      "title": "AI system roles and responsibilities",
+      "summary": "Define and document roles and responsibilities specific to AI system design, development, and operation.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-A.4.1",
+      "clause": "A.4.1",
+      "title": "Human resources for AI systems",
+      "summary": "Ensure sufficient qualified personnel are assigned to AI system development and oversight.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-A.5.1",
+      "clause": "A.5.1",
+      "title": "Assessing AI system impacts",
+      "summary": "Conduct documented AI system impact assessments prior to deployment.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-A.6.1",
+      "clause": "A.6.1",
+      "title": "AI system lifecycle management",
+      "summary": "Manage AI systems across all lifecycle phases from conception to retirement.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-A.6.2",
+      "clause": "A.6.2",
+      "title": "Verification and validation of AI systems",
+      "summary": "Perform verification and validation of AI systems to ensure requirements are fulfilled.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-A.7.1",
+      "clause": "A.7.1",
+      "title": "Data management for AI systems",
+      "summary": "Establish governance processes for training, validation, and testing data quality and provenance.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-A.8.1",
+      "clause": "A.8.1",
+      "title": "Information for users of AI systems",
+      "summary": "Provide appropriate transparency and technical information to users regarding AI system capabilities and limitations.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-A.9.1",
+      "clause": "A.9.1",
+      "title": "Responsible use of AI systems",
+      "summary": "Define guidance and boundaries for acceptable use of AI systems by internal users.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    },
+    {
+      "id": "iso-42001-A.10.1",
+      "clause": "A.10.1",
+      "title": "Supplier relationships for AI systems",
+      "summary": "Assess and manage risks associated with third-party AI system components and suppliers.",
+      "parent": "",
+      "normative_level": "shall",
+      "source_edition": "ISO/IEC 42001:2023"
+    }
+  ]
+}
