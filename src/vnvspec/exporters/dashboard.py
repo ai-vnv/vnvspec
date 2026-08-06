@@ -135,7 +135,7 @@ def export_dashboard(
         nav.append((f"requirements/{req.id}.html", req.id))
 
     # Generate index
-    index_html = _render_index(spec, report, evidence_by_req, standards_info, history_data, nav)
+    index_html = _render_index(spec, report, evidence_by_req, standards_info, history_data, nav=nav)
     (output_dir / "index.html").write_text(index_html, encoding="utf-8")
 
     # Generate per-requirement pages
@@ -178,6 +178,7 @@ def _render_index(
     evidence_by_req: dict[str, list[Evidence]],
     standards_info: list[dict[str, Any]],
     history_data: dict[str, list[dict[str, Any]]],
+    *,
     nav: list[tuple[str, str]],
 ) -> str:
     """Render the main dashboard index page."""

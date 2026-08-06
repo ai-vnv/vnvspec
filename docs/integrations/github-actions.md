@@ -50,5 +50,6 @@ Or use the badge exporter locally:
 
 ```python
 from vnvspec.exporters.badge import export_badge
+
 export_badge(report, path="vnvspec-badge.svg")
 ```
