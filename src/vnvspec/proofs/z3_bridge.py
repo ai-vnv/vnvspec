@@ -14,7 +14,7 @@ from vnvspec.core.evidence import Evidence, Verdict
 
 ProofStatus = Literal["proved", "disproved", "unknown", "error"]
 
-_MAX_TIMEOUT_MS = 2_147_483_647  # Z3 uses unsigned 32-bit int for timeout
+_MAX_TIMEOUT_MS = 2_147_483_647  # signed 32-bit max: conservative cap, see verify_z3_formula
 
 
 class ProofResult(BaseModel):
@@ -98,7 +98,10 @@ def verify_z3_formula(
         Optional ID for the generated Evidence object.
     timeout_ms:
         Optional solver timeout in milliseconds. Must be a positive integer
-        not exceeding 2,147,483,647 (Z3 unsigned 32-bit limit).
+        not exceeding 2,147,483,647 (the signed 32-bit maximum). Z3's own
+        timeout parameter is an unsigned 32-bit value and does not reject
+        larger Python integers, so this bound is enforced here to keep the
+        accepted range unambiguous across platforms.
     """
     z3 = _check_z3_available()
 

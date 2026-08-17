@@ -2,8 +2,11 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import pytest
 
+from vnvspec.registries import loader
 from vnvspec.registries.loader import (
     Registry,
     RegistryEntry,
@@ -33,6 +36,18 @@ class TestListAvailable:
     def test_sorted(self) -> None:
         names = list_available()
         assert names == sorted(names)
+
+    def test_non_json_entries_are_ignored(
+        self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        """Only .json files are registries; other data-dir entries are skipped."""
+        (tmp_path / "custom_registry.json").write_text("{}", encoding="utf-8")
+        (tmp_path / "README.md").write_text("not a registry", encoding="utf-8")
+        (tmp_path / "notes.txt").write_text("scratch", encoding="utf-8")
+        (tmp_path / "nested").mkdir()
+        monkeypatch.setattr(loader, "_data_path", lambda: tmp_path)
+
+        assert list_available() == ["custom_registry"]
 
 
 class TestLoad:
