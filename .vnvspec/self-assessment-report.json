@@ -1,7 +1,7 @@
 {
   "spec_name": "vnvspec-self",
   "spec_version": "0.3.0",
-  "created_at": "2026-07-30T15:03:17.196043Z",
+  "created_at": "2026-08-17T10:29:57.096865Z",
   "evidence": [
     {
       "id": "EV-AUTO-0001",
@@ -9,7 +9,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:02:57.267554Z",
+      "observed_at": "2026-08-17T10:29:26.888341Z",
       "details": {
         "message": "all_basemodel=True, count=8"
       }
@@ -20,7 +20,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:02:57.267554Z",
+      "observed_at": "2026-08-17T10:29:26.888341Z",
       "details": {
         "message": "dup_rejected=True, unique_accepted=True"
       }
@@ -31,7 +31,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:02:57.267554Z",
+      "observed_at": "2026-08-17T10:29:26.893517Z",
       "details": {
         "message": "acyclic_ok=True, cycle_rejected=True"
       }
@@ -42,7 +42,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:02:57.275673Z",
+      "observed_at": "2026-08-17T10:29:26.893517Z",
       "details": {
         "message": "rules=8, names=['_r1_necessary', '_r2_singular', '_r3_unambiguous', '_r4_verifiable', '_r5_feasible', '_r6_unit_bearing', '_r7_complete', '_r8_consistent_id']"
       }
@@ -53,7 +53,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:02:57.283006Z",
+      "observed_at": "2026-08-17T10:29:26.903059Z",
       "details": {
         "message": "count=6, names=['eu_ai_act', 'iso_21448', 'iso_42001', 'iso_pas_8800', 'nist_ai_rmf', 'ul_4600'], all_load=True"
       }
@@ -64,7 +64,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:02:57.283006Z",
+      "observed_at": "2026-08-17T10:29:26.903059Z",
       "details": {
         "message": "required=5, available=['export_annex_iv', 'export_badge', 'export_compliance_matrix', 'export_dashboard', 'export_gsn_mermaid', 'export_html', 'export_json', 'export_markdown', 'export_shields_endpoint']"
       }
@@ -75,7 +75,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:02:57.283006Z",
+      "observed_at": "2026-08-17T10:29:26.903059Z",
       "details": {
         "message": "inherit=True, help_urls=True, base_ok=True"
       }
@@ -86,7 +86,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:02:57.283006Z",
+      "observed_at": "2026-08-17T10:29:26.903059Z",
       "details": {
         "message": "frozen=True, mutation_blocked=True"
       }
@@ -97,7 +97,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:02:57.284008Z",
+      "observed_at": "2026-08-17T10:29:26.904442Z",
       "details": {
         "message": "original=1, extended=2"
       }
@@ -108,7 +108,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:02:57.974841Z",
+      "observed_at": "2026-08-17T10:29:27.418280Z",
       "details": {
         "message": "OK: all 16 v0.1 symbols still importable\nOK: basic behavioral checks passed"
       }
@@ -119,7 +119,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:00.981838Z",
+      "observed_at": "2026-08-17T10:29:29.477954Z",
       "details": {
         "message": "Success: no issues found in 89 source files"
       }
@@ -130,7 +130,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:01.174511Z",
+      "observed_at": "2026-08-17T10:29:29.642938Z",
       "details": {
         "message": "format=0, check=0"
       }
@@ -139,11 +139,11 @@
       "id": "EV-AUTO-0013",
       "requirement_id": "REQ-SELF-COV-001",
       "kind": "test",
-      "verdict": "fail",
+      "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:11.716207Z",
+      "observed_at": "2026-08-17T10:29:53.020513Z",
       "details": {
-        "message": "? tests passed, coverage threshold met"
+        "message": "687 tests passed, coverage threshold met"
       }
     },
     {
@@ -152,7 +152,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:13.339382Z",
+      "observed_at": "2026-08-17T10:29:54.186376Z",
       "details": {
         "message": "mkdocs build --strict passed"
       }
@@ -163,7 +163,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:13.339382Z",
+      "observed_at": "2026-08-17T10:29:54.186376Z",
       "details": {
         "message": "str_wrap={'message': 'ok'}, dict_pass={'k': 'v'}"
       }
@@ -174,7 +174,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:13.339382Z",
+      "observed_at": "2026-08-17T10:29:54.186376Z",
       "details": {
         "message": "summary={'message': 'ok'}"
       }
@@ -185,7 +185,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:13.474607Z",
+      "observed_at": "2026-08-17T10:29:54.267970Z",
       "details": {
         "message": "exit_codes=[0, 1, 2, 3, 4, 5]"
       }
@@ -196,7 +196,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:13.474607Z",
+      "observed_at": "2026-08-17T10:29:54.267970Z",
       "details": {
         "message": "RequirementError raised=True"
       }
@@ -207,7 +207,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:13.478528Z",
+      "observed_at": "2026-08-17T10:29:54.275539Z",
       "details": {
         "message": "yaml_rt=True, toml_rt=True"
       }
@@ -218,7 +218,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:13.478528Z",
+      "observed_at": "2026-08-17T10:29:54.276797Z",
       "details": {
         "message": "empty_all_gaps=True, mapped_has_covered=True"
       }
@@ -229,7 +229,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:13.478528Z",
+      "observed_at": "2026-08-17T10:29:54.276797Z",
       "details": {
         "message": "formal_R6=warning, webapp_R6=info"
       }
@@ -240,7 +240,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:13.485407Z",
+      "observed_at": "2026-08-17T10:29:54.279319Z",
       "details": {
         "message": "hits=1"
       }
@@ -251,7 +251,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:13.487902Z",
+      "observed_at": "2026-08-17T10:29:54.284741Z",
       "details": {
         "message": "green_pass=True, text=True"
       }
@@ -262,7 +262,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:13.491277Z",
+      "observed_at": "2026-08-17T10:29:54.286373Z",
       "details": {
         "message": "regressions=['R1']"
       }
@@ -273,7 +273,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:13.491277Z",
+      "observed_at": "2026-08-17T10:29:54.286373Z",
       "details": {
         "message": "warning_count=1, correct_type=True"
       }
@@ -284,7 +284,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:13.491277Z",
+      "observed_at": "2026-08-17T10:29:54.286373Z",
       "details": {
         "message": "Self-spec loaded successfully (we're running)"
       }
@@ -295,7 +295,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:13.491277Z",
+      "observed_at": "2026-08-17T10:29:54.286373Z",
       "details": {
         "message": "strict=True, lenient=True, fail_precedence=True"
       }
@@ -306,7 +306,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:13.491277Z",
+      "observed_at": "2026-08-17T10:29:54.286373Z",
       "details": {
         "message": "construct=True, roundtrip=True"
       }
@@ -317,7 +317,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:13.491277Z",
+      "observed_at": "2026-08-17T10:29:54.286373Z",
       "details": {
         "message": "str_norm=True, list_pass=True, default_empty=True"
       }
@@ -328,7 +328,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:14.274564Z",
+      "observed_at": "2026-08-17T10:29:54.893508Z",
       "details": {
         "message": "OK: all 20 v0.2 symbols still importable\nOK: basic v0.2 behavioral checks passed"
       }
@@ -339,7 +339,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:14.282904Z",
+      "observed_at": "2026-08-17T10:29:54.893508Z",
       "details": {
         "message": "count=32, stds=62%, gtwr_clean=True"
       }
@@ -350,7 +350,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:17.187918Z",
+      "observed_at": "2026-08-17T10:29:57.089560Z",
       "details": {
         "message": "list=True, show=True, audit=True"
       }
@@ -361,7 +361,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-07-30T15:03:17.196043Z",
+      "observed_at": "2026-08-17T10:29:57.096865Z",
       "details": {
         "message": "green=True, red=True, yellow=True, grey=True"
       }

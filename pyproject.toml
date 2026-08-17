@@ -107,6 +107,7 @@ testpaths = ["tests"]
 markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
     "gpu: marks tests requiring GPU",
+    "vnvspec: links a test to a vnvspec requirement ID (see pytest-vnvspec)",
 ]
 addopts = "--strict-markers --strict-config"
 
