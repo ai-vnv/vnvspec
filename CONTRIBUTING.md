@@ -27,7 +27,7 @@ All code must pass:
 - `ruff format --check .` — formatting
 - `ruff check .` — linting
 - `mypy --strict src/vnvspec` — type checking
-- `pytest --cov-fail-under=85` — tests with coverage
+- `just cov` — tests with coverage (95% threshold)
 
 ## License
 

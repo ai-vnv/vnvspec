@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 import pytest
+import yaml
 
 from vnvspec.core.errors import SpecError
 from vnvspec.core.evidence import Evidence
@@ -292,3 +293,54 @@ class TestSpecSerialization:
         spec.to_yaml(yaml_path)
         spec2 = Spec.from_yaml(yaml_path)
         assert spec.model_dump() == spec2.model_dump()
+
+
+class TestSpecYamlSafety:
+    """Regression tests pinning safe YAML deserialization in spec loading.
+
+    ``Spec.from_yaml`` deserializes with ``yaml.safe_load``. These tests
+    ensure a YAML document carrying Python object-construction tags is
+    rejected rather than instantiated, and that valid and empty documents
+    keep their existing behavior. They exist to catch any future regression
+    to an unsafe loader (``yaml.load`` / ``FullLoader`` / ``UnsafeLoader``).
+    """
+
+    # Under an unsafe loader this ``!!python/object/apply`` tag would invoke
+    # os.system. ``yaml.safe_load`` must refuse to construct the tag instead.
+    _MALICIOUS_YAML = '!!python/object/apply:os.system ["echo pwned"]\n'
+
+    def test_from_yaml_rejects_python_object_tag(self, tmp_path: Path) -> None:
+        """Spec.from_yaml rejects Python object-construction tags."""
+        malicious = tmp_path / "malicious.yaml"
+        malicious.write_text(self._MALICIOUS_YAML)
+        with pytest.raises(yaml.constructor.ConstructorError):
+            Spec.from_yaml(malicious)
+
+    def test_from_file_rejects_python_object_tag(self, tmp_path: Path) -> None:
+        """Spec.from_file routes .yaml through the safe loader and rejects tags."""
+        malicious = tmp_path / "malicious.yaml"
+        malicious.write_text(self._MALICIOUS_YAML)
+        with pytest.raises(yaml.constructor.ConstructorError):
+            Spec.from_file(malicious)
+
+    def test_from_yaml_loads_valid_spec(self, tmp_path: Path) -> None:
+        """A valid, hand-authored YAML spec still loads through the safe path."""
+        good = tmp_path / "good.yaml"
+        good.write_text(
+            "name: valid-spec\n"
+            "requirements:\n"
+            "  - id: REQ-100\n"
+            "    statement: The system shall respond within 100 ms.\n"
+            "    verification_method: test\n"
+        )
+        spec = Spec.from_yaml(good)
+        assert spec.name == "valid-spec"
+        assert len(spec.requirements) == 1
+        assert spec.requirements[0].id == "REQ-100"
+
+    def test_from_yaml_empty_file_raises_spec_error(self, tmp_path: Path) -> None:
+        """Empty YAML deserializes to None and raises the existing SpecError."""
+        empty = tmp_path / "empty.yaml"
+        empty.write_text("")
+        with pytest.raises(SpecError, match="Expected a YAML mapping"):
+            Spec.from_yaml(empty)
