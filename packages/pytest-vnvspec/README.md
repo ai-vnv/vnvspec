@@ -15,9 +15,11 @@ Mark tests with `@pytest.mark.vnvspec("REQ-001")` to link them to requirements:
 ```python
 import pytest
 
+
 @pytest.mark.vnvspec("REQ-001")
 def test_accuracy():
     assert model.accuracy() > 0.9
+
 
 @pytest.mark.vnvspec("REQ-002")
 def test_latency():

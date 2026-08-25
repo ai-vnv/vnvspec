@@ -15,9 +15,11 @@ pip install pytest-vnvspec
 ```python
 import pytest
 
+
 @pytest.mark.vnvspec("REQ-001")
 def test_accuracy():
     assert model.accuracy() > 0.9
+
 
 @pytest.mark.vnvspec("REQ-002")
 def test_latency():
@@ -29,8 +31,7 @@ A test can have multiple markers:
 ```python
 @pytest.mark.vnvspec("REQ-001")
 @pytest.mark.vnvspec("REQ-003")
-def test_accuracy_and_consistency():
-    ...
+def test_accuracy_and_consistency(): ...
 ```
 
 ### 2. Run with spec file

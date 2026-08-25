@@ -10,10 +10,12 @@ Tests that validate the spec itself — no running system required.
 import pytest
 from vnvspec import Spec
 
+
 @pytest.mark.vnvspec("REQ-SPEC-001")
 def test_all_requirements_have_rationale(spec: Spec):
     for req in spec.requirements:
         assert req.rationale, f"{req.id} has no rationale"
+
 
 @pytest.mark.vnvspec("REQ-SPEC-002")
 def test_requirement_quality(spec: Spec):
@@ -31,10 +33,12 @@ Tests that hit a running service to verify functional requirements.
 import httpx
 import pytest
 
+
 @pytest.mark.vnvspec("REQ-API-001")
 def test_health_endpoint(api_url: str):
     r = httpx.get(f"{api_url}/health")
     assert r.status_code == 200
+
 
 @pytest.mark.vnvspec("REQ-API-002")
 def test_auth_required(api_url: str):
@@ -50,10 +54,12 @@ Tests that verify build artifacts after CI produces them.
 import pytest
 from pathlib import Path
 
+
 @pytest.mark.vnvspec("REQ-BUILD-001")
 def test_docker_image_exists():
     result = subprocess.run(["docker", "images", "-q", "myapp:latest"], capture_output=True)
     assert result.stdout.strip(), "Docker image not built"
+
 
 @pytest.mark.vnvspec("REQ-BUILD-002")
 def test_migration_scripts_present():
