@@ -21,6 +21,7 @@ _PYPI_TO_IMPORT: dict[str, str] = {
     "pyyaml": "yaml",
     "tomli-w": "tomli_w",
     "openpyxl": "openpyxl",
+    "z3-solver": "z3",
 }
 
 # Standard library top-level module names (3.11+)

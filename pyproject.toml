@@ -36,6 +36,9 @@ torch = [
     "protobuf>=4.0",
     "sentencepiece>=0.1.99",
 ]
+z3 = [
+    "z3-solver>=4.12",
+]
 docs = [
     "mkdocs-material>=9.5",
     "mkdocstrings[python]>=0.25",
@@ -58,7 +61,7 @@ dev = [
     "pandera[pandas]>=0.19",
 ]
 all = [
-    "vnvspec[torch,docs,dev]",
+    "vnvspec[torch,z3,docs,dev]",
 ]
 
 [project.scripts]
@@ -81,12 +84,20 @@ line-length = 100
 target-version = "py311"
 extend-exclude = ["notebooks"]
 
+[tool.ruff.format]
+# ruff >= 0.16 formats Python code blocks inside Markdown. Documentation
+# snippets are illustrative and often intentionally elided, so keep them out
+# of the formatter as they were before that release.
+exclude = ["*.md"]
+
 [tool.ruff.lint]
 select = ["E", "F", "I", "N", "UP", "B", "A", "C4", "PL", "RUF"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["PLR2004", "E402", "PLC0415", "E741"]
-"src/vnvspec/exporters/dashboard.py" = ["E501", "PLR0913", "PLR2004"]
+"src/vnvspec/exporters/dashboard.py" = ["E501", "PLR0913", "PLR0917", "PLR2004"]
+# PLR0917 left preview in ruff 0.16; both functions are keyword-friendly by design.
+"src/vnvspec/proofs/z3_bridge.py" = ["PLR0917"]
 "packages/**/tests/**" = ["PLR2004", "E402", "PLC0415", "E741", "I001"]
 "scripts/**" = ["PLC0415", "E501", "E741", "PLW1510"]
 
@@ -95,11 +106,16 @@ strict = true
 warn_unused_ignores = true
 disallow_untyped_defs = true
 
+[[tool.mypy.overrides]]
+module = ["z3.*"]
+ignore_missing_imports = true
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
     "gpu: marks tests requiring GPU",
+    "vnvspec: links a test to a vnvspec requirement ID (see pytest-vnvspec)",
 ]
 addopts = "--strict-markers --strict-config"
 

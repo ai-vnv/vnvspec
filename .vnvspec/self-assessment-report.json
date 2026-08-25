@@ -1,7 +1,7 @@
 {
   "spec_name": "vnvspec-self",
   "spec_version": "0.3.0",
-  "created_at": "2026-04-17T18:34:11.833886Z",
+  "created_at": "2026-08-17T11:25:42.248898Z",
   "evidence": [
     {
       "id": "EV-AUTO-0001",
@@ -9,7 +9,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:33:56.409907Z",
+      "observed_at": "2026-08-17T11:25:03.960670Z",
       "details": {
         "message": "all_basemodel=True, count=8"
       }
@@ -20,7 +20,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:33:56.410091Z",
+      "observed_at": "2026-08-17T11:25:03.960670Z",
       "details": {
         "message": "dup_rejected=True, unique_accepted=True"
       }
@@ -31,7 +31,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:33:56.410730Z",
+      "observed_at": "2026-08-17T11:25:03.962020Z",
       "details": {
         "message": "acyclic_ok=True, cycle_rejected=True"
       }
@@ -42,7 +42,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:33:56.412211Z",
+      "observed_at": "2026-08-17T11:25:03.965308Z",
       "details": {
         "message": "rules=8, names=['_r1_necessary', '_r2_singular', '_r3_unambiguous', '_r4_verifiable', '_r5_feasible', '_r6_unit_bearing', '_r7_complete', '_r8_consistent_id']"
       }
@@ -53,9 +53,9 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:33:56.414763Z",
+      "observed_at": "2026-08-17T11:25:03.973335Z",
       "details": {
-        "message": "count=5, names=['eu_ai_act', 'iso_21448', 'iso_pas_8800', 'nist_ai_rmf', 'ul_4600'], all_load=True"
+        "message": "count=6, names=['eu_ai_act', 'iso_21448', 'iso_42001', 'iso_pas_8800', 'nist_ai_rmf', 'ul_4600'], all_load=True"
       }
     },
     {
@@ -64,7 +64,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:33:56.414774Z",
+      "observed_at": "2026-08-17T11:25:03.973335Z",
       "details": {
         "message": "required=5, available=['export_annex_iv', 'export_badge', 'export_compliance_matrix', 'export_dashboard', 'export_gsn_mermaid', 'export_html', 'export_json', 'export_markdown', 'export_shields_endpoint']"
       }
@@ -75,7 +75,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:33:56.414783Z",
+      "observed_at": "2026-08-17T11:25:03.973335Z",
       "details": {
         "message": "inherit=True, help_urls=True, base_ok=True"
       }
@@ -86,7 +86,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:33:56.414840Z",
+      "observed_at": "2026-08-17T11:25:03.973335Z",
       "details": {
         "message": "frozen=True, mutation_blocked=True"
       }
@@ -97,7 +97,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:33:56.414878Z",
+      "observed_at": "2026-08-17T11:25:03.973335Z",
       "details": {
         "message": "original=1, extended=2"
       }
@@ -108,7 +108,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:33:56.527862Z",
+      "observed_at": "2026-08-17T11:25:04.681184Z",
       "details": {
         "message": "OK: all 16 v0.1 symbols still importable\nOK: basic behavioral checks passed"
       }
@@ -119,9 +119,9 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:33:57.233842Z",
+      "observed_at": "2026-08-17T11:25:07.358331Z",
       "details": {
-        "message": "Success: no issues found in 77 source files"
+        "message": "Success: no issues found in 89 source files"
       }
     },
     {
@@ -130,7 +130,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:33:57.330275Z",
+      "observed_at": "2026-08-17T11:25:07.563224Z",
       "details": {
         "message": "format=0, check=0"
       }
@@ -141,9 +141,9 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:34:10.202923Z",
+      "observed_at": "2026-08-17T11:25:34.345105Z",
       "details": {
-        "message": "565 tests passed, coverage threshold met"
+        "message": "696 tests passed, coverage threshold met"
       }
     },
     {
@@ -152,7 +152,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:34:10.615386Z",
+      "observed_at": "2026-08-17T11:25:37.730003Z",
       "details": {
         "message": "mkdocs build --strict passed"
       }
@@ -163,7 +163,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:34:10.615444Z",
+      "observed_at": "2026-08-17T11:25:37.730003Z",
       "details": {
         "message": "str_wrap={'message': 'ok'}, dict_pass={'k': 'v'}"
       }
@@ -174,7 +174,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:34:10.615482Z",
+      "observed_at": "2026-08-17T11:25:37.730003Z",
       "details": {
         "message": "summary={'message': 'ok'}"
       }
@@ -185,7 +185,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:34:10.647392Z",
+      "observed_at": "2026-08-17T11:25:37.856628Z",
       "details": {
         "message": "exit_codes=[0, 1, 2, 3, 4, 5]"
       }
@@ -196,7 +196,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:34:10.647448Z",
+      "observed_at": "2026-08-17T11:25:37.856628Z",
       "details": {
         "message": "RequirementError raised=True"
       }
@@ -207,7 +207,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:34:10.648476Z",
+      "observed_at": "2026-08-17T11:25:37.861221Z",
       "details": {
         "message": "yaml_rt=True, toml_rt=True"
       }
@@ -218,7 +218,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:34:10.648814Z",
+      "observed_at": "2026-08-17T11:25:37.861221Z",
       "details": {
         "message": "empty_all_gaps=True, mapped_has_covered=True"
       }
@@ -229,7 +229,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:34:10.648895Z",
+      "observed_at": "2026-08-17T11:25:37.861221Z",
       "details": {
         "message": "formal_R6=warning, webapp_R6=info"
       }
@@ -240,7 +240,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:34:10.650016Z",
+      "observed_at": "2026-08-17T11:25:37.877467Z",
       "details": {
         "message": "hits=1"
       }
@@ -251,7 +251,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:34:10.650278Z",
+      "observed_at": "2026-08-17T11:25:37.880388Z",
       "details": {
         "message": "green_pass=True, text=True"
       }
@@ -262,7 +262,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:34:10.651175Z",
+      "observed_at": "2026-08-17T11:25:37.882396Z",
       "details": {
         "message": "regressions=['R1']"
       }
@@ -273,7 +273,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:34:10.651341Z",
+      "observed_at": "2026-08-17T11:25:37.882396Z",
       "details": {
         "message": "warning_count=1, correct_type=True"
       }
@@ -284,7 +284,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:34:10.651345Z",
+      "observed_at": "2026-08-17T11:25:37.882396Z",
       "details": {
         "message": "Self-spec loaded successfully (we're running)"
       }
@@ -295,7 +295,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:34:10.651358Z",
+      "observed_at": "2026-08-17T11:25:37.882396Z",
       "details": {
         "message": "strict=True, lenient=True, fail_precedence=True"
       }
@@ -306,7 +306,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:34:10.651372Z",
+      "observed_at": "2026-08-17T11:25:37.882396Z",
       "details": {
         "message": "construct=True, roundtrip=True"
       }
@@ -317,7 +317,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:34:10.651379Z",
+      "observed_at": "2026-08-17T11:25:37.882396Z",
       "details": {
         "message": "str_norm=True, list_pass=True, default_empty=True"
       }
@@ -328,7 +328,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:34:10.787445Z",
+      "observed_at": "2026-08-17T11:25:38.778432Z",
       "details": {
         "message": "OK: all 20 v0.2 symbols still importable\nOK: basic v0.2 behavioral checks passed"
       }
@@ -339,7 +339,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:34:10.791358Z",
+      "observed_at": "2026-08-17T11:25:38.785971Z",
       "details": {
         "message": "count=32, stds=62%, gtwr_clean=True"
       }
@@ -350,7 +350,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:34:11.832135Z",
+      "observed_at": "2026-08-17T11:25:42.228318Z",
       "details": {
         "message": "list=True, show=True, audit=True"
       }
@@ -361,7 +361,7 @@
       "kind": "test",
       "verdict": "pass",
       "artifact_uri": "",
-      "observed_at": "2026-04-17T18:34:11.833871Z",
+      "observed_at": "2026-08-17T11:25:42.248898Z",
       "details": {
         "message": "green=True, red=True, yellow=True, grey=True"
       }
